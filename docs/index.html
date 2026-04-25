@@ -794,7 +794,7 @@ footer {
         </li>
         <li>
           <span class="b-label">Omfattning</span>
-          <span class="b-text">~27 000 extra kWh på 161 dygn. Vid de extrema vinterpriserna jan–feb 2026 motsvarar detta ungefär <strong>16–20 000 kr inklusive moms</strong> — mer än hela on-säsongens elnota.</span>
+          <span class="b-text">~27 000 extra kWh på 161 dygn. Vid spotpris för hela perioden: ungefär <strong>21 000 kr ex moms (~26 000 kr inkl moms)</strong>. Av detta föll ~16 000 kr bara på jan–feb 2026 vid vinterprischockens extrempriser.</span>
         </li>
         <li>
           <span class="b-label">Åtgärd</span>
@@ -936,12 +936,12 @@ footer {
 
     <div class="chart-card">
       <div class="chart-legend">
-        <span><span class="swatch" style="background: var(--ocean)"></span>Brott-perioden, varje timme (3 864 punkter)</span>
-        <span><span class="swatch" style="background: var(--sage)"></span>Vinter 1, varje timme (2 877 punkter)</span>
-        <span><span class="swatch" style="background: var(--ink)"></span>Linjär anpassning timme för timme</span>
+        <span><span class="swatch" style="background: var(--ocean)"></span>Köldknäppen 13–15 feb 2026 · 72 verkliga timmar</span>
+        <span><span class="swatch" style="background: var(--ink)"></span>Brott-periodens regression (n = 3 864 timmar)</span>
+        <span><span class="swatch" style="background: var(--sage)"></span>Vinter 1:s regression (n = 2 877 timmar)</span>
       </div>
       <svg id="hourly-scatter" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Spridningsdiagram timme-kWh vs timme-temperatur"></svg>
-      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Varje punkt är <em>en faktisk timme</em>. Blåa punkter ligger systematiskt högre än gröna, även vid samma temperatur. Den blå regressionslinjen är inte bara <em>förskjuten</em> uppåt — den är också <em>brantare</em>. Det betyder mer än "lite extra last": värmesystemet svarade kraftigare på kyla under brottet än under vintern innan.</p>
+      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Punkterna är 72 faktiska timmar från köldknäppen — visar att även under den värsta kylan följer kWh temperaturen direkt. Linjerna är linjär anpassning över <em>alla</em> 6 741 timmar i de två perioderna. Den blå linjen är inte bara förskjuten uppåt — den är också <em>brantare</em>. Värmesystemet svarade kraftigare på kyla under brottet än vintern innan.</p>
     </div>
 
     <div class="findings" style="margin-top: 56px;">
@@ -1601,12 +1601,12 @@ function drawBaseload() {
     svg.appendChild(ln);
   });
 
-  // Date labels for break boundaries
+  // Date labels for break boundaries — above the plot area to avoid colliding with peak annotation
   ['Strukturbrottet börjar · 3 okt', 'Strukturbrottet slutar · 12 mar'].forEach((label, i) => {
     const t = i === 0 ? sbStartT : sbEndT;
     const tx = document.createElementNS(ns, 'text');
     tx.setAttribute('x', xFor(t) + (i === 0 ? 6 : -6));
-    tx.setAttribute('y', M.top + 16);
+    tx.setAttribute('y', 14);
     tx.setAttribute('text-anchor', i === 0 ? 'start' : 'end');
     tx.style.font = 'italic 11px Fraunces, serif';
     tx.style.fill = 'var(--amber)';
@@ -1748,154 +1748,6 @@ function drawBaseload() {
   annot.style.fill = 'var(--amber)';
   annot.textContent = `topp ${SE(peakVal, 1)} kWh/h`;
   svg.appendChild(annot);
-}
-
-function drawHourly() {
-  const svg = document.getElementById('hourly-chart');
-  svg.innerHTML = '';
-  const W = 1200, H = 420;
-  const M = { top: 30, right: 60, bottom: 60, left: 70 };
-  const iw = W - M.left - M.right;
-  const ih = H - M.top - M.bottom;
-  const ns = 'http://www.w3.org/2000/svg';
-
-  // Use representative summer (Jul 2025) and winter (Feb 2026) profiles
-  // — these show the OPPOSITE day/night patterns that the rolling-year
-  // average masks. The all-year average is shown as faint dashed line.
-  const onP = DATA.representative_profiles.summer_jul_2025;
-  const offP = DATA.representative_profiles.winter_feb_2026;
-  const allP = DATA.hourly_profile.all;
-  const allMax = Math.max(...onP, ...offP, ...allP);
-  const niceMax = Math.ceil(allMax / 2) * 2 + 2;
-
-  // Grid
-  const grid = document.createElementNS(ns, 'g');
-  grid.setAttribute('class', 'grid');
-  const yTicks = 5;
-  for (let i = 0; i <= yTicks; i++) {
-    const v = niceMax * i / yTicks;
-    const y = M.top + ih - (v / niceMax) * ih;
-    const ln = document.createElementNS(ns, 'line');
-    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
-    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
-    grid.appendChild(ln);
-    const t = document.createElementNS(ns, 'text');
-    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
-    t.setAttribute('text-anchor', 'end');
-    t.style.font = '10px JetBrains Mono, monospace';
-    t.style.fill = 'var(--ink-mute)';
-    t.textContent = SE(v, 0);
-    grid.appendChild(t);
-  }
-  svg.appendChild(grid);
-
-  // X labels
-  for (let h = 0; h <= 24; h += 3) {
-    const x = M.left + (h / 24) * iw;
-    const t = document.createElementNS(ns, 'text');
-    t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
-    t.setAttribute('text-anchor', 'middle');
-    t.style.font = '10px JetBrains Mono, monospace';
-    t.style.fill = 'var(--ink-mute)';
-    t.textContent = String(h).padStart(2, '0') + ':00';
-    svg.appendChild(t);
-  }
-
-  const xFor = h => M.left + (h / 24) * iw;
-  const yFor = v => M.top + ih - (v / niceMax) * ih;
-
-  function drawLine(arr, color, width, opacity=1, dash=null) {
-    const path = document.createElementNS(ns, 'path');
-    let d = '';
-    arr.forEach((v, i) => {
-      const x = xFor(i + 0.5);
-      const y = yFor(v);
-      d += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
-    });
-    path.setAttribute('d', d);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', color);
-    path.setAttribute('stroke-width', width);
-    path.setAttribute('stroke-linecap', 'round');
-    path.setAttribute('stroke-linejoin', 'round');
-    path.setAttribute('opacity', opacity);
-    if (dash) path.setAttribute('stroke-dasharray', dash);
-    svg.appendChild(path);
-  }
-
-  function drawArea(arr, color, opacity) {
-    const path = document.createElementNS(ns, 'path');
-    let d = '';
-    arr.forEach((v, i) => {
-      const x = xFor(i + 0.5);
-      const y = yFor(v);
-      d += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
-    });
-    d += 'L' + xFor(arr.length - 0.5) + ',' + yFor(0) + ' ';
-    d += 'L' + xFor(0.5) + ',' + yFor(0) + ' Z';
-    path.setAttribute('d', d);
-    path.setAttribute('fill', color);
-    path.setAttribute('opacity', opacity);
-    svg.appendChild(path);
-  }
-
-  drawArea(allP, 'var(--ink)', 0.04);
-  drawLine(allP, 'var(--ink)', 1, 0.4, '3 3');
-  drawArea(offP, 'var(--ocean)', 0.10);
-  drawLine(offP, 'var(--ocean)', 2.5);
-  drawArea(onP, 'var(--sage)', 0.10);
-  drawLine(onP, 'var(--sage)', 2.5);
-
-  // Dots on each point
-  function drawDots(arr, color) {
-    arr.forEach((v, i) => {
-      const c = document.createElementNS(ns, 'circle');
-      c.setAttribute('cx', xFor(i + 0.5));
-      c.setAttribute('cy', yFor(v));
-      c.setAttribute('r', 3);
-      c.setAttribute('fill', 'var(--paper)');
-      c.setAttribute('stroke', color);
-      c.setAttribute('stroke-width', 1.5);
-      const title = document.createElementNS(ns, 'title');
-      title.textContent = `kl ${String(i).padStart(2,'0')}–${String(i+1).padStart(2,'0')}: ${SE(v,2)} kWh`;
-      c.appendChild(title);
-      svg.appendChild(c);
-    });
-  }
-  drawDots(onP, 'var(--sage)');
-  drawDots(offP, 'var(--ocean)');
-
-  // Y axis title
-  const yt = document.createElementNS(ns, 'text');
-  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
-  yt.style.font = '600 10px Manrope, sans-serif';
-  yt.style.letterSpacing = '0.18em';
-  yt.style.textTransform = 'uppercase';
-  yt.style.fill = 'var(--ink-mute)';
-  yt.textContent = 'kWh per timme · medel inom månaden';
-  svg.appendChild(yt);
-
-  // Annotation: peak/dip for summer vs winter (which are opposite)
-  const summerPeakIdx = onP.indexOf(Math.max(...onP));
-  const summerDipIdx = onP.indexOf(Math.min(...onP));
-  const winterPeakIdx = offP.indexOf(Math.max(...offP));
-  const winterDipIdx = offP.indexOf(Math.min(...offP));
-
-  function annotate(idx, val, color, label, anchor='middle', dy=-14) {
-    const x = xFor(idx + 0.5);
-    const y = yFor(val);
-    const t = document.createElementNS(ns, 'text');
-    t.setAttribute('x', x);
-    t.setAttribute('y', y + dy);
-    t.setAttribute('text-anchor', anchor);
-    t.style.font = 'italic 11px Fraunces, serif';
-    t.style.fill = color;
-    t.textContent = label;
-    svg.appendChild(t);
-  }
-  annotate(summerPeakIdx, onP[summerPeakIdx], 'var(--sage)', `sommar-topp kl ${String(summerPeakIdx).padStart(2,'0')}`, 'middle', -10);
-  annotate(summerDipIdx, onP[summerDipIdx], 'var(--sage)', `dipp kl ${String(summerDipIdx).padStart(2,'0')}`, 'middle', 18);
-  annotate(winterPeakIdx, offP[winterPeakIdx], 'var(--ocean)', `vinter-topp kl ${String(winterPeakIdx).padStart(2,'0')}`, 'middle', -10);
 }
 
 // =================== HOURLY SCATTER (kWh vs T per timme) ===================
