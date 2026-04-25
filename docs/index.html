@@ -161,6 +161,81 @@ h2.summary-title em {
 .cta-secondary { color: var(--ink-soft); border: 1px solid var(--rule); }
 .cta-secondary:hover { color: var(--ink); border-color: var(--ink); }
 
+/* Zoom chart controls */
+.zoom-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.zoom-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.zoom-presets button {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.zoom-presets button:hover { color: var(--ink); border-color: var(--ink); }
+.zoom-presets button.active {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.zoom-dates {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.zoom-dates label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.zoom-dates input[type="date"] {
+  padding: 6px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+.zoom-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.1s;
+  white-space: nowrap;
+  z-index: 100;
+}
+.zoom-tooltip.show { opacity: 0.95; }
+
 /* Åtgärder section */
 .alert-num { color: var(--alert) !important; }
 .alert-eyebrow { color: var(--alert) !important; }
@@ -907,7 +982,7 @@ footer {
       <div>
         <div class="section-eyebrow">Diagnos · timme för timme</div>
         <h2 class="section-title">Vad är det som drar? En <em>uppvärmd byggnad</em>.</h2>
-        <p class="section-deck">Vi har 10 916 verkliga timmar att titta på. För varje timme har vi både hur mycket el som drogs och hur kallt det var ute (från SMHI:s station 32 km bort). Inga medelvärden, inga genvägar — bara timme för timme. Det finns tre rimliga förklaringar till den dolda lasten. Bara en stämmer.</p>
+        <p class="section-deck">Vi har 10 920 verkliga timmar att titta på. För varje timme har vi både hur mycket el som drogs och hur kallt det var ute — temperaturen mätt med en Netatmo-station i Ånge tätort (validerad mot SMHI:s station Torpshammar 32 km bort, R² = 0,97). Inga medelvärden, inga genvägar — bara timme för timme. Det finns tre rimliga förklaringar till den dolda lasten. Bara en stämmer.</p>
       </div>
     </div>
 
@@ -1190,10 +1265,49 @@ footer {
     <div id="heatmap-tooltip" class="heatmap-tooltip"></div>
   </section>
 
+  <!-- ============== UTFORSKA TIMMAR ============== -->
+  <section id="utforska">
+    <div class="section-head">
+      <div class="section-num serif">08</div>
+      <div>
+        <div class="section-eyebrow">Utforska timmar</div>
+        <h2 class="section-title">Alla 10 920 timmar — <em>zooma in</em>.</h2>
+        <p class="section-deck">Hela perioden timme för timme: blått är kWh, orange är temperatur. Klicka på en knapp för att zooma till en intressant period, eller välj egna datum.</p>
+      </div>
+    </div>
+
+    <div class="zoom-controls">
+      <div class="zoom-presets" id="zoom-presets" role="tablist">
+        <button class="active" data-start="2025-01-01" data-end="2026-03-31">Hela perioden</button>
+        <button data-start="2025-10-03" data-end="2026-03-12">Brott-perioden</button>
+        <button data-start="2026-02-13" data-end="2026-02-15">Köldknäppen feb</button>
+        <button data-start="2025-06-23" data-end="2025-06-29">Midsommar-veckan</button>
+        <button data-start="2025-09-25" data-end="2025-10-12">Före/efter brottet</button>
+        <button data-start="2026-03-08" data-end="2026-03-22">När det stängde av</button>
+      </div>
+      <div class="zoom-dates">
+        <label>Från<input type="date" id="zoom-start" min="2025-01-01" max="2026-03-31" value="2025-01-01"></label>
+        <label>Till<input type="date" id="zoom-end" min="2025-01-01" max="2026-03-31" value="2026-03-31"></label>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-legend">
+        <span><span class="swatch" style="background: var(--ocean)"></span>kWh per timme</span>
+        <span><span class="swatch" style="background: var(--alert); opacity: 0.7"></span>Utomhustemperatur · °C (Netatmo Ånge)</span>
+        <span id="zoom-info" style="margin-left: auto; font-size: 11px; color: var(--ink-mute);"></span>
+      </div>
+      <svg id="zoom-chart" class="chart-svg" viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid meet" aria-label="Zoombar timgraf med kWh och temperatur"></svg>
+      <div id="zoom-tooltip" class="zoom-tooltip"></div>
+    </div>
+
+    <p style="max-width: 64ch; margin: 24px 0 0; font-size: 14px; color: var(--ink-mute); line-height: 1.55;">Vid stora tidsintervall sammanfattas datan automatiskt till dygnsmedel för läsbarhet. Vid kortare intervall (under en vecka) visas varje enskild timme. Hovra över grafen för att se exakta värden.</p>
+  </section>
+
   <!-- ============== FINDINGS ============== -->
   <section id="fynd">
     <div class="section-head">
-      <div class="section-num serif">08</div>
+      <div class="section-num serif">09</div>
       <div>
         <div class="section-eyebrow">Tre fynd</div>
         <h2 class="section-title">Tre upptäckter som <em>förändrar bilden</em>.</h2>
@@ -1251,7 +1365,7 @@ footer {
   <!-- ============== METHODOLOGY ============== -->
   <section id="metod">
     <div class="section-head">
-      <div class="section-num serif">09</div>
+      <div class="section-num serif">10</div>
       <div>
         <div class="section-eyebrow">Metod &amp; reservationer</div>
         <h2 class="section-title">Hur siffrorna är <em>räknade</em>.</h2>
@@ -1261,7 +1375,7 @@ footer {
     <div class="method">
       <div>
         <h4>Var siffrorna kommer från</h4>
-        Förbrukningen är timvärden från elnätsmätaren mellan 1 januari 2025 och 31 mars 2026 — 455 dygn × 24 timmar = 10 920 mätningar. Elpriset är månadsmedel för elområde SE2 (Norra Mellansverige). Vädret kommer från SMHI:s station Torpshammar A, som ligger 32 km från Ånge och hade nästan komplett timdata under hela perioden. Siffrorna är kontrollerade av två oberoende AI-system och en separat SMHI-genomgång — alla tre landade på samma resultat.
+        Förbrukningen är timvärden från elnätsmätaren mellan 1 januari 2025 och 31 mars 2026 — 455 dygn × 24 timmar = 10 920 mätningar. Elpriset är månadsmedel för elområde SE2 (Norra Mellansverige). Temperaturen kommer i första hand från en Netatmo-utomhusstation i Ånge tätort (10 610 timmar, ~96 % täckning). De ~4 % saknade timmarna fylls igen med SMHI:s station Torpshammar A, 32 km bort. De två stationerna stämmer mycket väl överens (Pearson R² = 0,97 på timupplöst data; medeloffset 0,7°C med Ånge tätort något varmare på grund av urban heat island). Siffrorna är kontrollerade av två oberoende AI-system och en separat SMHI-genomgång — alla tre landade på samma resultat.
       </div>
       <div>
         <h4>Vad räkningarna räknar</h4>
@@ -2102,6 +2216,270 @@ function drawColdSnap() {
   svg.appendChild(ann);
 }
 
+// =================== ZOOM CHART (kWh + T per hour with date range) ===================
+function dateToIndex(dateStr) {
+  // Returns the index of the first hour of dateStr in DATA.hourly_series.kwh
+  const start = DATA.hourly_series.start_date;  // 'YYYY-MM-DD'
+  const startMs = new Date(start + 'T00:00:00').getTime();
+  const targetMs = new Date(dateStr + 'T00:00:00').getTime();
+  return Math.floor((targetMs - startMs) / 3600_000);
+}
+function indexToDate(idx) {
+  const startMs = new Date(DATA.hourly_series.start_date + 'T00:00:00').getTime();
+  return new Date(startMs + idx * 3600_000);
+}
+
+function drawZoomChart(startDate, endDate) {
+  const svg = document.getElementById('zoom-chart');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 1200, H = 440;
+  const M = { top: 36, right: 70, bottom: 60, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const startIdx = Math.max(0, dateToIndex(startDate));
+  const endIdx = Math.min(DATA.hourly_series.n - 1, dateToIndex(endDate) + 23);
+  const kwhArr = DATA.hourly_series.kwh.slice(startIdx, endIdx + 1);
+  const tArr = DATA.hourly_series.t.slice(startIdx, endIdx + 1);
+  const n = kwhArr.length;
+
+  // Decide aggregation: hourly if <= 168 hours (7 days), else daily
+  const useDaily = n > 168;
+  let plotKwh, plotT, plotLabels, plotIndices;
+  if (useDaily) {
+    // Aggregate to daily means
+    plotKwh = []; plotT = []; plotLabels = []; plotIndices = [];
+    for (let i = 0; i < n; i += 24) {
+      const dayKwh = [], dayT = [];
+      for (let j = i; j < Math.min(i + 24, n); j++) {
+        if (kwhArr[j] != null) dayKwh.push(kwhArr[j]);
+        if (tArr[j] != null) dayT.push(tArr[j]);
+      }
+      const meanKwh = dayKwh.length ? dayKwh.reduce((a,b)=>a+b,0) / dayKwh.length : null;
+      const meanT = dayT.length ? dayT.reduce((a,b)=>a+b,0) / dayT.length : null;
+      plotKwh.push(meanKwh);
+      plotT.push(meanT);
+      const dt = indexToDate(startIdx + i);
+      plotLabels.push(dt);
+      plotIndices.push(i);
+    }
+  } else {
+    plotKwh = kwhArr;
+    plotT = tArr;
+    plotLabels = [];
+    plotIndices = [];
+    for (let i = 0; i < n; i++) {
+      plotLabels.push(indexToDate(startIdx + i));
+      plotIndices.push(i);
+    }
+  }
+
+  // Y scales
+  const kVals = plotKwh.filter(v => v != null);
+  const tVals = plotT.filter(v => v != null);
+  const kMax = kVals.length ? Math.max(...kVals) : 10;
+  const kMin = 0;
+  const tMin = tVals.length ? Math.min(-5, Math.min(...tVals)) : -5;
+  const tMax = tVals.length ? Math.max(15, Math.max(...tVals)) : 15;
+  const niceKMax = Math.ceil(kMax / 2) * 2 + 2;
+
+  const xFor = i => M.left + (plotKwh.length === 1 ? iw / 2 : (i / (plotKwh.length - 1)) * iw);
+  const yKwh = v => M.top + ih - (v / niceKMax) * ih;
+  const yT = v => M.top + ih - ((v - tMin) / (tMax - tMin)) * ih;
+
+  // Grid + Y axes
+  for (let i = 0; i <= 5; i++) {
+    const v = niceKMax * i / 5;
+    const y = yKwh(v);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    ln.setAttribute('stroke', 'var(--rule)');
+    svg.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ocean)';
+    t.textContent = SE(v, 0);
+    svg.appendChild(t);
+  }
+  // Right axis: T
+  const tStep = Math.ceil((tMax - tMin) / 6 / 5) * 5 || 5;
+  for (let v = Math.ceil(tMin / tStep) * tStep; v <= tMax; v += tStep) {
+    const y = yT(v);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', W - M.right + 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'start');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--alert)';
+    t.textContent = v + '°';
+    svg.appendChild(t);
+  }
+  // Zero line for T
+  if (tMin < 0 && tMax > 0) {
+    const y0 = yT(0);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y0); ln.setAttribute('y2', y0);
+    ln.setAttribute('stroke', 'var(--alert)');
+    ln.setAttribute('stroke-width', 0.5);
+    ln.setAttribute('stroke-dasharray', '4 4');
+    ln.setAttribute('opacity', 0.4);
+    svg.appendChild(ln);
+  }
+
+  // X labels: smart spacing
+  const nLabels = Math.min(8, plotLabels.length);
+  for (let i = 0; i < nLabels; i++) {
+    const idx = Math.floor((plotLabels.length - 1) * i / (nLabels - 1));
+    const dt = plotLabels[idx];
+    const x = xFor(idx);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
+    t.setAttribute('text-anchor', 'middle');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    if (useDaily) {
+      const days = (plotLabels[plotLabels.length - 1] - plotLabels[0]) / (1000 * 86400);
+      t.textContent = days > 60
+        ? dt.toLocaleDateString('sv-SE', { month: 'short', year: 'numeric' })
+        : dt.toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' });
+    } else {
+      t.textContent = `${dt.toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' })} ${String(dt.getHours()).padStart(2,'0')}:00`;
+    }
+    svg.appendChild(t);
+  }
+
+  // Draw temp line first (so it's behind kWh)
+  function drawSeries(arr, yScale, color, width) {
+    const path = document.createElementNS(ns, 'path');
+    let d = '';
+    let started = false;
+    arr.forEach((v, i) => {
+      if (v == null) {
+        started = false;
+        return;
+      }
+      const x = xFor(i);
+      const y = yScale(v);
+      d += (started ? 'L' : 'M') + x + ',' + y + ' ';
+      started = true;
+    });
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', width);
+    path.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(path);
+  }
+  drawSeries(plotT, yT, 'var(--alert)', 1.5);
+  drawSeries(plotKwh, yKwh, 'var(--ocean)', plotKwh.length > 200 ? 1 : 2);
+
+  // Y axis labels (titles)
+  const ytL = document.createElementNS(ns, 'text');
+  ytL.setAttribute('x', M.left); ytL.setAttribute('y', M.top - 14);
+  ytL.style.font = '600 10px Manrope, sans-serif';
+  ytL.style.letterSpacing = '0.18em';
+  ytL.style.textTransform = 'uppercase';
+  ytL.style.fill = 'var(--ocean)';
+  ytL.textContent = useDaily ? 'kWh per timme · dygnsmedel' : 'kWh per timme';
+  svg.appendChild(ytL);
+
+  const ytR = document.createElementNS(ns, 'text');
+  ytR.setAttribute('x', W - M.right + 10); ytR.setAttribute('y', M.top - 14);
+  ytR.style.font = '600 10px Manrope, sans-serif';
+  ytR.style.letterSpacing = '0.18em';
+  ytR.style.textTransform = 'uppercase';
+  ytR.style.fill = 'var(--alert)';
+  ytR.textContent = '°C';
+  svg.appendChild(ytR);
+
+  // Hover overlay for tooltip
+  const overlay = document.createElementNS(ns, 'rect');
+  overlay.setAttribute('x', M.left); overlay.setAttribute('y', M.top);
+  overlay.setAttribute('width', iw); overlay.setAttribute('height', ih);
+  overlay.setAttribute('fill', 'transparent');
+  overlay.style.cursor = 'crosshair';
+  svg.appendChild(overlay);
+
+  const cursor = document.createElementNS(ns, 'line');
+  cursor.setAttribute('y1', M.top); cursor.setAttribute('y2', M.top + ih);
+  cursor.setAttribute('stroke', 'var(--ink)');
+  cursor.setAttribute('stroke-width', 0.5);
+  cursor.setAttribute('opacity', 0);
+  svg.appendChild(cursor);
+
+  const tip = document.getElementById('zoom-tooltip');
+  overlay.addEventListener('mousemove', e => {
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const svgPt = pt.matrixTransform(ctm.inverse());
+    const idx = Math.round(((svgPt.x - M.left) / iw) * (plotKwh.length - 1));
+    if (idx < 0 || idx >= plotKwh.length) return;
+    const x = xFor(idx);
+    cursor.setAttribute('x1', x);
+    cursor.setAttribute('x2', x);
+    cursor.setAttribute('opacity', 0.4);
+    const dt = plotLabels[idx];
+    const k = plotKwh[idx];
+    const t = plotT[idx];
+    let label;
+    if (useDaily) {
+      label = dt.toLocaleDateString('sv-SE', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    } else {
+      label = `${dt.toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' })} ${String(dt.getHours()).padStart(2,'0')}:00`;
+    }
+    tip.innerHTML = `<div>${label}</div>` +
+      `<div style="color:#9DC4E0">kWh: ${k != null ? SE(k, 2) : '—'}${useDaily ? ' /h snitt' : ''}</div>` +
+      `<div style="color:#E5B58A">Temp: ${t != null ? SE(t, 1) + '°C' : '—'}</div>`;
+    tip.classList.add('show');
+    tip.style.left = (e.clientX + 14) + 'px';
+    tip.style.top = (e.clientY + 14) + 'px';
+  });
+  overlay.addEventListener('mouseleave', () => {
+    cursor.setAttribute('opacity', 0);
+    tip.classList.remove('show');
+  });
+
+  // Info text
+  const info = document.getElementById('zoom-info');
+  if (info) {
+    const d0 = plotLabels[0], d1 = plotLabels[plotLabels.length - 1];
+    const days = Math.round((d1 - d0) / (1000 * 86400));
+    info.textContent = `${plotKwh.length} ${useDaily ? 'dygn' : 'timmar'} · ${days + 1} dygn totalt`;
+  }
+}
+
+function setActiveZoomPreset(btn) {
+  document.querySelectorAll('#zoom-presets button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function wireZoomControls() {
+  document.querySelectorAll('#zoom-presets button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActiveZoomPreset(btn);
+      const s = btn.dataset.start, e = btn.dataset.end;
+      document.getElementById('zoom-start').value = s;
+      document.getElementById('zoom-end').value = e;
+      drawZoomChart(s, e);
+    });
+  });
+  ['zoom-start', 'zoom-end'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      setActiveZoomPreset(null);
+      const s = document.getElementById('zoom-start').value;
+      const e = document.getElementById('zoom-end').value;
+      if (s && e && s <= e) drawZoomChart(s, e);
+    });
+  });
+}
+
 // =================== INIT ===================
 fetch('data.json').then(r => r.json()).then(data => {
   DATA = data;
@@ -2111,6 +2489,8 @@ fetch('data.json').then(r => r.json()).then(data => {
   drawHourlyScatter();
   drawHodDiag();
   drawColdSnap();
+  drawZoomChart('2025-01-01', '2026-03-31');
+  wireZoomControls();
 
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('in');
