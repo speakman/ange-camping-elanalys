@@ -1352,7 +1352,7 @@ footer {
       <div id="zoom-tooltip" class="zoom-tooltip"></div>
     </div>
 
-    <p style="max-width: 64ch; margin: 24px 0 0; font-size: 14px; color: var(--ink-mute); line-height: 1.55;">Vid stora tidsintervall sammanfattas datan automatiskt till dygnsmedel för läsbarhet. Vid kortare intervall (under en vecka) visas varje enskild timme. Hovra över grafen för att se exakta värden.</p>
+    <p style="max-width: 64ch; margin: 24px 0 0; font-size: 14px; color: var(--ink-mute); line-height: 1.55;">Vid längre intervall visas <strong>dygnssnitt</strong> som linje och <strong>dygnets min–max-spann</strong> som ljusare band — så syns kalla nätter och varma eftermiddagar tydligt även när hela året klämts in i grafen. Vid kortare intervall (under en vecka) visas varje enskild timme rakt av. Hovra över grafen för att se exakta värden.</p>
   </section>
 
   <!-- ============== FINDINGS ============== -->
@@ -2307,11 +2307,13 @@ function drawZoomChart(startDate, endDate) {
   const tArr = DATA.hourly_series.t.slice(startIdx, endIdx + 1);
   const n = kwhArr.length;
 
-  // Aggregation: hourly if <= 168 hours (7 days), else daily
+  // Aggregation: hourly if <= 168 hours (7 days), else daily.
+  // For daily mode we also keep min/max so cold/hot snaps don't get smoothed away.
   const useDaily = n > 168;
-  let plotKwh, plotT, plotLabels;
+  let plotKwh, plotT, plotKwhMin, plotKwhMax, plotTMin, plotTMax, plotLabels;
   if (useDaily) {
     plotKwh = []; plotT = []; plotLabels = [];
+    plotKwhMin = []; plotKwhMax = []; plotTMin = []; plotTMax = [];
     for (let i = 0; i < n; i += 24) {
       const dayKwh = [], dayT = [];
       for (let j = i; j < Math.min(i + 24, n); j++) {
@@ -2319,21 +2321,28 @@ function drawZoomChart(startDate, endDate) {
         if (tArr[j] != null) dayT.push(tArr[j]);
       }
       plotKwh.push(dayKwh.length ? dayKwh.reduce((a,b)=>a+b,0) / dayKwh.length : null);
+      plotKwhMin.push(dayKwh.length ? Math.min(...dayKwh) : null);
+      plotKwhMax.push(dayKwh.length ? Math.max(...dayKwh) : null);
       plotT.push(dayT.length ? dayT.reduce((a,b)=>a+b,0) / dayT.length : null);
+      plotTMin.push(dayT.length ? Math.min(...dayT) : null);
+      plotTMax.push(dayT.length ? Math.max(...dayT) : null);
       plotLabels.push(indexToDate(startIdx + i));
     }
   } else {
     plotKwh = kwhArr;
     plotT = tArr;
+    plotKwhMin = plotKwhMax = plotTMin = plotTMax = null;
     plotLabels = Array.from({length: n}, (_, i) => indexToDate(startIdx + i));
   }
 
-  const kVals = plotKwh.filter(v => v != null);
-  const tVals = plotT.filter(v => v != null);
+  // Use min/max bounds when in daily mode so the y-axis spans the actual extremes
+  const kVals = useDaily ? plotKwhMax.filter(v => v != null) : plotKwh.filter(v => v != null);
+  const tValsLow = useDaily ? plotTMin.filter(v => v != null) : plotT.filter(v => v != null);
+  const tValsHigh = useDaily ? plotTMax.filter(v => v != null) : plotT.filter(v => v != null);
   const kMax = kVals.length ? Math.max(...kVals) : 10;
   const niceKMax = Math.ceil(kMax / 2) * 2 + 2;
-  const tMin = tVals.length ? Math.min(-5, Math.min(...tVals)) : -5;
-  const tMax = tVals.length ? Math.max(15, Math.max(...tVals)) : 15;
+  const tMin = tValsLow.length ? Math.min(-5, Math.min(...tValsLow)) : -5;
+  const tMax = tValsHigh.length ? Math.max(15, Math.max(...tValsHigh)) : 15;
   // Round nicely
   const tMinN = Math.floor(tMin / 5) * 5;
   const tMaxN = Math.ceil(tMax / 5) * 5;
@@ -2470,8 +2479,38 @@ function drawZoomChart(startDate, endDate) {
     svg.appendChild(path);
   }
 
-  // Draw temp first so kWh sits on top when both are shown
-  if (showTemp) drawSeries(plotT, yT, COLOR_T, useDaily ? 2 : 2.5);
+  // Daily min/max band: shows the full range each day, so cold/hot snaps stand out
+  function drawBand(minArr, maxArr, yScale, color, opacity) {
+    const top = []; // outline along max
+    const bottom = []; // outline along min, reversed
+    minArr.forEach((mn, i) => {
+      const mx = maxArr[i];
+      if (mn != null && mx != null) {
+        top.push([xFor(i), yScale(mx)]);
+        bottom.unshift([xFor(i), yScale(mn)]);
+      }
+    });
+    if (!top.length) return;
+    const path = document.createElementNS(ns, 'path');
+    let d = '';
+    top.forEach((p, i) => { d += (i === 0 ? 'M' : 'L') + p[0] + ',' + p[1] + ' '; });
+    bottom.forEach(p => { d += 'L' + p[0] + ',' + p[1] + ' '; });
+    d += 'Z';
+    path.setAttribute('d', d);
+    path.setAttribute('fill', color);
+    path.setAttribute('opacity', opacity);
+    path.setAttribute('stroke', 'none');
+    svg.appendChild(path);
+  }
+
+  // Draw order: temp band, kWh band, temp line, kWh line. Bands behind lines.
+  if (useDaily && showTemp) {
+    drawBand(plotTMin, plotTMax, yT, COLOR_T, 0.18);
+  }
+  if (useDaily && showKwh) {
+    drawBand(plotKwhMin, plotKwhMax, yKwh, COLOR_KWH, 0.15);
+  }
+  if (showTemp) drawSeries(plotT, yT, COLOR_T, useDaily ? 1.8 : 2.5);
   if (showKwh) drawSeries(plotKwh, yKwh, COLOR_KWH, plotKwh.length > 200 ? 1.5 : 2.5);
 
   // If neither: show message
@@ -2522,9 +2561,23 @@ function drawZoomChart(startDate, endDate) {
     } else {
       label = `${dt.toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' })} ${String(dt.getHours()).padStart(2,'0')}:00`;
     }
-    tip.innerHTML = `<div>${label}</div>` +
-      (showKwh ? `<div style="color:#9DC4E0">kWh: ${k != null ? SE(k, 2) : '—'}${useDaily ? ' /h snitt' : ''}</div>` : '') +
-      (showTemp ? `<div style="color:#E5B58A">Temp: ${t != null ? SE(t, 1) + '°C' : '—'}</div>` : '');
+    let kwhRow = '';
+    if (showKwh) {
+      if (useDaily && plotKwhMin && plotKwhMin[idx] != null) {
+        kwhRow = `<div style="color:#9DC4E0">kWh: ${SE(k, 2)} /h snitt &nbsp;·&nbsp; ${SE(plotKwhMin[idx], 1)}–${SE(plotKwhMax[idx], 1)} (min–max)</div>`;
+      } else {
+        kwhRow = `<div style="color:#9DC4E0">kWh: ${k != null ? SE(k, 2) : '—'}</div>`;
+      }
+    }
+    let tRow = '';
+    if (showTemp) {
+      if (useDaily && plotTMin && plotTMin[idx] != null) {
+        tRow = `<div style="color:#E5B58A">Temp: ${SE(t, 1)}°C snitt &nbsp;·&nbsp; ${SE(plotTMin[idx], 1)}° till ${SE(plotTMax[idx], 1)}°</div>`;
+      } else {
+        tRow = `<div style="color:#E5B58A">Temp: ${t != null ? SE(t, 1) + '°C' : '—'}</div>`;
+      }
+    }
+    tip.innerHTML = `<div>${label}</div>${kwhRow}${tRow}`;
     tip.classList.add('show');
     tip.style.left = (e.clientX + 14) + 'px';
     tip.style.top = (e.clientY + 14) + 'px';
