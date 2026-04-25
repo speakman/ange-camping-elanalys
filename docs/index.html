@@ -543,14 +543,14 @@ footer {
   <!-- ============== HERO ============== -->
   <header class="hero">
     <div>
-      <div class="kicker">Årsredovisning · Elförbrukning</div>
-      <h1 class="headline">Sju mörka månader. <em>Åttioen procent</em> av elkostnaden.</h1>
-      <p class="lede">När säsongen är över — när campingen är stängd och nästan tom — slukar fastigheten ändå majoriteten av elen. Den här rapporten kartlägger 72&thinsp;811 kilowattimmar fördelade över ett år och visar var pengarna faktiskt går.</p>
+      <div class="kicker">Årsanalys · Elförbrukning · 2 av 2 agenter konvergerar</div>
+      <h1 class="headline">Något slogs på <em>3 oktober</em>. Något slogs av <em>12 mars</em>.</h1>
+      <p class="lede">Två oberoende analyser — väderkorrelation mot SMHI och forensisk timseriegranskning — landar i samma slutsats: en kontinuerlig, oförklarlig last på cirka <strong>9 kilowatt</strong> körde dygnet runt i 161 dagar. Det är inte vädret. Det är inte spotpriset. Det är något som faktiskt drog ström — och som ingen tycks ha vetat om.</p>
     </div>
     <div class="hero-stat reveal in">
-      <div class="label">Off-season-pris ÷ on-season-pris</div>
-      <div class="figure">2,7<span class="sub">×</span></div>
-      <div class="caption">Varje kWh utanför säsongen kostade i snitt 2,7&thinsp;ggr mer än varje kWh under sommarsäsongen — en kombination av högre förbrukning och högre spotpriser.</div>
+      <div class="label">Vad strukturbrottet kostade · ink moms</div>
+      <div class="figure">~16<span class="sub">tkr</span></div>
+      <div class="caption">Differensen mellan vintern 2025:s lugna grundlast och vintern 2026:s ständigt-på-nivå. Ungefär halva chockfakturan jan–feb 2026 går att hänföra till denna dolda last, inte till elpriset.</div>
     </div>
   </header>
 
@@ -589,14 +589,66 @@ footer {
     </div>
   </section>
 
-  <!-- ============== SEASONAL SPLIT ============== -->
-  <section id="sasong">
+  <!-- ============== STRUCTURAL BREAK (NEW) ============== -->
+  <section id="strukturbrott">
     <div class="section-head">
       <div class="section-num serif">02</div>
       <div>
+        <div class="section-eyebrow">Det viktigaste fyndet · strukturbrottet</div>
+        <h2 class="section-title">En dold last <em>som aldrig vilade</em>.</h2>
+        <p class="section-deck">Genom hela vintern 2025/26 sjönk timförbrukningen aldrig under 9 kWh — inte en enda gång på 60 dagar i januari och februari. Ett år tidigare låg samma tysta golv på 1,8 kWh. Skiftet är distinkt, tidsbestämt, och inte väderdrivet.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="label">Grundlast feb 2025</div>
+        <div class="value mono-num">1,8<span class="unit">kWh/h</span></div>
+        <div class="note">Median av dygnets minsta timme — campingen "sov" nattetid</div>
+      </div>
+      <div class="stat">
+        <div class="label">Grundlast feb 2026</div>
+        <div class="value mono-num">9,4<span class="unit">kWh/h</span></div>
+        <div class="note">Samma median ett år senare — femdubblat, alla nätter</div>
+      </div>
+      <div class="stat">
+        <div class="label">Lugna timmar jan–feb 2026</div>
+        <div class="value mono-num">0<span class="unit">av 1416</span></div>
+        <div class="note">Ingen enda timme under 5 kWh. Året innan: alla 28&nbsp;dygn hade det.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Skiftet pågick</div>
+        <div class="value mono-num">161<span class="unit">dygn</span></div>
+        <div class="note">3 okt 2025 → 12 mar 2026, sedan tillbaka till normal nivå</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-legend">
+        <span><span class="swatch" style="background: var(--ocean)"></span>Dygnets lägsta timme · 14-dygns rullande median</span>
+        <span><span class="swatch" style="background: var(--amber); opacity: 0.3"></span>Strukturbrottets period (3 okt – 12 mar)</span>
+      </div>
+      <svg id="baseload-chart" class="chart-svg" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid meet" aria-label="Linjediagram över rullande grundlast"></svg>
+    </div>
+
+    <div class="pull-quote">
+      <span class="accent">9 kilowatt.</span> Dygnet runt. <em>I 161 dygn.</em>
+    </div>
+
+    <div style="max-width: 60ch; margin: 0 auto 32px; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
+      <p>Vad slogs på? En ny värmare i en servicebyggnad? En termostat höjd som "frostskydd"? En läckande varmvattenberedare? En stuga uthyrd som vinterboende? Det är frågor för en på-platsen-utredning — datan kan inte säga vad utrustningen var, bara att den fanns.</p>
+      <p style="margin-top: 14px;">Det vi <em>kan</em> säga: kostnaden för exakt denna last under jan–feb 2026, vid den månadens extrema spotpriser, var ungefär 16&thinsp;000 kr inklusive moms. Det är mer än hela on-säsongens elnota.</p>
+    </div>
+  </section>
+
+  <!-- ============== SEASONAL SPLIT ============== -->
+  <section id="sasong">
+    <div class="section-head">
+      <div class="section-num serif">03</div>
+      <div>
         <div class="section-eyebrow">Säsongsfördelning</div>
         <h2 class="section-title">När campingen är <em>tom</em>, jobbar elmätaren hårdast.</h2>
-        <p class="section-deck">On-säsongen (maj–september) är fem månader långa och stod för 38&nbsp;% av kilowattimmarna men bara 19&nbsp;% av kostnaden. Off-säsongen (oktober–april) — sju månader — bar resten.</p>
+        <p class="section-deck">On-säsongen (maj–september) är fem månader långa och stod för 38&nbsp;% av kilowattimmarna men bara 19&nbsp;% av kostnaden. Off-säsongen (oktober–april) — sju månader — bar resten. En del av off-säsongens tyngd kommer från strukturbrottet ovan.</p>
       </div>
     </div>
 
@@ -633,14 +685,55 @@ footer {
     </div>
   </section>
 
+  <!-- ============== WEATHER (NEW) ============== -->
+  <section id="vader">
+    <div class="section-head">
+      <div class="section-num serif">04</div>
+      <div>
+        <div class="section-eyebrow">Vädret bidrog · men inte ensamt</div>
+        <h2 class="section-title">Februari 2026 var den <em>tredje kallaste</em> på trettio år.</h2>
+        <p class="section-deck">Korrelerar man förbrukningen mot SMHI:s timdata från Torpshammar A (32 km från Ånge) tonar bilden ner: vädret förklarar inte ens halva chocken. Hälften av extrakostnaden är ren volymökning som inte beror på temperaturen.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="label">Feb 2026 medeltemp</div>
+        <div class="value mono-num">−12,1<span class="unit">°C</span></div>
+        <div class="note">5,9 °C kallare än 30-årsnormalen — bara 2009 och 2010 var kallare sedan 1996</div>
+      </div>
+      <div class="stat">
+        <div class="label">Lägsta uppmätta timme</div>
+        <div class="value mono-num">−29,8<span class="unit">°C</span></div>
+        <div class="note">14 februari 2026 kl 06 — den dagen drogs 390 kWh</div>
+      </div>
+      <div class="stat">
+        <div class="label">Värmens tändpunkt</div>
+        <div class="value mono-num">+3<span class="unit">°C</span></div>
+        <div class="note">Under tröskeln: −8,4 kWh per °C kallare. Över: temperaturen styr inget</div>
+      </div>
+      <div class="stat">
+        <div class="label">Pris-vs-volym (Shapley)</div>
+        <div class="value mono-num">51 / 49</div>
+        <div class="note">Av jan–feb 2026:s extra-kostnad: 51 % från priset, 49 % från ökad volym</div>
+      </div>
+    </div>
+
+    <div style="max-width: 64ch; margin: 40px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
+      <p><strong>Vad vädret <em>inte</em> förklarade.</strong> Räknar man om jan–feb 2026 till samma kWh-per-gradtimme som året innan, hade förbrukningen blivit ~6&thinsp;700 kWh — inte 18&thinsp;700. Mellanskillnaden, ~12&thinsp;000 kWh, kan inte tillskrivas kylan. Det är samma 9 kW-strömlast som syns i strukturbrott-diagrammet ovan, mätt på ett annat sätt.</p>
+      <p style="margin-top: 14px;"><strong>Vad vädret förklarade.</strong> Att det fanns en tröskel runt +3 °C där värmesystemet "tänder", och att varje grad kallare under den tröskeln drar ~8,4 kWh extra per dygn. Sommarens förbrukning korrelerar i princip inte med temperaturen alls (R² = 0,02) — där styr gästbeläggningen.</p>
+      <p style="margin-top: 14px;"><strong>Vad väder absolut inte förklarade.</strong> Vind: r = 0,00. Sommarens regn: r = 0,07. Hypotesen att regn driver gäster inomhus och upp elen — håller inte. Och årets enskilt högsta timme, 23,86 kWh den 24 juni 2025 kl 18, inföll i 13 °C, vindstilla, utan nederbörd. Det var tisdagen efter midsommar — klassisk camping-fyllning.</p>
+    </div>
+  </section>
+
   <!-- ============== MONTHLY ============== -->
   <section id="manad">
     <div class="section-head">
-      <div class="section-num serif">03</div>
+      <div class="section-num serif">05</div>
       <div>
         <div class="section-eyebrow">Månad för månad</div>
         <h2 class="section-title">Förbrukning och kostnad <em>per månad</em>.</h2>
-        <p class="section-deck">Hela datasetet om femton månader. Sage-färg markerar on-säsong (maj–sep). Häll musen över en stapel för exakta tal.</p>
+        <p class="section-deck">Hela datasetet om femton månader. Sage-färg markerar on-säsong (maj–sep). Bärnsten markerar de extrema vintermånaderna jan–feb 2026. Häll musen över en stapel för exakta tal.</p>
       </div>
     </div>
 
@@ -658,11 +751,11 @@ footer {
   <!-- ============== HEATMAP ============== -->
   <section id="kalender">
     <div class="section-head">
-      <div class="section-num serif">04</div>
+      <div class="section-num serif">06</div>
       <div>
         <div class="section-eyebrow">Daglig värmekarta</div>
         <h2 class="section-title">Varje dygn under <em>femton månader</em>.</h2>
-        <p class="section-deck">En cell per dygn. Mörkare ton = högre förbrukning. Den vertikala bandet i grönt visar on-säsongens fem månader. Du ser direkt hur on-säsongens dagsmönster är jämnare och högre, och hur vinterns toppar dyker upp som mörka stråk.</p>
+        <p class="section-deck">En cell per dygn. Mörkare ton = högre förbrukning. Det gröna bandet ovanför markerar on-säsongens fem månader. Lägg märke till de mörka stråken jan–feb 2026 — de är inte huvudsakligen kalla dagar, de är strukturbrottet.</p>
       </div>
     </div>
 
@@ -682,33 +775,39 @@ footer {
   <!-- ============== HOURLY ============== -->
   <section id="dygnsprofil">
     <div class="section-head">
-      <div class="section-num serif">05</div>
+      <div class="section-num serif">07</div>
       <div>
-        <div class="section-eyebrow">Dygnsprofil</div>
-        <h2 class="section-title">Lasten är nästan <em>platt</em>.</h2>
-        <p class="section-deck">Genomsnittlig kWh per timme på dygnet. Skillnaden mellan natt och dag är mindre än 25&nbsp;%. Det indikerar att grundlast — uppvärmning, kylar, ventilation, frys — dominerar över aktiv användning.</p>
+        <div class="section-eyebrow">Dygnsprofil · korrigering</div>
+        <h2 class="section-title">Den platta kurvan är en <em>illusion</em>.</h2>
+        <p class="section-deck">En genomsnittlig dygnskurva ser nästan platt ut — men det är en aggregerings-artefakt. Sommar- och vinterdygn har <em>motsatta</em> profiler som tar ut varandra när man medelvärdesberäknar. Ser man på en typisk sommarmånad och en typisk vintermånad var för sig kommer mönstret tillbaka.</p>
       </div>
     </div>
 
     <div class="chart-legend">
-      <span><span class="swatch" style="background: var(--sage)"></span>On-season medel</span>
-      <span><span class="swatch" style="background: var(--ocean)"></span>Off-season medel</span>
-      <span><span class="swatch" style="background: var(--ink); opacity: 0.3"></span>Helårsmedel</span>
+      <span><span class="swatch" style="background: var(--sage)"></span>Juli 2025 · representativ sommar</span>
+      <span><span class="swatch" style="background: var(--ocean)"></span>Februari 2026 · representativ vinter</span>
+      <span><span class="swatch" style="background: var(--ink); opacity: 0.3"></span>15-månadersmedel (skenbart "platt")</span>
     </div>
 
     <div class="chart-card">
       <svg id="hourly-chart" class="chart-svg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet" aria-label="Linjediagram över timprofil"></svg>
+    </div>
+
+    <div style="max-width: 64ch; margin: 32px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
+      <p><strong>Sommaren (juli)</strong> toppar nattetid kring kl 03 (varmvattenberedning + termostat-cykler) och dippar mitt på dagen kring kl 15 — solen sänker värmebehovet i servicebyggnaden.</p>
+      <p style="margin-top: 14px;"><strong>Vintern (februari)</strong> toppar morgon-kväll kring kl 07 och 19 (klassisk uppvärmning som följer kallaste timmarna) och dippar kl 14–15.</p>
+      <p style="margin-top: 14px;"><strong>Lördagskvällarna</strong> (kl 18–22 i juni–augusti) ligger i snitt 22&nbsp;% över söndagskvällar — den enda riktigt mänskliga signalen i datan, som syns även genom medelvärdet. Det är ankomstfönstret: gäster som checkar in, lagar mat, duschar, fyller på elbilar.</p>
     </div>
   </section>
 
   <!-- ============== FINDINGS ============== -->
   <section id="fynd">
     <div class="section-head">
-      <div class="section-num serif">06</div>
+      <div class="section-num serif">08</div>
       <div>
         <div class="section-eyebrow">Anmärkningsvärda fynd</div>
-        <h2 class="section-title">Fem upptäckter som <em>förändrar bilden</em>.</h2>
-        <p class="section-deck">Datan visar ett par saker som inte syns på fakturan. Här är de fem mest anmärkningsvärda — i prioriterad ordning, från störst potentiell besparing till intressantast detalj.</p>
+        <h2 class="section-title">Åtta upptäckter som <em>förändrar bilden</em>.</h2>
+        <p class="section-deck">Två oberoende analyser — en mot SMHI:s 30-åriga väderarkiv, en forensisk genomlysning av timseriestrukturen — landade i åtta fynd som inte syns på fakturan. I prioriterad ordning, från störst handlingsbar besparing till intressantast detalj om campingens vardag.</p>
       </div>
     </div>
 
@@ -717,70 +816,112 @@ footer {
       <article class="finding">
         <div class="finding-num alert serif">i</div>
         <div class="finding-body">
-          <h3>Två månader, mer kostnad än de <em>tretton andra tillsammans</em>.</h3>
-          <p>Januari och februari 2026 stod för 23&nbsp;% av kilowattimmarna men <strong>53&nbsp;% av hela årets spotkostnad</strong>. Kombinationen av vinterns förbrukningstopp (~9&thinsp;300&nbsp;kWh/månad) och historiskt höga spotpriser (131–137&nbsp;öre/kWh) gjorde dessa två månader förödande dyra.</p>
-          <p>Sätter ni jan–feb i det normala spannet (~50&nbsp;öre/kWh) hade kostnaden för året legat ~16&thinsp;000&nbsp;kr lägre.</p>
+          <h3>Strukturbrottet: en <em>9 kW dold last</em> i 161 dagar.</h3>
+          <p>Mellan 3 oktober 2025 och 12 mars 2026 sjönk timförbrukningen aldrig under 9&nbsp;kWh — året innan låg samma "tysta golv" på 1,8&nbsp;kWh. Skiftet är distinkt: en första uppgång i veckan 3–11 oktober 2025, sedan ett kort tillbakaslag, sedan definitivt skifte från 14 november till 12 mars då nivån återställdes.</p>
+          <p>Detta är inte vädret (som varierar långsamt). Det är inte spotpriset (som inte påverkar förbrukning). Något fysiskt drog ström — sannolikt en specifik installation, en termostat, eller en defekt apparat. Att hitta vad och stänga av den sparar ungefär 16&thinsp;000 kr inklusive moms i jan–feb-vinterprisernas extremscenario, mer i normala år eftersom utrustningen ändå gick dygnet runt i 161 dygn.</p>
         </div>
         <div class="finding-stat alert">
-          <div class="label">Jan + feb 2026</div>
-          <div class="big">25&thinsp;118 kr</div>
-          <div class="detail">Övriga 13 månader: 22&thinsp;602 kr<br>Andel av årskostnaden: <strong>53&nbsp;%</strong></div>
+          <div class="label">Grundlasten femdubblades</div>
+          <div class="big">5,3 ×</div>
+          <div class="detail">Feb 2025: 1,8 kWh/h kontinuerligt.<br>Feb 2026: 9,4 kWh/h kontinuerligt.<br>Värde att utreda: ~16&thinsp;000 kr ink moms</div>
         </div>
       </article>
 
       <article class="finding">
         <div class="finding-num alt serif">ii</div>
         <div class="finding-body">
-          <h3>Grundlasten ensam är värd <em>en sjättedel</em> av årsförbrukningen.</h3>
-          <p>De stilla dygnen — när campingen i praktiken står tom — drar ändå i snitt 56&nbsp;kWh per dygn. Det motsvarar en <strong>2,3&nbsp;kW kontinuerlig grundlast</strong>: ungefär en handduktorkare som aldrig stängs av, dygnet runt, året runt.</p>
-          <p>Skalat till hela året blir det 20&thinsp;300&nbsp;kWh som inte är kopplade till verksamhet — bara till att fastigheten finns. Vid vinterspot (~50 öre) är det 10&thinsp;000&nbsp;kr om året.</p>
+          <h3>Halva chocken är pris. <em>Halva</em> är volym.</h3>
+          <p>Konventionell läsning: "spotpriset bröt rekord, därför chock-räkningen jan–feb 2026". Det är bara halva sanningen. En Shapley-uppdelning av kostnadsökningen jan–feb 2025 → jan–feb 2026 ger 51&nbsp;% prischock, 49&nbsp;% volymökning. Förbrukningen ökade <strong>235&nbsp;%</strong> mellan vintrarna — av sig själv tillräckligt för att förklara halva kostnadschocken.</p>
+          <p>Den volymökningen är till stor del strukturbrottet ovan. Vädret (kallaste februari på trettio år) bidrar något, men en kontrollräkning visar att om campingen haft samma kWh-per-gradtimme som året innan hade förbrukningen blivit ~6&thinsp;700 kWh, inte 18&thinsp;700.</p>
         </div>
         <div class="finding-stat alt">
-          <div class="label">Kontinuerlig grundlast</div>
-          <div class="big">2,3 kW</div>
-          <div class="detail">≈ 56 kWh/dygn när inget händer<br>≈ 28&nbsp;% av årsförbrukningen</div>
+          <div class="label">Volym vs pris (Shapley)</div>
+          <div class="big">49 / 51</div>
+          <div class="detail">Av jan–feb 2026:s extra 22&thinsp;982 kr<br>Volymeffekt: 11&thinsp;321 kr · Priseffekt: 11&thinsp;660 kr</div>
         </div>
       </article>
 
       <article class="finding">
         <div class="finding-num serif">iii</div>
         <div class="finding-body">
-          <h3>Off-season-kilowattimmen kostar <em>2,7&nbsp;gånger</em> on-season-kilowattimmen.</h3>
-          <p>Det volymvägda spotpriset under campingsäsongen var 30,6&nbsp;öre/kWh. Utanför säsong: 81,5&nbsp;öre/kWh. Det är samma fysiska ström — men förbrukad i fel månader.</p>
-          <p>Slutsatsen: varje kWh ni kan flytta från november–februari till maj–september är värd nästan tre gånger så mycket. Det gör fastpriskontrakt för vintermånaderna och termisk tröghet (välisolerade tankar, schemalagd uppvärmning) extra mycket värda.</p>
+          <h3>Räkningen är ett <em>platå</em>, inte en serie spikar.</h3>
+          <p>Energi-besparingsråd brukar säga "klipp topparna". I Ånges fall hjälper det inte: de dyraste 1&nbsp;% av alla 10&thinsp;920 timmar är bara 5,5&nbsp;% av kostnaden. De dyraste 10&nbsp;% utgör 44&nbsp;%. Det betyder att räkningen byggs av en bred, jämn last — inte enskilda toppar.</p>
+          <p>Att sänka golvet (grundlasten) är därför mycket mer värt än att kapa toppar. 96 av topp-1 %-timmarna ligger i februari 2026 — månaden där grundlasten var 9 kW snarare än 2.</p>
         </div>
         <div class="finding-stat">
-          <div class="label">Effektivt pris per kWh</div>
-          <div class="big">30,6 → 81,5 <span style="font-size: 0.45em; color: var(--ink-mute);">öre</span></div>
-          <div class="detail">On-season medel vs off-season medel<br>Faktor: <strong>2,66×</strong></div>
+          <div class="label">Topp 1&nbsp;% av timmarna</div>
+          <div class="big">5,5 %</div>
+          <div class="detail">av totala spotkostnaden<br>96 av 109 i feb 2026</div>
         </div>
       </article>
 
       <article class="finding">
         <div class="finding-num alt serif">iv</div>
         <div class="finding-body">
-          <h3>Lasten har <em>ingen</em> tydlig dygnsprofil.</h3>
-          <p>Skillnaden mellan dygnets högsta och lägsta timme (i medel) är bara ~25&nbsp;%. För ett hushåll skulle den siffran ligga närmare 200&nbsp;%. Det betyder att den aktiva användningen är liten i förhållande till baslasten — uppvärmning, ventilation, kylar och frysar går oavsett om någon är där.</p>
-          <p>Det är goda nyheter för åtgärder: en stor del av elnotan kan trimmas utan att påverka gästupplevelsen alls.</p>
+          <h3>Värmen tänder vid <em>+3 °C</em>.</h3>
+          <p>Statistisk modellering mot SMHI:s timdata ger en knäpunkt: under +3&nbsp;°C drar varje grad kallare i snitt 8,4&nbsp;kWh extra per dygn. Ovanför är förbrukningen i praktiken temperaturoberoende. På sommaren förklarar temperaturen i princip ingenting (R² = 0,02) — där styr gästbeläggningen.</p>
+          <p>Det betyder att en termostat-justering i lågsäsong ger linjär utdelning. Att tillåta byggnaden att svalna från komfort till frostskydd några grader ger 8,4 × dygn × graderna i besparing.</p>
         </div>
         <div class="finding-stat alt">
-          <div class="label">Topp / botten på dygnet</div>
-          <div class="big">7,98 / 6,36</div>
-          <div class="detail">kWh per timme · medel<br>Spread bara ~25&nbsp;%</div>
+          <div class="label">Värme-känslighet</div>
+          <div class="big">−8,4 <span style="font-size: 0.4em; color: var(--ink-mute);">kWh/°C</span></div>
+          <div class="detail">Per grad kallare under +3 °C<br>R² = 0,30 lågsäsong · 0,02 högsäsong</div>
         </div>
       </article>
 
       <article class="finding">
         <div class="finding-num serif">v</div>
         <div class="finding-body">
-          <h3>Sommarens högsta timme överträffar <em>vinterns</em> högsta timme.</h3>
-          <p>Effekttoppen under hela året låg på <strong>23,9&nbsp;kW</strong> — och inföll 24 juni 2025 kl 18. Inte i januari, inte i februari. Det är ovanligt: vintern står för totalvolymen, men en enskild sommarkväll satte effektrekord.</p>
-          <p>Värt att kontrollera. Var det en installation, en bastu, en tillfällig last? Effekttoppar påverkar inte spotpriset men kan slå mot effektabonnemang i nätavgiften.</p>
+          <h3>Påsken visar campingens <em>verkliga nollnivå</em>.</h3>
+          <p>De två lägsta dygnen i hela 15-månadersperioden är skärtorsdag och långfredag 2025: 33,1 och 34,2 kWh — en kontinuerlig last på cirka <strong>1,4 kW</strong>. Detta är det fysiska minimum byggnaden drar när absolut ingenting händer: stand-by, kylar, frys, någon liten värme för att inte frysa rören.</p>
+          <p>Det säger två saker: (1) en månadsmedel-grundlast på 2,3 kW är en överskattning av "absolut nollnivå" — den är 1,4 kW. (2) Allt utöver dessa 1,4 kW är reduceringsbart utan att påverka byggnadens existens.</p>
         </div>
         <div class="finding-stat">
-          <div class="label">Årets effekttopp</div>
-          <div class="big">23,9 kW</div>
-          <div class="detail">2025-06-24 kl 18–19<br>Värt att utreda</div>
+          <div class="label">Lägsta dygn 455</div>
+          <div class="big">33 <span style="font-size: 0.4em; color: var(--ink-mute);">kWh</span></div>
+          <div class="detail">Skärtorsdagen 2025-04-17<br>= 1,4 kW kontinuerlig last</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num alt serif">vi</div>
+        <div class="finding-body">
+          <h3>Lördagskvällar avslöjar <em>gästerna</em>.</h3>
+          <p>Genom medeltal på alla 24 timmar går mänsklig aktivitet förlorad. Men en specifik signal håller: lördagar i juni–augusti drar i snitt 9,2 kWh/h mellan kl 18–22, mot söndagars 7,5 kWh/h — en <strong>22&nbsp;%-höjning</strong> över fem timmar, fem helger i rad. Det är ankomstfönstret: gäster checkar in lördag eftermiddag, lagar middag, duschar, fyller på elbilar/husbilar.</p>
+          <p>Något motsvarande mönster finns inte på vintern. Förbrukningen är då veckodag-blind — en ren "byggnaden står"-signal.</p>
+        </div>
+        <div class="finding-stat alt">
+          <div class="label">Lör vs sön kväll · sommar</div>
+          <div class="big">+22 %</div>
+          <div class="detail">9,2 vs 7,5 kWh/h kl 18–22<br>Den enda mänskliga signalen som överlever medelvärdet</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num serif">vii</div>
+        <div class="finding-body">
+          <h3>Februari 2026 var <em>3:e kallaste</em> på trettio år.</h3>
+          <p>Vid Torpshammar A (32 km från Ånge) var februari 2026 i medel −12,1 °C — 5,9 °C kallare än 30-årssnittet (1996–2024), 1,8 standardavvikelser från normalen. Endast februari 2009 (−12,3 °C) och 2010 (−12,2 °C) var kallare på 30 år. Den lägsta enskilda timmen var <strong>−29,8&nbsp;°C</strong>, 14 februari kl 06.</p>
+          <p>Det förklarar varför priserna sköt i höjden — hela Norrland värmde samtidigt — men förklarar inte att Ånges egen förbrukning fyrdubblades. Dålig kombination av yttre köld och inre strukturbrott.</p>
+        </div>
+        <div class="finding-stat">
+          <div class="label">Köldanomali feb 2026</div>
+          <div class="big">−5,9 <span style="font-size: 0.4em; color: var(--ink-mute);">°C</span></div>
+          <div class="detail">vs 30-årsnormalen · z = −1,84<br>Lägsta tim-temp: −29,8 °C den 14 feb</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num alt serif">viii</div>
+        <div class="finding-body">
+          <h3>Sommartoppen var inte väder. Det var <em>midsommar-tisdag</em>.</h3>
+          <p>Årets enskilt högsta timme — 23,86 kWh tisdagen 24 juni 2025 kl 18 — inföll vid 13,1 °C, vindstilla, utan nederbörd. Ingen värmebölja, ingen storm, inget åskväder. Toppen kom dagarna efter midsommarafton (fredag 20 juni) och har den klassiska signaturen för full camping: stadig kvällsbelastning kl 15–23 från bastu, duschar, kök och husvagnsuppkopplingar.</p>
+          <p>Vind och regn var noll-faktorer i hela datasetet (r ≈ 0). Hypotesen att regn driver gäster inomhus och upp elen håller inte; värmebölja → AC syns inte heller. Campingen är väderoberoende — det är gästerna som bestämmer.</p>
+        </div>
+        <div class="finding-stat alt">
+          <div class="label">Topptimme · 24 juni 2025 kl 18</div>
+          <div class="big">23,86 <span style="font-size: 0.4em; color: var(--ink-mute);">kWh</span></div>
+          <div class="detail">13,1 °C · vindstilla · torrt<br>Tisdagen efter midsommarafton</div>
         </div>
       </article>
 
@@ -790,7 +931,7 @@ footer {
   <!-- ============== METHODOLOGY ============== -->
   <section id="metod">
     <div class="section-head">
-      <div class="section-num serif">07</div>
+      <div class="section-num serif">09</div>
       <div>
         <div class="section-eyebrow">Metod &amp; reservationer</div>
         <h2 class="section-title">Hur siffrorna är <em>räknade</em>.</h2>
@@ -800,15 +941,15 @@ footer {
     <div class="method">
       <div>
         <h4>Datakällor</h4>
-        Timvis förbrukning från elnätsmätaren, 2025-01-01 till 2026-03-31 (455 dygn). Spotpriserna är månadsmedelvärden för Elområde SE2 (Norra Mellansverige).
+        Timvis förbrukning från elnätsmätaren, 2025-01-01 till 2026-03-31 (455 dygn × 24 tim = 10&thinsp;920 mätpunkter). Spotpriserna är månadsmedelvärden för Elområde SE2 (Norra Mellansverige). Vädret hämtades från SMHI Open Data, mätstation Torpshammar A (126290), 32 km från Ånge med 99,9 % timdatatäckning i analysperioden.
       </div>
       <div>
         <h4>Vad som räknas</h4>
-        Bara <em>spotandelen</em> av elkostnaden: spotpris × verklig timförbrukning, summerat per månad. Påslag (3–8 öre/kWh), energiskatt (~43 öre/kWh), nätavgift och moms 25 % tillkommer på faktisk faktura.
+        Bara <em>spotandelen</em> av elkostnaden: spotpris × verklig timförbrukning, summerat per månad. Påslag (3–8 öre/kWh), energiskatt (~43 öre/kWh), nätavgift och moms 25&nbsp;% tillkommer på faktisk faktura. Verklig totalkostnad ligger typiskt 2–3× högre än ren spot.
       </div>
       <div>
-        <h4>Säsongsdefinition</h4>
-        On-season = maj till september (5 månader). Off-season = oktober till april (7 månader). Rollande 12-månadersfönster: april 2025 till mars 2026. Grundlast = medelvärdet av de 5&nbsp;% lägsta dygnen.
+        <h4>Strukturbrottet</h4>
+        Definierat som dygnens lägsta timme (14-dygns rullande median) avvikande från 2024/25-baslinje. Cost framing: extra ~7 kW × 24 h × 60 d (jan–feb 2026) × ~135 öre/kWh ≈ 13&thinsp;000 kr ex moms / 16&thinsp;000 kr ink moms. Två oberoende metoder (väderkorrelation och timseries­forensik) konvergerar på samma slutsats.
       </div>
     </div>
   </section>
@@ -1095,6 +1236,200 @@ function drawHeatmap() {
 }
 
 // =================== HOURLY PROFILE ===================
+// =================== STRUCTURAL BREAK / ROLLING BASELOAD ===================
+function drawBaseload() {
+  const svg = document.getElementById('baseload-chart');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 1200, H = 380;
+  const M = { top: 30, right: 30, bottom: 60, left: 60 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const series = DATA.rolling_min_hourly; // [{date, rolling_min_kwh_per_h}]
+  const sb = DATA.structural_break;
+  const dates = series.map(d => new Date(d.date).getTime());
+  const values = series.map(d => d.rolling_min_kwh_per_h);
+  const tMin = Math.min(...dates), tMax = Math.max(...dates);
+  const vMax = Math.max(...values, 12);
+  const niceMax = Math.ceil(vMax / 2) * 2;
+
+  const xFor = t => M.left + ((t - tMin) / (tMax - tMin)) * iw;
+  const yFor = v => M.top + ih - (v / niceMax) * ih;
+
+  // Structural break period band
+  const sbStartT = new Date(sb.start).getTime();
+  const sbEndT = new Date(sb.end).getTime();
+  const band = document.createElementNS(ns, 'rect');
+  band.setAttribute('x', xFor(sbStartT));
+  band.setAttribute('y', M.top);
+  band.setAttribute('width', xFor(sbEndT) - xFor(sbStartT));
+  band.setAttribute('height', ih);
+  band.setAttribute('fill', 'var(--amber)');
+  band.setAttribute('opacity', 0.10);
+  svg.appendChild(band);
+
+  // Vertical lines marking the break
+  [sbStartT, sbEndT].forEach(t => {
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', xFor(t)); ln.setAttribute('x2', xFor(t));
+    ln.setAttribute('y1', M.top); ln.setAttribute('y2', M.top + ih);
+    ln.setAttribute('stroke', 'var(--amber)');
+    ln.setAttribute('stroke-width', 1);
+    ln.setAttribute('stroke-dasharray', '3 3');
+    svg.appendChild(ln);
+  });
+
+  // Date labels for break boundaries
+  ['Strukturbrottet börjar · 3 okt', 'Strukturbrottet slutar · 12 mar'].forEach((label, i) => {
+    const t = i === 0 ? sbStartT : sbEndT;
+    const tx = document.createElementNS(ns, 'text');
+    tx.setAttribute('x', xFor(t) + (i === 0 ? 6 : -6));
+    tx.setAttribute('y', M.top + 16);
+    tx.setAttribute('text-anchor', i === 0 ? 'start' : 'end');
+    tx.style.font = 'italic 11px Fraunces, serif';
+    tx.style.fill = 'var(--amber)';
+    tx.textContent = label;
+    svg.appendChild(tx);
+  });
+
+  // Grid + Y axis
+  const grid = document.createElementNS(ns, 'g');
+  grid.setAttribute('class', 'grid');
+  for (let i = 0; i <= 5; i++) {
+    const v = niceMax * i / 5;
+    const y = yFor(v);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    grid.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 8); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = SE(v, 0);
+    grid.appendChild(t);
+  }
+  svg.appendChild(grid);
+
+  // X axis (month labels)
+  const startD = new Date(series[0].date);
+  const endD = new Date(series[series.length - 1].date);
+  for (let y = startD.getFullYear(); y <= endD.getFullYear(); y++) {
+    for (let m = 0; m < 12; m++) {
+      const d = new Date(Date.UTC(y, m, 1));
+      const t = d.getTime();
+      if (t < tMin || t > tMax) continue;
+      const x = xFor(t);
+      const ln = document.createElementNS(ns, 'line');
+      ln.setAttribute('x1', x); ln.setAttribute('x2', x);
+      ln.setAttribute('y1', M.top + ih); ln.setAttribute('y2', M.top + ih + 4);
+      ln.setAttribute('stroke', 'var(--rule)');
+      svg.appendChild(ln);
+      if (m % 2 === 0) {
+        const lab = document.createElementNS(ns, 'text');
+        lab.setAttribute('x', x); lab.setAttribute('y', M.top + ih + 18);
+        lab.setAttribute('text-anchor', 'middle');
+        lab.style.font = '10px JetBrains Mono, monospace';
+        lab.style.fill = 'var(--ink-mute)';
+        lab.textContent = monthName(m + 1);
+        svg.appendChild(lab);
+        if (m === 0) {
+          const yl = document.createElementNS(ns, 'text');
+          yl.setAttribute('x', x); yl.setAttribute('y', M.top + ih + 36);
+          yl.setAttribute('text-anchor', 'middle');
+          yl.style.font = 'italic 12px Fraunces, serif';
+          yl.style.fill = 'var(--ink)';
+          yl.textContent = String(y);
+          svg.appendChild(yl);
+        }
+      }
+    }
+  }
+
+  // Reference baseline (~1.8 kWh/h, the "normal" winter)
+  const refY = yFor(1.8);
+  const refLn = document.createElementNS(ns, 'line');
+  refLn.setAttribute('x1', M.left); refLn.setAttribute('x2', W - M.right);
+  refLn.setAttribute('y1', refY); refLn.setAttribute('y2', refY);
+  refLn.setAttribute('stroke', 'var(--ink-mute)');
+  refLn.setAttribute('stroke-width', 1);
+  refLn.setAttribute('stroke-dasharray', '4 4');
+  refLn.setAttribute('opacity', 0.4);
+  svg.appendChild(refLn);
+  const refLab = document.createElementNS(ns, 'text');
+  refLab.setAttribute('x', M.left + 6); refLab.setAttribute('y', refY - 4);
+  refLab.style.font = 'italic 11px Fraunces, serif';
+  refLab.style.fill = 'var(--ink-mute)';
+  refLab.textContent = 'normal vintergrundlast ≈ 1,8 kWh/h';
+  svg.appendChild(refLab);
+
+  // Area under curve
+  const areaPath = document.createElementNS(ns, 'path');
+  let dArea = 'M' + xFor(dates[0]) + ',' + yFor(0) + ' ';
+  for (let i = 0; i < series.length; i++) {
+    dArea += 'L' + xFor(dates[i]) + ',' + yFor(values[i]) + ' ';
+  }
+  dArea += 'L' + xFor(dates[dates.length - 1]) + ',' + yFor(0) + ' Z';
+  areaPath.setAttribute('d', dArea);
+  areaPath.setAttribute('fill', 'var(--ocean)');
+  areaPath.setAttribute('opacity', 0.10);
+  svg.appendChild(areaPath);
+
+  // Main line
+  const linePath = document.createElementNS(ns, 'path');
+  let dLine = '';
+  for (let i = 0; i < series.length; i++) {
+    dLine += (i === 0 ? 'M' : 'L') + xFor(dates[i]) + ',' + yFor(values[i]) + ' ';
+  }
+  linePath.setAttribute('d', dLine);
+  linePath.setAttribute('fill', 'none');
+  linePath.setAttribute('stroke', 'var(--ocean)');
+  linePath.setAttribute('stroke-width', 2);
+  linePath.setAttribute('stroke-linecap', 'round');
+  linePath.setAttribute('stroke-linejoin', 'round');
+  svg.appendChild(linePath);
+
+  // Y axis title
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ink-mute)';
+  yt.textContent = 'kWh per timme · 14-dygns rullande median av dygnets minsta timme';
+  svg.appendChild(yt);
+
+  // Find peak inside the break
+  let peakIdx = 0, peakVal = 0;
+  for (let i = 0; i < series.length; i++) {
+    const t = dates[i];
+    if (t >= sbStartT && t <= sbEndT && values[i] > peakVal) {
+      peakVal = values[i];
+      peakIdx = i;
+    }
+  }
+  const peakX = xFor(dates[peakIdx]);
+  const peakY = yFor(peakVal);
+  const dot = document.createElementNS(ns, 'circle');
+  dot.setAttribute('cx', peakX); dot.setAttribute('cy', peakY);
+  dot.setAttribute('r', 5);
+  dot.setAttribute('fill', 'var(--paper)');
+  dot.setAttribute('stroke', 'var(--amber)');
+  dot.setAttribute('stroke-width', 2);
+  svg.appendChild(dot);
+  const annot = document.createElementNS(ns, 'text');
+  annot.setAttribute('x', peakX);
+  annot.setAttribute('y', peakY - 12);
+  annot.setAttribute('text-anchor', 'middle');
+  annot.style.font = 'italic 12px Fraunces, serif';
+  annot.style.fill = 'var(--amber)';
+  annot.textContent = `topp ${SE(peakVal, 1)} kWh/h`;
+  svg.appendChild(annot);
+}
+
 function drawHourly() {
   const svg = document.getElementById('hourly-chart');
   svg.innerHTML = '';
@@ -1104,8 +1439,11 @@ function drawHourly() {
   const ih = H - M.top - M.bottom;
   const ns = 'http://www.w3.org/2000/svg';
 
-  const onP = DATA.hourly_profile.on;
-  const offP = DATA.hourly_profile.off;
+  // Use representative summer (Jul 2025) and winter (Feb 2026) profiles
+  // — these show the OPPOSITE day/night patterns that the rolling-year
+  // average masks. The all-year average is shown as faint dashed line.
+  const onP = DATA.representative_profiles.summer_jul_2025;
+  const offP = DATA.representative_profiles.winter_feb_2026;
   const allP = DATA.hourly_profile.all;
   const allMax = Math.max(...onP, ...offP, ...allP);
   const niceMax = Math.ceil(allMax / 2) * 2 + 2;
@@ -1214,14 +1552,15 @@ function drawHourly() {
   yt.style.letterSpacing = '0.18em';
   yt.style.textTransform = 'uppercase';
   yt.style.fill = 'var(--ink-mute)';
-  yt.textContent = 'kWh per timme · medel';
+  yt.textContent = 'kWh per timme · medel inom månaden';
   svg.appendChild(yt);
 
-  // Annotation: peak and dip
-  const onPeakIdx = onP.indexOf(Math.max(...onP));
-  const offPeakIdx = offP.indexOf(Math.max(...offP));
+  // Annotation: peak/dip for summer vs winter (which are opposite)
+  const summerPeakIdx = onP.indexOf(Math.max(...onP));
+  const summerDipIdx = onP.indexOf(Math.min(...onP));
+  const winterPeakIdx = offP.indexOf(Math.max(...offP));
+  const winterDipIdx = offP.indexOf(Math.min(...offP));
 
-  // small annotation arrows
   function annotate(idx, val, color, label, anchor='middle', dy=-14) {
     const x = xFor(idx + 0.5);
     const y = yFor(val);
@@ -1234,14 +1573,16 @@ function drawHourly() {
     t.textContent = label;
     svg.appendChild(t);
   }
-  annotate(onPeakIdx, onP[onPeakIdx], 'var(--sage)', `topp ${SE(onP[onPeakIdx],2)}`);
-  annotate(offPeakIdx, offP[offPeakIdx], 'var(--ocean)', `topp ${SE(offP[offPeakIdx],2)}`, 'middle', -14);
+  annotate(summerPeakIdx, onP[summerPeakIdx], 'var(--sage)', `sommar-topp kl ${String(summerPeakIdx).padStart(2,'0')}`, 'middle', -10);
+  annotate(summerDipIdx, onP[summerDipIdx], 'var(--sage)', `dipp kl ${String(summerDipIdx).padStart(2,'0')}`, 'middle', 18);
+  annotate(winterPeakIdx, offP[winterPeakIdx], 'var(--ocean)', `vinter-topp kl ${String(winterPeakIdx).padStart(2,'0')}`, 'middle', -10);
 }
 
 // =================== INIT ===================
 fetch('data.json').then(r => r.json()).then(data => {
   DATA = data;
   drawMonthly('kwh');
+  drawBaseload();
   drawHeatmap();
   drawHourly();
 
