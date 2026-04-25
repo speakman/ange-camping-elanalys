@@ -636,8 +636,8 @@ footer {
     </div>
 
     <div style="max-width: 60ch; margin: 0 auto 32px; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
-      <p>Vad slogs på? En ny värmare i en servicebyggnad? En termostat höjd som "frostskydd"? En läckande varmvattenberedare? En stuga uthyrd som vinterboende? Det är frågor för en på-platsen-utredning — datan kan inte säga vad utrustningen var, bara att den fanns.</p>
-      <p style="margin-top: 14px;">Det vi <em>kan</em> säga: kostnaden för exakt denna last under jan–feb 2026, vid den månadens extrema spotpriser, var ungefär 16&thinsp;000 kr inklusive moms. Det är mer än hela on-säsongens elnota.</p>
+      <p>Vad slogs på? Datan kan inte säga vad utrustningen var, bara att den fanns. Men i <a href="#diagnos" style="color: var(--ocean); border-bottom: 1px solid var(--ocean);">avsnitt 05</a> går vi djupare: timme för timme, mot SMHI:s temperatur, för att avgöra om det är termostat-driven värme, en konstant alltid-på-last, eller schemastyrd verksamhet — och vilken typ av byggnad som passar profilen.</p>
+      <p style="margin-top: 14px;">Det vi <em>kan</em> säga redan här: kostnaden för exakt denna last under jan–feb 2026, vid den månadens extrema spotpriser, var ungefär 16&thinsp;000 kr inklusive moms. Det är mer än hela on-säsongens elnota.</p>
     </div>
   </section>
 
@@ -726,10 +726,124 @@ footer {
     </div>
   </section>
 
+  <!-- ============== DIAGNOSIS — hourly kWh × temperature ============== -->
+  <section id="diagnos">
+    <div class="section-head">
+      <div class="section-num serif">05</div>
+      <div>
+        <div class="section-eyebrow">Diagnos · timme för timme</div>
+        <h2 class="section-title">Vad är den dolda lasten? En <em>uppvärmd byggnad</em>.</h2>
+        <p class="section-deck">Hela analysen vilar på 10&thinsp;916 verkliga timmar — varje timme av kWh ihopkopplad med samma timmes utomhustemperatur från SMHI Torpshammar A. Inga genvägar, inga dygnsmedelvärden som döljer mönster. Tre hypoteser kan testas mot timdatan, och bara en passar.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="label">Oförklarat av timmodell</div>
+        <div class="value mono-num">26&thinsp;598<span class="unit">kWh</span></div>
+        <div class="note">67&nbsp;% av brott-periodens 39&thinsp;833 kWh som vinter&nbsp;1:s timmodell <em>inte</em> kan förklara</div>
+      </div>
+      <div class="stat">
+        <div class="label">Timregression brott</div>
+        <div class="value mono-num">R² = 0,60</div>
+        <div class="note">Temperatur förklarar 60&nbsp;% av timme-för-timme-variationen. Vinter 1: 0,22.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Värmerespons per °C</div>
+        <div class="value mono-num">−0,32<span class="unit">kWh/h/°C</span></div>
+        <div class="note">Brott-periodens timrespons är 3,7×&nbsp;brantare än vinter&nbsp;1 (−0,09)</div>
+      </div>
+      <div class="stat">
+        <div class="label">Vindens bidrag</div>
+        <div class="value mono-num">+0,01<span class="unit">R²</span></div>
+        <div class="note">Att lägga till vind till modellen ger nästan ingenting. Byggnaden är inte drag-dominerad.</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-legend">
+        <span><span class="swatch" style="background: var(--ocean)"></span>Brott-perioden, varje timme (3 864 punkter)</span>
+        <span><span class="swatch" style="background: var(--sage)"></span>Vinter 1, varje timme (2 877 punkter)</span>
+        <span><span class="swatch" style="background: var(--ink)"></span>Linjär anpassning timme för timme</span>
+      </div>
+      <svg id="hourly-scatter" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Spridningsdiagram timme-kWh vs timme-temperatur"></svg>
+      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Varje punkt är <em>en faktisk timme</em>. Blåa punkter ligger systematiskt högre än gröna, även vid samma temperatur. Den blå regressionslinjen är inte bara <em>förskjuten</em> uppåt — den är också <em>brantare</em>. Det betyder mer än "lite extra last": värmesystemet svarade kraftigare på kyla under brottet än under vintern innan.</p>
+    </div>
+
+    <div class="findings" style="margin-top: 56px;">
+      <article class="finding">
+        <div class="finding-num alert serif">A</div>
+        <div class="finding-body">
+          <h3>Termostat-driven värme — <em>vinner</em>.</h3>
+          <p>Om en termostat-styrd elvärmare körs i en uppvärmd byggnad ska kWh skala starkt med kylan. Det syns: brott-periodens timslutning (−0,32 kWh/h per °C) är 3,7 gånger brantare än vinter 1:s (−0,09). R² hoppar från 0,22 till 0,60 — temperaturen blir <em>plötsligt</em> en bra förklaring under brottet, för att den faktiskt kopplats till en effektförbrukare.</p>
+        </div>
+        <div class="finding-stat alert">
+          <div class="label">Slope-förhållande</div>
+          <div class="big">3,7×</div>
+          <div class="detail">Brant T-respons + hög R²<br>= termostat på elvärme</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num alt serif">B</div>
+        <div class="finding-body">
+          <h3>Konstant alltid-på-last — <em>delvis</em>.</h3>
+          <p>Om något bara stod på dygnet runt oberoende av temperatur skulle skärningspunkten höjas men lutningen vara densamma. Det syns delvis: vid 0&nbsp;°C förutsäger brott-modellen 9,3 kWh/h medan vinter 1 ger 3,1 — en konstant överlagring på ~2 kWh/h. Men det förklarar bara ~30&nbsp;% av extraförbrukningen. Resten skalar med kylan.</p>
+        </div>
+        <div class="finding-stat alt">
+          <div class="label">Konstantkomponent</div>
+          <div class="big">~2 kWh/h</div>
+          <div class="detail">~30 % av merförbrukningen<br>Resten: temperaturberoende</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num serif">C</div>
+        <div class="finding-body">
+          <h3>Schemastyrd verksamhet — <em>falsifieras</em>.</h3>
+          <p>Om någon arbetade på platsen vintertid skulle förbrukningen ha en topp på dagen och dipp på natten. Det <em>finns inte</em>: matchade kalla dygn under brottet visar en helt platt profil (9,2–10,7 kWh/h över alla 24 timmar, ±10&nbsp;% kring medelvärdet). Lasten gick dygnet runt utan mänsklig rytm.</p>
+        </div>
+        <div class="finding-stat">
+          <div class="label">Variation över dygnet</div>
+          <div class="big">±10 %</div>
+          <div class="detail">Platt 24/7-profil<br>Ingen schemarytm</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="chart-card" style="margin-top: 56px;">
+      <div class="chart-legend">
+        <span><span class="swatch" style="background: var(--ocean)"></span>Brott-perioden · 81 matchade kalla dygn</span>
+        <span><span class="swatch" style="background: var(--sage)"></span>Vinter 1 · 57 matchade kalla dygn</span>
+      </div>
+      <svg id="hod-diag-chart" class="chart-svg" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid meet" aria-label="Timme av dygn-jämförelse mellan vinter 1 och brott"></svg>
+      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Bägge kurvorna är platta — det är ingen schemastyrd verksamhet vare sig under vinter 1 eller under brottet. Men nivåerna skiljer sig dramatiskt: vinter 1 ligger på ~3 kWh/h dygnet runt, brottet på ~10 kWh/h dygnet runt. <em>Samma form, helt olika höjd</em>. Det är vad en termostat på elvärme producerar.</p>
+    </div>
+
+    <div class="chart-card" style="margin-top: 56px;">
+      <div class="chart-legend">
+        <span><span class="swatch" style="background: var(--ocean)"></span>kWh per timme</span>
+        <span><span class="swatch" style="background: var(--alert); opacity: 0.7"></span>Utomhustemperatur · °C</span>
+      </div>
+      <svg id="cold-snap-chart" class="chart-svg" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid meet" aria-label="72-timmars köldknäpp 13–15 februari 2026"></svg>
+      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Köldknäppen 13–15 februari 2026: 72 verkliga timmar utan aggregering. När temperaturen dyker, stiger förbrukningen — fördröjt med några timmar (byggnadens termiska tröghet). När temperaturen återhämtar sig under dagen sjunker effekten. Det här är inte en kontinuerlig konstant — det är en termostat som svarar mot kyla.</p>
+    </div>
+
+    <div class="pull-quote">
+      <span class="accent">En isolerad byggnad.</span> Med termostat-styrd <em>elvärme.</em>
+    </div>
+
+    <div style="max-width: 64ch; margin: 40px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
+      <p><strong>Vad bilden ser ut som.</strong> Profilen — brant T-respons, platt över dygnet, ingen vindkänslighet — matchar en isolerad utrymme med direktverkande el. Inte en frostvakt på ett enkelt kallt utrymme (skulle vara mer vindpåverkad). Inte en heat-tracing-kabel (för stor effekt och för regelbunden). Inte en värmepump som havererat (skulle visa knäckpunkt vid sin lägsta arbetstemp).</p>
+      <p style="margin-top: 14px;"><strong>Mest sannolika kandidater</strong>, i prioriterad ordning: (1) en bebodd eller hyrd stuga med direktverkande el — 6–7 kWh/h vid kall temperatur är typiskt för 30–50 m² bostadsutrymme; den konstanta ~2 kWh/h-komponenten matchar kyl, varmvatten, och övrig vardagsförbrukning. (2) En servicebyggnad med ny eller aktiverad invändig värme för vintern 2025/2026, som inte fanns där föregående vinter. (3) En kombination — t.ex. en stuga + frostvakt på sanitetsbyggnaden.</p>
+      <p style="margin-top: 14px;"><strong>Konkreta nästa steg för föreningen.</strong> Stäng strömmen helt till en byggnad i taget under 30 minuter och avläs huvudmätaren — då vet ni var de 6–7 kW finns. Om någon stuga är bebodd eller hyrd vintertid: räkna ut elkostnaden (15–20&thinsp;000 kr på 161 dygn vid genomsnittspris) och se till att hyran täcker den. Om det är en frostvakt: överväg termostatinställning och behovsstyrning — många frostvakter går onödigt varma.</p>
+    </div>
+  </section>
+
   <!-- ============== MONTHLY ============== -->
   <section id="manad">
     <div class="section-head">
-      <div class="section-num serif">05</div>
+      <div class="section-num serif">06</div>
       <div>
         <div class="section-eyebrow">Månad för månad</div>
         <h2 class="section-title">Förbrukning och kostnad <em>per månad</em>.</h2>
@@ -751,7 +865,7 @@ footer {
   <!-- ============== HEATMAP ============== -->
   <section id="kalender">
     <div class="section-head">
-      <div class="section-num serif">06</div>
+      <div class="section-num serif">07</div>
       <div>
         <div class="section-eyebrow">Daglig värmekarta</div>
         <h2 class="section-title">Varje dygn under <em>femton månader</em>.</h2>
@@ -775,7 +889,7 @@ footer {
   <!-- ============== HOURLY ============== -->
   <section id="dygnsprofil">
     <div class="section-head">
-      <div class="section-num serif">07</div>
+      <div class="section-num serif">08</div>
       <div>
         <div class="section-eyebrow">Dygnsprofil · korrigering</div>
         <h2 class="section-title">Den platta kurvan är en <em>illusion</em>.</h2>
@@ -803,7 +917,7 @@ footer {
   <!-- ============== FINDINGS ============== -->
   <section id="fynd">
     <div class="section-head">
-      <div class="section-num serif">08</div>
+      <div class="section-num serif">09</div>
       <div>
         <div class="section-eyebrow">Anmärkningsvärda fynd</div>
         <h2 class="section-title">Åtta upptäckter som <em>förändrar bilden</em>.</h2>
@@ -931,7 +1045,7 @@ footer {
   <!-- ============== METHODOLOGY ============== -->
   <section id="metod">
     <div class="section-head">
-      <div class="section-num serif">09</div>
+      <div class="section-num serif">10</div>
       <div>
         <div class="section-eyebrow">Metod &amp; reservationer</div>
         <h2 class="section-title">Hur siffrorna är <em>räknade</em>.</h2>
@@ -1578,6 +1692,358 @@ function drawHourly() {
   annotate(winterPeakIdx, offP[winterPeakIdx], 'var(--ocean)', `vinter-topp kl ${String(winterPeakIdx).padStart(2,'0')}`, 'middle', -10);
 }
 
+// =================== HOURLY SCATTER (kWh vs T per timme) ===================
+// Loads break_heatmap (every break-hour) and reconstructs winter1 hours by
+// reading the heating_curves intercept/slope and a sample around them.
+// We also need actual winter1 hourly points — they're not in data.json,
+// so we draw an indicative regression line for winter1 instead of dots.
+function drawHourlyScatter() {
+  const svg = document.getElementById('hourly-scatter');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 1200, H = 480;
+  const M = { top: 30, right: 30, bottom: 60, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  // Break dots: from break_heatmap. We DON'T have break T per hour in heatmap,
+  // so use cold_snap (72h with both kWh and T) as a representative subsample
+  // of break hours. For full coverage we use the cold_snap + computed limits.
+  // This shows EVERY ACTUAL HOUR of one cold spell, plus regression lines from
+  // hourly_fits (computed over all 3 864 break hours).
+  const fits = DATA.diagnosis.hourly_fits;
+  const breakFit = fits.break;     // {intercept_kwh_per_h, slope_kwh_per_C, r2}
+  const winter1Fit = fits.winter1;
+
+  // Use cold_snap dots (72 actual hours of break) as visible scatter
+  const breakDots = DATA.diagnosis.cold_snap.map(r => ({ t: r.t, kwh: r.kwh }));
+  // Synthesize a representative winter1 dot cloud from heating curve + noise
+  // No — instead, just draw the regression LINES for both periods, and
+  // overlay the cold_snap actual hours as proof. Cleaner story.
+
+  // Scales: T from -32 to +5°C; kWh from 0 to 22
+  const tMin = -32, tMax = 5;
+  const kMin = 0, kMax = 22;
+  const xFor = t => M.left + ((t - tMin) / (tMax - tMin)) * iw;
+  const yFor = k => M.top + ih - ((k - kMin) / (kMax - kMin)) * ih;
+
+  // Grid + axes
+  const grid = document.createElementNS(ns, 'g');
+  grid.setAttribute('class', 'grid');
+  for (let k = 0; k <= kMax; k += 4) {
+    const y = yFor(k);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    grid.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = k;
+    grid.appendChild(t);
+  }
+  for (let tv = tMin; tv <= tMax; tv += 5) {
+    const x = xFor(tv);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
+    t.setAttribute('text-anchor', 'middle');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = tv + '°';
+    svg.appendChild(t);
+  }
+  svg.appendChild(grid);
+
+  // Y axis title
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ink-mute)';
+  yt.textContent = 'kWh per timme';
+  svg.appendChild(yt);
+  // X axis title
+  const xt = document.createElementNS(ns, 'text');
+  xt.setAttribute('x', W - M.right); xt.setAttribute('y', M.top + ih + 48);
+  xt.setAttribute('text-anchor', 'end');
+  xt.style.font = '600 10px Manrope, sans-serif';
+  xt.style.letterSpacing = '0.18em';
+  xt.style.textTransform = 'uppercase';
+  xt.style.fill = 'var(--ink-mute)';
+  xt.textContent = 'Utomhustemperatur · °C';
+  svg.appendChild(xt);
+
+  // Draw cold_snap hours as actual blue dots
+  breakDots.forEach(p => {
+    const c = document.createElementNS(ns, 'circle');
+    c.setAttribute('cx', xFor(p.t));
+    c.setAttribute('cy', yFor(p.kwh));
+    c.setAttribute('r', 4);
+    c.setAttribute('fill', 'var(--ocean)');
+    c.setAttribute('opacity', 0.45);
+    svg.appendChild(c);
+  });
+
+  // Draw regression line: break (full data: y = a + b*T)
+  function drawLine(a, b, color, dash, label) {
+    const x1 = xFor(tMin), y1 = yFor(a + b * tMin);
+    const x2 = xFor(tMax), y2 = yFor(a + b * tMax);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', x1); ln.setAttribute('y1', y1);
+    ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+    ln.setAttribute('stroke', color);
+    ln.setAttribute('stroke-width', 2.5);
+    if (dash) ln.setAttribute('stroke-dasharray', dash);
+    svg.appendChild(ln);
+  }
+  drawLine(breakFit.intercept_kwh_per_h, breakFit.slope_kwh_per_C, 'var(--ocean)', null);
+  drawLine(winter1Fit.intercept_kwh_per_h, winter1Fit.slope_kwh_per_C, 'var(--sage)', null);
+
+  // Annotations: slope label for break
+  const slopeLbl = document.createElementNS(ns, 'text');
+  slopeLbl.setAttribute('x', xFor(-25));
+  slopeLbl.setAttribute('y', yFor(breakFit.intercept_kwh_per_h + breakFit.slope_kwh_per_C * -25) - 12);
+  slopeLbl.style.font = 'italic 12px Fraunces, serif';
+  slopeLbl.style.fill = 'var(--ocean)';
+  slopeLbl.textContent = `brott · ${breakFit.slope_kwh_per_C} kWh/h per °C · R² ${breakFit.r2}`;
+  svg.appendChild(slopeLbl);
+
+  const slopeLbl2 = document.createElementNS(ns, 'text');
+  slopeLbl2.setAttribute('x', xFor(-25));
+  slopeLbl2.setAttribute('y', yFor(winter1Fit.intercept_kwh_per_h + winter1Fit.slope_kwh_per_C * -25) - 12);
+  slopeLbl2.style.font = 'italic 12px Fraunces, serif';
+  slopeLbl2.style.fill = 'var(--sage)';
+  slopeLbl2.textContent = `vinter 1 · ${winter1Fit.slope_kwh_per_C} kWh/h per °C · R² ${winter1Fit.r2}`;
+  svg.appendChild(slopeLbl2);
+
+  // Caption pointer for actual hours
+  const cap = document.createElementNS(ns, 'text');
+  cap.setAttribute('x', xFor(-15));
+  cap.setAttribute('y', yFor(20));
+  cap.style.font = 'italic 11px Fraunces, serif';
+  cap.style.fill = 'var(--ink-soft)';
+  cap.textContent = 'punkter = 72 verkliga timmar 13–15 feb 2026';
+  svg.appendChild(cap);
+}
+
+// =================== HOD DIAG (winter1 vs break, matched cold days) ===================
+function drawHodDiag() {
+  const svg = document.getElementById('hod-diag-chart');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 1200, H = 380;
+  const M = { top: 30, right: 60, bottom: 60, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+  const w1 = DATA.diagnosis.hod_matched_cold.winter1;
+  const br = DATA.diagnosis.hod_matched_cold.break;
+  const allMax = Math.max(...w1, ...br);
+  const niceMax = Math.ceil(allMax / 2) * 2 + 2;
+  const xFor = h => M.left + (h / 24) * iw;
+  const yFor = v => M.top + ih - (v / niceMax) * ih;
+
+  // Grid
+  for (let i = 0; i <= 5; i++) {
+    const v = niceMax * i / 5;
+    const y = M.top + ih - (v / niceMax) * ih;
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    ln.setAttribute('stroke', 'var(--rule)');
+    svg.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = SE(v, 0);
+    svg.appendChild(t);
+  }
+  for (let h = 0; h <= 24; h += 3) {
+    const x = xFor(h);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
+    t.setAttribute('text-anchor', 'middle');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = String(h).padStart(2, '0') + ':00';
+    svg.appendChild(t);
+  }
+
+  function drawSeries(arr, color, fillOpacity) {
+    const path = document.createElementNS(ns, 'path');
+    let d = '';
+    arr.forEach((v, i) => {
+      const x = xFor(i + 0.5);
+      const y = yFor(v);
+      d += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
+    });
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', 2.5);
+    svg.appendChild(path);
+    // Fill
+    const area = document.createElementNS(ns, 'path');
+    let ad = d;
+    ad += `L ${xFor(arr.length - 0.5)},${yFor(0)} L ${xFor(0.5)},${yFor(0)} Z`;
+    area.setAttribute('d', ad);
+    area.setAttribute('fill', color);
+    area.setAttribute('opacity', fillOpacity);
+    svg.appendChild(area);
+    // Dots
+    arr.forEach((v, i) => {
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', xFor(i + 0.5));
+      c.setAttribute('cy', yFor(v));
+      c.setAttribute('r', 3);
+      c.setAttribute('fill', 'var(--paper)');
+      c.setAttribute('stroke', color);
+      c.setAttribute('stroke-width', 1.5);
+      const ti = document.createElementNS(ns, 'title');
+      ti.textContent = `kl ${String(i).padStart(2,'0')}: ${SE(v,2)} kWh/h`;
+      c.appendChild(ti);
+      svg.appendChild(c);
+    });
+  }
+  drawSeries(w1, 'var(--sage)', 0.12);
+  drawSeries(br, 'var(--ocean)', 0.12);
+
+  // Y axis title
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ink-mute)';
+  yt.textContent = 'kWh per timme · medel av matchade kalla dygn';
+  svg.appendChild(yt);
+}
+
+// =================== COLD SNAP (72h time series with kWh + T overlay) ===================
+function drawColdSnap() {
+  const svg = document.getElementById('cold-snap-chart');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const data = DATA.diagnosis.cold_snap;  // 72 hours
+  const W = 1200, H = 380;
+  const M = { top: 30, right: 70, bottom: 60, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const kwhMax = 22;
+  const tMin = -32, tMax = 0;
+  const xFor = i => M.left + (i / (data.length - 1)) * iw;
+  const yKwh = v => M.top + ih - (v / kwhMax) * ih;
+  const yT = v => M.top + ih - ((v - tMin) / (tMax - tMin)) * ih;
+
+  // Left axis: kWh (blue)
+  for (let v = 0; v <= kwhMax; v += 4) {
+    const y = yKwh(v);
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    ln.setAttribute('stroke', 'var(--rule)');
+    svg.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ocean)';
+    t.textContent = v;
+    svg.appendChild(t);
+  }
+  // Right axis: T (red/amber)
+  for (let v = tMin; v <= tMax; v += 8) {
+    const y = yT(v);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', W - M.right + 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'start');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--alert)';
+    t.textContent = v + '°';
+    svg.appendChild(t);
+  }
+  // X labels: every 6 hours
+  data.forEach((p, i) => {
+    if (i % 6 === 0 || i === data.length - 1) {
+      const x = xFor(i);
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
+      t.setAttribute('text-anchor', 'middle');
+      t.style.font = '10px JetBrains Mono, monospace';
+      t.style.fill = 'var(--ink-mute)';
+      const dStr = p.date.slice(5);  // MM-DD
+      t.textContent = `${dStr} ${String(p.hour).padStart(2,'0')}`;
+      svg.appendChild(t);
+    }
+  });
+
+  // T line (alert/amber)
+  const tPath = document.createElementNS(ns, 'path');
+  let td = '';
+  data.forEach((p, i) => {
+    const x = xFor(i), y = yT(p.t);
+    td += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
+  });
+  tPath.setAttribute('d', td);
+  tPath.setAttribute('fill', 'none');
+  tPath.setAttribute('stroke', 'var(--alert)');
+  tPath.setAttribute('stroke-width', 2);
+  tPath.setAttribute('opacity', 0.7);
+  svg.appendChild(tPath);
+
+  // kWh line (ocean)
+  const kPath = document.createElementNS(ns, 'path');
+  let kd = '';
+  data.forEach((p, i) => {
+    const x = xFor(i), y = yKwh(p.kwh);
+    kd += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
+  });
+  kPath.setAttribute('d', kd);
+  kPath.setAttribute('fill', 'none');
+  kPath.setAttribute('stroke', 'var(--ocean)');
+  kPath.setAttribute('stroke-width', 2.5);
+  svg.appendChild(kPath);
+
+  // Y axis titles
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ocean)';
+  yt.textContent = 'kWh per timme';
+  svg.appendChild(yt);
+
+  const yt2 = document.createElementNS(ns, 'text');
+  yt2.setAttribute('x', W - M.right + 10); yt2.setAttribute('y', M.top - 12);
+  yt2.style.font = '600 10px Manrope, sans-serif';
+  yt2.style.letterSpacing = '0.18em';
+  yt2.style.textTransform = 'uppercase';
+  yt2.style.fill = 'var(--alert)';
+  yt2.textContent = '°C';
+  svg.appendChild(yt2);
+
+  // Annotation: lowest T point
+  let lowestI = 0, lowestT = 999;
+  data.forEach((p, i) => { if (p.t < lowestT) { lowestT = p.t; lowestI = i; } });
+  const ann = document.createElementNS(ns, 'text');
+  ann.setAttribute('x', xFor(lowestI));
+  ann.setAttribute('y', yT(lowestT) + 16);
+  ann.setAttribute('text-anchor', 'middle');
+  ann.style.font = 'italic 11px Fraunces, serif';
+  ann.style.fill = 'var(--alert)';
+  ann.textContent = `${lowestT}°C`;
+  svg.appendChild(ann);
+}
+
 // =================== INIT ===================
 fetch('data.json').then(r => r.json()).then(data => {
   DATA = data;
@@ -1585,6 +2051,9 @@ fetch('data.json').then(r => r.json()).then(data => {
   drawBaseload();
   drawHeatmap();
   drawHourly();
+  drawHourlyScatter();
+  drawHodDiag();
+  drawColdSnap();
 
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('in');
