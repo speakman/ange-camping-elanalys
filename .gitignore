@@ -1,0 +1,8 @@
+# Ignore everything by default
+*
+
+# But include only the public-facing site and metadata
+!docs/
+!docs/**
+!README.md
+!.gitignore

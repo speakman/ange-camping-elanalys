@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ånge Camping · Elanalys 2025–2026</title>
+<meta name="description" content="Detaljerad analys av elförbrukning och kostnad för Ånge Camping under perioden april 2025 till mars 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EDE0;
+  --paper-soft: #EAE2D0;
+  --paper-line: #D6CAAE;
+  --ink: #1A1A14;
+  --ink-soft: #4A4A3F;
+  --ink-mute: #807868;
+  --sage: #6B8758;
+  --sage-soft: #A8BD92;
+  --sage-bg: #DCE5CC;
+  --ocean: #2C4A6B;
+  --ocean-soft: #6685A3;
+  --ocean-bg: #C8D5E1;
+  --amber: #B85A2A;
+  --amber-soft: #D88656;
+  --amber-bg: #F0D7BC;
+  --rule: #C9BC9F;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(107, 135, 88, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 100%, rgba(44, 74, 107, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Typography */
+.serif {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 0;
+  font-weight: 400;
+}
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum'; }
+
+/* Layout */
+.page { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .page { padding: 0 20px; } }
+
+/* Top bar */
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.topbar .mark { font-weight: 600; color: var(--ink); }
+.topbar .mark::before { content: "❋"; color: var(--sage); margin-right: 8px; font-size: 14px; }
+.topbar .right { display: flex; gap: 24px; }
+
+/* Hero */
+.hero {
+  padding: 80px 0 60px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 880px) { .hero { grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: end; } }
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.kicker::before { content: "—"; margin-right: 12px; }
+
+h1.headline {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+  font-weight: 380;
+  font-size: clamp(42px, 6.5vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+h1.headline em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  color: var(--ocean);
+  font-weight: 380;
+}
+
+.lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 52ch;
+  font-weight: 400;
+}
+
+.hero-stat {
+  border-left: 1px solid var(--rule);
+  padding-left: 32px;
+  position: relative;
+}
+.hero-stat .label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+}
+.hero-stat .figure {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  font-weight: 350;
+  font-size: clamp(72px, 10vw, 130px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--ocean);
+  font-feature-settings: 'tnum' off;
+}
+.hero-stat .figure .sub {
+  font-size: 0.32em;
+  vertical-align: super;
+  color: var(--ink-mute);
+  margin-left: 4px;
+  font-weight: 400;
+}
+.hero-stat .caption {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin-top: 16px;
+  max-width: 32ch;
+}
+
+/* Section structure */
+section { padding: 70px 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: none; }
+
+.section-head { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 56px; }
+@media (min-width: 720px) { .section-head { grid-template-columns: 280px 1fr; gap: 64px; align-items: start; } }
+.section-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+  font-weight: 350;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--sage);
+  font-feature-settings: 'tnum' off;
+}
+.section-num::after {
+  content: "";
+  display: block;
+  width: 60px; height: 1px;
+  background: var(--rule);
+  margin-top: 24px;
+}
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+h2.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+h2.section-title em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 80, 'WONK' 1;
+  color: var(--sage);
+}
+.section-deck {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  line-height: 1.55;
+}
+
+/* Stat grid */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 720px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat {
+  background: var(--paper);
+  padding: 28px 24px;
+}
+.stat .label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.stat .value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 60, 'SOFT' 30;
+  font-weight: 380;
+  font-size: clamp(34px, 4vw, 48px);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-feature-settings: 'tnum' off;
+}
+.stat .value .unit {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-mute);
+  margin-left: 6px;
+  letter-spacing: 0;
+}
+.stat .note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* Charts */
+.chart-card {
+  margin-top: 40px;
+  position: relative;
+}
+.chart-legend {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+.chart-legend .swatch {
+  display: inline-block;
+  width: 14px; height: 14px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+.chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.axis text { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-mute); }
+.axis line, .axis path { stroke: var(--rule); stroke-width: 1; fill: none; }
+.grid line { stroke: var(--paper-line); stroke-width: 1; stroke-dasharray: 2 3; }
+.bar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-soft); }
+
+/* Season-split visual */
+.season-split {
+  margin-top: 40px;
+}
+.split-row {
+  margin-bottom: 36px;
+}
+.split-row:last-child { margin-bottom: 0; }
+.split-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.split-label .name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  font-variation-settings: 'opsz' 60;
+}
+.split-label .name em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 60, 'SOFT' 80;
+  color: var(--ink-mute);
+  font-size: 13px;
+  margin-left: 12px;
+  letter-spacing: 0.05em;
+}
+.split-label .meta { font-size: 13px; color: var(--ink-mute); font-family: 'JetBrains Mono', monospace; }
+.split-bar {
+  height: 56px;
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.split-bar > div {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.split-bar .on { background: var(--sage); }
+.split-bar .off { background: var(--ocean); justify-content: flex-end; }
+
+/* Findings */
+.findings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.finding {
+  border-bottom: 1px solid var(--rule);
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 880px) {
+  .finding { grid-template-columns: 220px 1fr 320px; gap: 56px; align-items: start; }
+}
+.finding-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  font-weight: 350;
+  font-style: italic;
+  font-size: 80px;
+  line-height: 0.85;
+  color: var(--sage);
+  font-feature-settings: 'tnum' off;
+}
+.finding-num.alt { color: var(--ocean); }
+.finding-num.alert { color: var(--amber); }
+.finding-body h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+.finding-body h3 em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+.finding-body p { color: var(--ink-soft); font-size: 16px; line-height: 1.6; max-width: 60ch; }
+.finding-body p + p { margin-top: 14px; }
+.finding-stat {
+  background: var(--paper-soft);
+  padding: 24px;
+  border-radius: 4px;
+  border-left: 3px solid var(--sage);
+}
+.finding-stat.alt { border-left-color: var(--ocean); }
+.finding-stat.alert { border-left-color: var(--amber); }
+.finding-stat .big {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  font-weight: 350;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-feature-settings: 'tnum' off;
+}
+.finding-stat .label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.finding-stat .detail {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+/* Heatmap calendar */
+.heatmap-wrap { overflow-x: auto; padding-bottom: 8px; }
+.heatmap { min-width: 720px; }
+.heatmap-cell { stroke: var(--paper); stroke-width: 1; cursor: pointer; transition: opacity 0.15s; }
+.heatmap-cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.heatmap-month-label { font-family: 'Fraunces', serif; font-size: 12px; fill: var(--ink-soft); font-weight: 500; font-style: italic; }
+.heatmap-day-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: var(--ink-mute); }
+.heatmap-tooltip {
+  position: fixed;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 14px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+  z-index: 100;
+  white-space: nowrap;
+}
+.heatmap-tooltip.show { opacity: 1; }
+.heatmap-tooltip .strong { color: var(--sage-soft); font-weight: 500; }
+
+/* Toggles */
+.toggle-group {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 4px;
+  background: var(--paper-soft);
+  margin-bottom: 8px;
+}
+.toggle-group button {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.toggle-group button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.toggle-group button:not(.active):hover { color: var(--ink); }
+
+/* Methodology / footer */
+.method {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+@media (min-width: 720px) { .method { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
+.method h4 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
+  margin-bottom: 12px;
+  color: var(--ink);
+  font-variation-settings: 'opsz' 60, 'SOFT' 80;
+}
+
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 80px;
+  padding: 40px 0 60px;
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* Pull quote treatment */
+.pull-quote {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  font-weight: 350;
+  font-style: italic;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 36px 0;
+  margin: 60px auto;
+  max-width: 24ch;
+  text-align: center;
+}
+.pull-quote .accent { color: var(--amber); font-style: normal; font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 0; }
+
+/* Print niceties */
+@media print {
+  body { background: white; }
+  .topbar, footer { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <div class="mark">Ånge Camping · Ideell förening</div>
+    <div class="right">
+      <span>Elanalys 2025–2026</span>
+      <span>Prisområde SE2</span>
+    </div>
+  </div>
+
+  <!-- ============== HERO ============== -->
+  <header class="hero">
+    <div>
+      <div class="kicker">Årsredovisning · Elförbrukning</div>
+      <h1 class="headline">Sju mörka månader. <em>Åttioen procent</em> av elkostnaden.</h1>
+      <p class="lede">När säsongen är över — när campingen är stängd och nästan tom — slukar fastigheten ändå majoriteten av elen. Den här rapporten kartlägger 72&thinsp;811 kilowattimmar fördelade över ett år och visar var pengarna faktiskt går.</p>
+    </div>
+    <div class="hero-stat reveal in">
+      <div class="label">Off-season-pris ÷ on-season-pris</div>
+      <div class="figure">2,7<span class="sub">×</span></div>
+      <div class="caption">Varje kWh utanför säsongen kostade i snitt 2,7&thinsp;ggr mer än varje kWh under sommarsäsongen — en kombination av högre förbrukning och högre spotpriser.</div>
+    </div>
+  </header>
+
+  <!-- ============== KEY STATS ============== -->
+  <section id="overblick">
+    <div class="section-head">
+      <div class="section-num serif">01</div>
+      <div>
+        <div class="section-eyebrow">Översikt</div>
+        <h2 class="section-title">Ett år, <em>i stora drag</em>.</h2>
+        <p class="section-deck">Rollande tolv månader, från april 2025 till mars 2026. Alla siffror är spotelpriset (Nord&nbsp;Pool månadsmedel × verklig timförbrukning) — påslag, energiskatt, nätavgift och moms tillkommer på faktiskt fakturerad summa.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="label">Förbrukning</div>
+        <div class="value mono-num">72&thinsp;811<span class="unit">kWh</span></div>
+        <div class="note">i snitt 200 kWh per dygn</div>
+      </div>
+      <div class="stat">
+        <div class="label">Spotkostnad ex moms</div>
+        <div class="value mono-num">45&thinsp;178<span class="unit">kr</span></div>
+        <div class="note">56&thinsp;472 kr inklusive moms</div>
+      </div>
+      <div class="stat">
+        <div class="label">Volymvägt spotpris</div>
+        <div class="value mono-num">62,1<span class="unit">öre/kWh</span></div>
+        <div class="note">12-månaders snitt SE2</div>
+      </div>
+      <div class="stat">
+        <div class="label">Aktiv säsong</div>
+        <div class="value mono-num">5<span class="unit">månader · maj–sep</span></div>
+        <div class="note">7 månader off-season</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SEASONAL SPLIT ============== -->
+  <section id="sasong">
+    <div class="section-head">
+      <div class="section-num serif">02</div>
+      <div>
+        <div class="section-eyebrow">Säsongsfördelning</div>
+        <h2 class="section-title">När campingen är <em>tom</em>, jobbar elmätaren hårdast.</h2>
+        <p class="section-deck">On-säsongen (maj–september) är fem månader långa och stod för 38&nbsp;% av kilowattimmarna men bara 19&nbsp;% av kostnaden. Off-säsongen (oktober–april) — sju månader — bar resten.</p>
+      </div>
+    </div>
+
+    <div class="season-split">
+      <div class="split-row">
+        <div class="split-label">
+          <div class="name">Förbrukning <em>kWh</em></div>
+          <div class="meta">72&thinsp;811 kWh totalt</div>
+        </div>
+        <div class="split-bar" id="split-kwh">
+          <div class="on" style="flex: 38.3">38,3 % · 27&thinsp;851 kWh</div>
+          <div class="off" style="flex: 61.7">44&thinsp;960 kWh · 61,7 %</div>
+        </div>
+      </div>
+      <div class="split-row">
+        <div class="split-label">
+          <div class="name">Spotkostnad <em>kr ex moms</em></div>
+          <div class="meta">45&thinsp;178 kr totalt</div>
+        </div>
+        <div class="split-bar" id="split-cost">
+          <div class="on" style="flex: 18.9">18,9 % · 8&thinsp;527 kr</div>
+          <div class="off" style="flex: 81.1">36&thinsp;651 kr · 81,1 %</div>
+        </div>
+      </div>
+
+      <div class="chart-legend" style="margin-top: 32px;">
+        <span><span class="swatch" style="background: var(--sage)"></span>On-season · maj–september · 5 månader</span>
+        <span><span class="swatch" style="background: var(--ocean)"></span>Off-season · oktober–april · 7 månader</span>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      Kilowattimmen kostar <span class="accent">2,7×</span> mer när ingen är där.
+    </div>
+  </section>
+
+  <!-- ============== MONTHLY ============== -->
+  <section id="manad">
+    <div class="section-head">
+      <div class="section-num serif">03</div>
+      <div>
+        <div class="section-eyebrow">Månad för månad</div>
+        <h2 class="section-title">Förbrukning och kostnad <em>per månad</em>.</h2>
+        <p class="section-deck">Hela datasetet om femton månader. Sage-färg markerar on-säsong (maj–sep). Häll musen över en stapel för exakta tal.</p>
+      </div>
+    </div>
+
+    <div class="toggle-group" id="monthly-toggle" role="tablist">
+      <button class="active" data-mode="kwh">Förbrukning (kWh)</button>
+      <button data-mode="cost">Spotkostnad (kr)</button>
+      <button data-mode="price">Spotpris (öre/kWh)</button>
+    </div>
+
+    <div class="chart-card">
+      <svg id="monthly-chart" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Stapeldiagram över månadsförbrukning"></svg>
+    </div>
+  </section>
+
+  <!-- ============== HEATMAP ============== -->
+  <section id="kalender">
+    <div class="section-head">
+      <div class="section-num serif">04</div>
+      <div>
+        <div class="section-eyebrow">Daglig värmekarta</div>
+        <h2 class="section-title">Varje dygn under <em>femton månader</em>.</h2>
+        <p class="section-deck">En cell per dygn. Mörkare ton = högre förbrukning. Den vertikala bandet i grönt visar on-säsongens fem månader. Du ser direkt hur on-säsongens dagsmönster är jämnare och högre, och hur vinterns toppar dyker upp som mörka stråk.</p>
+      </div>
+    </div>
+
+    <div class="chart-legend">
+      <span class="mono">låg</span>
+      <span id="heat-scale" style="display:flex; gap:1px;"></span>
+      <span class="mono">hög</span>
+      <span style="margin-left: 24px;"><span class="swatch" style="background: var(--sage); border-radius: 999px;"></span>On-season-period markeras med band ovanför</span>
+    </div>
+
+    <div class="heatmap-wrap">
+      <svg id="heatmap" class="heatmap" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid meet" aria-label="Värmekarta över daglig förbrukning"></svg>
+    </div>
+    <div id="heatmap-tooltip" class="heatmap-tooltip"></div>
+  </section>
+
+  <!-- ============== HOURLY ============== -->
+  <section id="dygnsprofil">
+    <div class="section-head">
+      <div class="section-num serif">05</div>
+      <div>
+        <div class="section-eyebrow">Dygnsprofil</div>
+        <h2 class="section-title">Lasten är nästan <em>platt</em>.</h2>
+        <p class="section-deck">Genomsnittlig kWh per timme på dygnet. Skillnaden mellan natt och dag är mindre än 25&nbsp;%. Det indikerar att grundlast — uppvärmning, kylar, ventilation, frys — dominerar över aktiv användning.</p>
+      </div>
+    </div>
+
+    <div class="chart-legend">
+      <span><span class="swatch" style="background: var(--sage)"></span>On-season medel</span>
+      <span><span class="swatch" style="background: var(--ocean)"></span>Off-season medel</span>
+      <span><span class="swatch" style="background: var(--ink); opacity: 0.3"></span>Helårsmedel</span>
+    </div>
+
+    <div class="chart-card">
+      <svg id="hourly-chart" class="chart-svg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet" aria-label="Linjediagram över timprofil"></svg>
+    </div>
+  </section>
+
+  <!-- ============== FINDINGS ============== -->
+  <section id="fynd">
+    <div class="section-head">
+      <div class="section-num serif">06</div>
+      <div>
+        <div class="section-eyebrow">Anmärkningsvärda fynd</div>
+        <h2 class="section-title">Fem upptäckter som <em>förändrar bilden</em>.</h2>
+        <p class="section-deck">Datan visar ett par saker som inte syns på fakturan. Här är de fem mest anmärkningsvärda — i prioriterad ordning, från störst potentiell besparing till intressantast detalj.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+
+      <article class="finding">
+        <div class="finding-num alert serif">i</div>
+        <div class="finding-body">
+          <h3>Två månader, mer kostnad än de <em>tretton andra tillsammans</em>.</h3>
+          <p>Januari och februari 2026 stod för 23&nbsp;% av kilowattimmarna men <strong>53&nbsp;% av hela årets spotkostnad</strong>. Kombinationen av vinterns förbrukningstopp (~9&thinsp;300&nbsp;kWh/månad) och historiskt höga spotpriser (131–137&nbsp;öre/kWh) gjorde dessa två månader förödande dyra.</p>
+          <p>Sätter ni jan–feb i det normala spannet (~50&nbsp;öre/kWh) hade kostnaden för året legat ~16&thinsp;000&nbsp;kr lägre.</p>
+        </div>
+        <div class="finding-stat alert">
+          <div class="label">Jan + feb 2026</div>
+          <div class="big">25&thinsp;118 kr</div>
+          <div class="detail">Övriga 13 månader: 22&thinsp;602 kr<br>Andel av årskostnaden: <strong>53&nbsp;%</strong></div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num alt serif">ii</div>
+        <div class="finding-body">
+          <h3>Grundlasten ensam är värd <em>en sjättedel</em> av årsförbrukningen.</h3>
+          <p>De stilla dygnen — när campingen i praktiken står tom — drar ändå i snitt 56&nbsp;kWh per dygn. Det motsvarar en <strong>2,3&nbsp;kW kontinuerlig grundlast</strong>: ungefär en handduktorkare som aldrig stängs av, dygnet runt, året runt.</p>
+          <p>Skalat till hela året blir det 20&thinsp;300&nbsp;kWh som inte är kopplade till verksamhet — bara till att fastigheten finns. Vid vinterspot (~50 öre) är det 10&thinsp;000&nbsp;kr om året.</p>
+        </div>
+        <div class="finding-stat alt">
+          <div class="label">Kontinuerlig grundlast</div>
+          <div class="big">2,3 kW</div>
+          <div class="detail">≈ 56 kWh/dygn när inget händer<br>≈ 28&nbsp;% av årsförbrukningen</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num serif">iii</div>
+        <div class="finding-body">
+          <h3>Off-season-kilowattimmen kostar <em>2,7&nbsp;gånger</em> on-season-kilowattimmen.</h3>
+          <p>Det volymvägda spotpriset under campingsäsongen var 30,6&nbsp;öre/kWh. Utanför säsong: 81,5&nbsp;öre/kWh. Det är samma fysiska ström — men förbrukad i fel månader.</p>
+          <p>Slutsatsen: varje kWh ni kan flytta från november–februari till maj–september är värd nästan tre gånger så mycket. Det gör fastpriskontrakt för vintermånaderna och termisk tröghet (välisolerade tankar, schemalagd uppvärmning) extra mycket värda.</p>
+        </div>
+        <div class="finding-stat">
+          <div class="label">Effektivt pris per kWh</div>
+          <div class="big">30,6 → 81,5 <span style="font-size: 0.45em; color: var(--ink-mute);">öre</span></div>
+          <div class="detail">On-season medel vs off-season medel<br>Faktor: <strong>2,66×</strong></div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num alt serif">iv</div>
+        <div class="finding-body">
+          <h3>Lasten har <em>ingen</em> tydlig dygnsprofil.</h3>
+          <p>Skillnaden mellan dygnets högsta och lägsta timme (i medel) är bara ~25&nbsp;%. För ett hushåll skulle den siffran ligga närmare 200&nbsp;%. Det betyder att den aktiva användningen är liten i förhållande till baslasten — uppvärmning, ventilation, kylar och frysar går oavsett om någon är där.</p>
+          <p>Det är goda nyheter för åtgärder: en stor del av elnotan kan trimmas utan att påverka gästupplevelsen alls.</p>
+        </div>
+        <div class="finding-stat alt">
+          <div class="label">Topp / botten på dygnet</div>
+          <div class="big">7,98 / 6,36</div>
+          <div class="detail">kWh per timme · medel<br>Spread bara ~25&nbsp;%</div>
+        </div>
+      </article>
+
+      <article class="finding">
+        <div class="finding-num serif">v</div>
+        <div class="finding-body">
+          <h3>Sommarens högsta timme överträffar <em>vinterns</em> högsta timme.</h3>
+          <p>Effekttoppen under hela året låg på <strong>23,9&nbsp;kW</strong> — och inföll 24 juni 2025 kl 18. Inte i januari, inte i februari. Det är ovanligt: vintern står för totalvolymen, men en enskild sommarkväll satte effektrekord.</p>
+          <p>Värt att kontrollera. Var det en installation, en bastu, en tillfällig last? Effekttoppar påverkar inte spotpriset men kan slå mot effektabonnemang i nätavgiften.</p>
+        </div>
+        <div class="finding-stat">
+          <div class="label">Årets effekttopp</div>
+          <div class="big">23,9 kW</div>
+          <div class="detail">2025-06-24 kl 18–19<br>Värt att utreda</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============== METHODOLOGY ============== -->
+  <section id="metod">
+    <div class="section-head">
+      <div class="section-num serif">07</div>
+      <div>
+        <div class="section-eyebrow">Metod &amp; reservationer</div>
+        <h2 class="section-title">Hur siffrorna är <em>räknade</em>.</h2>
+      </div>
+    </div>
+
+    <div class="method">
+      <div>
+        <h4>Datakällor</h4>
+        Timvis förbrukning från elnätsmätaren, 2025-01-01 till 2026-03-31 (455 dygn). Spotpriserna är månadsmedelvärden för Elområde SE2 (Norra Mellansverige).
+      </div>
+      <div>
+        <h4>Vad som räknas</h4>
+        Bara <em>spotandelen</em> av elkostnaden: spotpris × verklig timförbrukning, summerat per månad. Påslag (3–8 öre/kWh), energiskatt (~43 öre/kWh), nätavgift och moms 25 % tillkommer på faktisk faktura.
+      </div>
+      <div>
+        <h4>Säsongsdefinition</h4>
+        On-season = maj till september (5 månader). Off-season = oktober till april (7 månader). Rollande 12-månadersfönster: april 2025 till mars 2026. Grundlast = medelvärdet av de 5&nbsp;% lägsta dygnen.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Ånge Camping ideell förening · Elanalys producerad april 2026</div>
+    <div>Källdata: timvärden från elnät · spotpris SE2 från SCB / Nord Pool</div>
+  </footer>
+
+</div>
+
+<script>
+let DATA = null;
+
+const SE = (n, d=0) => Number(n).toLocaleString('sv-SE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const monthName = m => ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'][m-1];
+const onSeason = m => m >= 5 && m <= 9;
+
+// =================== MONTHLY CHART ===================
+function drawMonthly(mode='kwh') {
+  const svg = document.getElementById('monthly-chart');
+  svg.innerHTML = '';
+  const W = 1200, H = 480;
+  const M = { top: 30, right: 30, bottom: 70, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+
+  const months = DATA.monthly;
+  const values = months.map(m => mode === 'kwh' ? m.kwh : mode === 'cost' ? m.cost_sek : m.price_ore);
+  const maxVal = Math.max(...values);
+  const niceMax = Math.ceil(maxVal / (mode === 'kwh' ? 1000 : mode === 'cost' ? 2000 : 25)) * (mode === 'kwh' ? 1000 : mode === 'cost' ? 2000 : 25);
+
+  const bw = iw / months.length;
+  const padInner = bw * 0.18;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  // Y axis
+  const yTicks = 5;
+  const grid = document.createElementNS(ns, 'g');
+  grid.setAttribute('class', 'grid');
+  for (let i = 0; i <= yTicks; i++) {
+    const v = niceMax * i / yTicks;
+    const y = M.top + ih - (v / niceMax) * ih;
+    const line = document.createElementNS(ns, 'line');
+    line.setAttribute('x1', M.left); line.setAttribute('x2', W - M.right);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    grid.appendChild(line);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 12); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.setAttribute('class', 'axis');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = mode === 'kwh' ? SE(v) : mode === 'cost' ? SE(v) : SE(v);
+    grid.appendChild(t);
+  }
+  svg.appendChild(grid);
+
+  // Bars
+  const barsG = document.createElementNS(ns, 'g');
+  months.forEach((m, i) => {
+    const v = values[i];
+    const h = (v / niceMax) * ih;
+    const x = M.left + i * bw + padInner / 2;
+    const y = M.top + ih - h;
+    const w = bw - padInner;
+    const isOn = onSeason(m.month);
+    const isExtreme = mode !== 'kwh' && (m.label === '2026-01' || m.label === '2026-02');
+    const rect = document.createElementNS(ns, 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', w);
+    rect.setAttribute('height', h);
+    rect.setAttribute('fill', isExtreme ? 'var(--amber)' : isOn ? 'var(--sage)' : 'var(--ocean)');
+    rect.setAttribute('rx', 1);
+    rect.style.transition = 'opacity 0.2s';
+    rect.addEventListener('mouseenter', () => rect.style.opacity = 0.75);
+    rect.addEventListener('mouseleave', () => rect.style.opacity = 1);
+    rect.style.cursor = 'pointer';
+
+    // Title for accessibility / native tooltip
+    const title = document.createElementNS(ns, 'title');
+    const unitTxt = mode === 'kwh' ? 'kWh' : mode === 'cost' ? 'kr (ex moms)' : 'öre/kWh';
+    title.textContent = `${m.label}: ${SE(v, mode === 'price' ? 1 : 0)} ${unitTxt}` +
+      (mode === 'kwh' ? ` · ${SE(m.cost_sek)} kr` : '');
+    rect.appendChild(title);
+    barsG.appendChild(rect);
+
+    // Value above bar
+    const lab = document.createElementNS(ns, 'text');
+    lab.setAttribute('x', x + w/2);
+    lab.setAttribute('y', y - 8);
+    lab.setAttribute('text-anchor', 'middle');
+    lab.setAttribute('class', 'bar-label');
+    lab.style.font = '10px JetBrains Mono, monospace';
+    lab.style.fill = isExtreme ? 'var(--amber)' : 'var(--ink-soft)';
+    lab.style.fontWeight = isExtreme ? '600' : '400';
+    lab.textContent = mode === 'price' ? SE(v, 1) : v >= 1000 ? (v/1000).toFixed(1).replace('.', ',') + 'k' : SE(v);
+    barsG.appendChild(lab);
+
+    // X axis tick label
+    const xl = document.createElementNS(ns, 'text');
+    xl.setAttribute('x', x + w/2);
+    xl.setAttribute('y', M.top + ih + 18);
+    xl.setAttribute('text-anchor', 'middle');
+    xl.style.font = '10px JetBrains Mono, monospace';
+    xl.style.fill = 'var(--ink-mute)';
+    xl.textContent = monthName(m.month);
+    barsG.appendChild(xl);
+
+    // Year tick (only when month=1 or first)
+    if (i === 0 || m.month === 1) {
+      const yt = document.createElementNS(ns, 'text');
+      yt.setAttribute('x', x);
+      yt.setAttribute('y', M.top + ih + 38);
+      yt.setAttribute('class', 'serif');
+      yt.style.font = 'italic 13px Fraunces, serif';
+      yt.style.fill = 'var(--ink)';
+      yt.textContent = m.year;
+      barsG.appendChild(yt);
+    }
+  });
+  svg.appendChild(barsG);
+
+  // Y axis title
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ink-mute)';
+  yt.textContent = mode === 'kwh' ? 'Förbrukning · kWh' : mode === 'cost' ? 'Spotkostnad · kr' : 'Spotpris · öre per kWh';
+  svg.appendChild(yt);
+}
+
+// Toggle handler
+document.querySelectorAll('#monthly-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#monthly-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drawMonthly(btn.dataset.mode);
+  });
+});
+
+// =================== HEATMAP CALENDAR ===================
+function drawHeatmap() {
+  const svg = document.getElementById('heatmap');
+  svg.innerHTML = '';
+  const W = 1200, H = 220;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const days = DATA.daily; // 455 entries
+  const cellW = (W - 80) / Math.ceil(days.length / 7);  // weeks across
+  const cellH = 18;
+  const xPad = 60;
+  const yPad = 50;
+
+  const maxKwh = Math.max(...days.map(d => d.kwh));
+  const minKwh = Math.min(...days.map(d => d.kwh));
+
+  // Color scale: 5 stops, beige -> deep ink
+  const stops = ['#F0E8D5', '#D8C8A2', '#B89C68', '#7A5C36', '#3A2A18'];
+  const colorFor = v => {
+    const t = (v - minKwh) / (maxKwh - minKwh);
+    const idx = Math.min(stops.length - 1, Math.floor(t * stops.length));
+    return stops[idx];
+  };
+
+  // Group days into columns (weeks). Week starts on Monday.
+  let col = 0;
+  let firstDate = new Date(days[0].date);
+  let firstDow = (firstDate.getDay() + 6) % 7; // Monday = 0
+
+  const seasonBands = []; // for on-season strip
+  let currentBand = null;
+
+  days.forEach((d, i) => {
+    const dt = new Date(d.date);
+    const dow = (dt.getDay() + 6) % 7;
+    const cx = xPad + col * cellW;
+    const cy = yPad + dow * cellH;
+
+    const rect = document.createElementNS(ns, 'rect');
+    rect.setAttribute('class', 'heatmap-cell');
+    rect.setAttribute('x', cx);
+    rect.setAttribute('y', cy);
+    rect.setAttribute('width', cellW - 1);
+    rect.setAttribute('height', cellH - 1);
+    rect.setAttribute('fill', colorFor(d.kwh));
+    rect.setAttribute('rx', 1);
+    rect.dataset.date = d.date;
+    rect.dataset.kwh = d.kwh;
+    rect.dataset.on = d.on_season;
+    svg.appendChild(rect);
+
+    // Track season bands
+    if (d.on_season && !currentBand) {
+      currentBand = { startCol: col, endCol: col };
+    } else if (d.on_season && currentBand) {
+      currentBand.endCol = col;
+    } else if (!d.on_season && currentBand) {
+      seasonBands.push(currentBand);
+      currentBand = null;
+    }
+
+    if (dow === 6) col++;
+    if (i === days.length - 1 && currentBand) {
+      seasonBands.push(currentBand);
+    }
+  });
+
+  // Season bands above
+  seasonBands.forEach(b => {
+    const x1 = xPad + b.startCol * cellW;
+    const x2 = xPad + (b.endCol + 1) * cellW - 1;
+    const r = document.createElementNS(ns, 'rect');
+    r.setAttribute('x', x1);
+    r.setAttribute('y', yPad - 14);
+    r.setAttribute('width', x2 - x1);
+    r.setAttribute('height', 4);
+    r.setAttribute('fill', 'var(--sage)');
+    r.setAttribute('rx', 2);
+    svg.appendChild(r);
+  });
+
+  // Month labels
+  let lastMonth = -1;
+  let weekIdx = 0;
+  let weekRunning = 0;
+  days.forEach((d, i) => {
+    const dt = new Date(d.date);
+    const dow = (dt.getDay() + 6) % 7;
+    if (dow === 0 || i === 0) {
+      if (dt.getMonth() !== lastMonth) {
+        lastMonth = dt.getMonth();
+        const t = document.createElementNS(ns, 'text');
+        t.setAttribute('class', 'heatmap-month-label');
+        t.setAttribute('x', xPad + weekRunning * cellW);
+        t.setAttribute('y', yPad - 22);
+        t.textContent = monthName(dt.getMonth() + 1) + (dt.getMonth() === 0 ? " '" + String(dt.getFullYear()).slice(-2) : "");
+        svg.appendChild(t);
+      }
+      weekRunning++;
+    }
+  });
+
+  // Weekday labels (M, W, F)
+  ['mån', 'ons', 'fre'].forEach((label, i) => {
+    const dy = i * 2; // 0, 2, 4
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('class', 'heatmap-day-label');
+    t.setAttribute('x', xPad - 10);
+    t.setAttribute('y', yPad + dy * cellH + cellH * 0.7);
+    t.setAttribute('text-anchor', 'end');
+    t.textContent = label;
+    svg.appendChild(t);
+  });
+
+  // Tooltip handlers
+  const tt = document.getElementById('heatmap-tooltip');
+  svg.querySelectorAll('.heatmap-cell').forEach(cell => {
+    cell.addEventListener('mousemove', e => {
+      const date = cell.dataset.date;
+      const kwh = parseFloat(cell.dataset.kwh);
+      const isOn = cell.dataset.on === 'true';
+      const dt = new Date(date);
+      tt.innerHTML = `<div><span class="strong">${dt.toLocaleDateString('sv-SE', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'})}</span></div>
+        <div>${SE(kwh, 1)} kWh · ${isOn ? 'on-season' : 'off-season'}</div>`;
+      tt.classList.add('show');
+      tt.style.left = (e.clientX + 14) + 'px';
+      tt.style.top = (e.clientY + 14) + 'px';
+    });
+    cell.addEventListener('mouseleave', () => tt.classList.remove('show'));
+  });
+
+  // Color scale legend
+  const scale = document.getElementById('heat-scale');
+  scale.innerHTML = '';
+  stops.forEach(c => {
+    const sw = document.createElement('span');
+    sw.style.cssText = `display:inline-block;width:18px;height:14px;background:${c};border:1px solid var(--paper);`;
+    scale.appendChild(sw);
+  });
+}
+
+// =================== HOURLY PROFILE ===================
+function drawHourly() {
+  const svg = document.getElementById('hourly-chart');
+  svg.innerHTML = '';
+  const W = 1200, H = 420;
+  const M = { top: 30, right: 60, bottom: 60, left: 70 };
+  const iw = W - M.left - M.right;
+  const ih = H - M.top - M.bottom;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const onP = DATA.hourly_profile.on;
+  const offP = DATA.hourly_profile.off;
+  const allP = DATA.hourly_profile.all;
+  const allMax = Math.max(...onP, ...offP, ...allP);
+  const niceMax = Math.ceil(allMax / 2) * 2 + 2;
+
+  // Grid
+  const grid = document.createElementNS(ns, 'g');
+  grid.setAttribute('class', 'grid');
+  const yTicks = 5;
+  for (let i = 0; i <= yTicks; i++) {
+    const v = niceMax * i / yTicks;
+    const y = M.top + ih - (v / niceMax) * ih;
+    const ln = document.createElementNS(ns, 'line');
+    ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+    ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+    grid.appendChild(ln);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', M.left - 10); t.setAttribute('y', y + 4);
+    t.setAttribute('text-anchor', 'end');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = SE(v, 0);
+    grid.appendChild(t);
+  }
+  svg.appendChild(grid);
+
+  // X labels
+  for (let h = 0; h <= 24; h += 3) {
+    const x = M.left + (h / 24) * iw;
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', M.top + ih + 22);
+    t.setAttribute('text-anchor', 'middle');
+    t.style.font = '10px JetBrains Mono, monospace';
+    t.style.fill = 'var(--ink-mute)';
+    t.textContent = String(h).padStart(2, '0') + ':00';
+    svg.appendChild(t);
+  }
+
+  const xFor = h => M.left + (h / 24) * iw;
+  const yFor = v => M.top + ih - (v / niceMax) * ih;
+
+  function drawLine(arr, color, width, opacity=1, dash=null) {
+    const path = document.createElementNS(ns, 'path');
+    let d = '';
+    arr.forEach((v, i) => {
+      const x = xFor(i + 0.5);
+      const y = yFor(v);
+      d += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
+    });
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', width);
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('opacity', opacity);
+    if (dash) path.setAttribute('stroke-dasharray', dash);
+    svg.appendChild(path);
+  }
+
+  function drawArea(arr, color, opacity) {
+    const path = document.createElementNS(ns, 'path');
+    let d = '';
+    arr.forEach((v, i) => {
+      const x = xFor(i + 0.5);
+      const y = yFor(v);
+      d += (i === 0 ? 'M' : 'L') + x + ',' + y + ' ';
+    });
+    d += 'L' + xFor(arr.length - 0.5) + ',' + yFor(0) + ' ';
+    d += 'L' + xFor(0.5) + ',' + yFor(0) + ' Z';
+    path.setAttribute('d', d);
+    path.setAttribute('fill', color);
+    path.setAttribute('opacity', opacity);
+    svg.appendChild(path);
+  }
+
+  drawArea(allP, 'var(--ink)', 0.04);
+  drawLine(allP, 'var(--ink)', 1, 0.4, '3 3');
+  drawArea(offP, 'var(--ocean)', 0.10);
+  drawLine(offP, 'var(--ocean)', 2.5);
+  drawArea(onP, 'var(--sage)', 0.10);
+  drawLine(onP, 'var(--sage)', 2.5);
+
+  // Dots on each point
+  function drawDots(arr, color) {
+    arr.forEach((v, i) => {
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', xFor(i + 0.5));
+      c.setAttribute('cy', yFor(v));
+      c.setAttribute('r', 3);
+      c.setAttribute('fill', 'var(--paper)');
+      c.setAttribute('stroke', color);
+      c.setAttribute('stroke-width', 1.5);
+      const title = document.createElementNS(ns, 'title');
+      title.textContent = `kl ${String(i).padStart(2,'0')}–${String(i+1).padStart(2,'0')}: ${SE(v,2)} kWh`;
+      c.appendChild(title);
+      svg.appendChild(c);
+    });
+  }
+  drawDots(onP, 'var(--sage)');
+  drawDots(offP, 'var(--ocean)');
+
+  // Y axis title
+  const yt = document.createElementNS(ns, 'text');
+  yt.setAttribute('x', M.left); yt.setAttribute('y', M.top - 12);
+  yt.style.font = '600 10px Manrope, sans-serif';
+  yt.style.letterSpacing = '0.18em';
+  yt.style.textTransform = 'uppercase';
+  yt.style.fill = 'var(--ink-mute)';
+  yt.textContent = 'kWh per timme · medel';
+  svg.appendChild(yt);
+
+  // Annotation: peak and dip
+  const onPeakIdx = onP.indexOf(Math.max(...onP));
+  const offPeakIdx = offP.indexOf(Math.max(...offP));
+
+  // small annotation arrows
+  function annotate(idx, val, color, label, anchor='middle', dy=-14) {
+    const x = xFor(idx + 0.5);
+    const y = yFor(val);
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', x);
+    t.setAttribute('y', y + dy);
+    t.setAttribute('text-anchor', anchor);
+    t.style.font = 'italic 11px Fraunces, serif';
+    t.style.fill = color;
+    t.textContent = label;
+    svg.appendChild(t);
+  }
+  annotate(onPeakIdx, onP[onPeakIdx], 'var(--sage)', `topp ${SE(onP[onPeakIdx],2)}`);
+  annotate(offPeakIdx, offP[offPeakIdx], 'var(--ocean)', `topp ${SE(offP[offPeakIdx],2)}`, 'middle', -14);
+}
+
+// =================== INIT ===================
+fetch('data.json').then(r => r.json()).then(data => {
+  DATA = data;
+  drawMonthly('kwh');
+  drawHeatmap();
+  drawHourly();
+
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in');
+  }), { threshold: 0.08 });
+  document.querySelectorAll('section, .stat, .finding').forEach(el => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}).catch(err => {
+  console.error('Failed to load data.json:', err);
+  document.body.insertAdjacentHTML('afterbegin',
+    '<div style="padding:24px;background:#FFE0E0;color:#900;font-family:monospace;">' +
+    'Kunde inte ladda data.json. Servera sidan via en webbserver, t.ex. <code>python3 -m http.server</code> i <code>docs/</code>.</div>');
+});
+</script>
+</body>
+</html>
