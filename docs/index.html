@@ -75,6 +75,226 @@ body {
 .topbar .mark::before { content: "❋"; color: var(--sage); margin-right: 8px; font-size: 14px; }
 .topbar .right { display: flex; gap: 24px; }
 
+/* Sammanfattning (Nivå 1) */
+.summary-section { padding: 60px 0 40px; border-top: 1px solid var(--rule); }
+.summary-card {
+  background: linear-gradient(180deg, rgba(217, 162, 95, 0.06), rgba(250, 247, 240, 0));
+  border-left: 3px solid var(--alert);
+  padding: 36px 40px 36px;
+  border-radius: 2px;
+}
+@media (max-width: 720px) { .summary-card { padding: 28px 22px; } }
+.summary-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--alert);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+h2.summary-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  line-height: 1.15;
+  margin: 0 0 28px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+h2.summary-title em {
+  color: var(--alert);
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+.summary-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: grid;
+  gap: 18px;
+}
+.summary-bullets li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 20px;
+  align-items: baseline;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+.summary-bullets li:last-child { border-bottom: none; padding-bottom: 0; }
+.summary-bullets .b-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+}
+.summary-bullets .b-text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.summary-bullets .b-text a {
+  color: var(--alert);
+  border-bottom: 1px solid var(--alert);
+  text-decoration: none;
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  .summary-bullets li { grid-template-columns: 1fr; gap: 6px; }
+}
+.summary-cta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.cta-primary, .cta-secondary {
+  display: inline-block;
+  padding: 12px 22px;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.cta-primary { background: var(--ink); color: var(--paper); }
+.cta-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+.cta-secondary { color: var(--ink-soft); border: 1px solid var(--rule); }
+.cta-secondary:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Åtgärder section */
+.alert-num { color: var(--alert) !important; }
+.alert-eyebrow { color: var(--alert) !important; }
+.actions { display: grid; gap: 24px; }
+.action {
+  display: grid;
+  grid-template-columns: 60px 1fr 220px;
+  gap: 28px;
+  align-items: start;
+  padding: 28px 32px;
+  background: rgba(217, 162, 95, 0.05);
+  border-left: 3px solid var(--alert);
+  border-radius: 2px;
+}
+@media (max-width: 880px) {
+  .action { grid-template-columns: 60px 1fr; gap: 18px; padding: 24px; }
+  .action .action-stat { grid-column: 1 / -1; }
+}
+.action-num {
+  font-size: 56px;
+  line-height: 1;
+  color: var(--alert);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+.action-body h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 8px 0 12px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.action-body p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; margin: 0; }
+.action-stat {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 18px 20px;
+  border-radius: 2px;
+}
+.action-stat .label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.action-stat .big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--alert);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.action-stat .detail { font-size: 12px; line-height: 1.45; color: var(--ink-mute); }
+
+/* Level divider */
+.level-divider {
+  margin: 90px 0 70px;
+  display: grid;
+  gap: 28px;
+  text-align: center;
+  scroll-margin-top: 60px;
+}
+.divider-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--rule) 30%, var(--rule) 70%, transparent);
+}
+.divider-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+}
+h2.divider-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  line-height: 1.1;
+  margin: 14px auto 14px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+h2.divider-title em {
+  font-style: italic;
+  color: var(--sage);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+.divider-deck {
+  max-width: 56ch;
+  margin: 0 auto;
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* Sticky section nav */
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 240, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 14px 0;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 -32px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.section-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.18s, border-color 0.18s;
+}
+.section-nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.section-nav a.atg { color: var(--alert); }
+.section-nav a.atg:hover { border-bottom-color: var(--alert); }
+@media (max-width: 720px) {
+  .section-nav { gap: 18px; font-size: 10px; padding-top: 10px; padding-bottom: 10px; letter-spacing: 0.14em; }
+}
+
 /* Hero */
 .hero {
   padding: 80px 0 60px;
@@ -540,6 +760,13 @@ footer {
     </div>
   </div>
 
+  <nav class="section-nav" aria-label="Sektionsnavigation">
+    <a href="#sammanfattning">Sammanfattning</a>
+    <a href="#strukturbrott">Slutsats</a>
+    <a href="#hela-analysen">Hela analysen</a>
+    <a href="#atgarder" class="atg">Åtgärder</a>
+  </nav>
+
   <!-- ============== HERO ============== -->
   <header class="hero">
     <div>
@@ -554,37 +781,30 @@ footer {
     </div>
   </header>
 
-  <!-- ============== KEY STATS ============== -->
-  <section id="overblick">
-    <div class="section-head">
-      <div class="section-num serif">01</div>
-      <div>
-        <div class="section-eyebrow">Översikt</div>
-        <h2 class="section-title">Ett år, <em>i stora drag</em>.</h2>
-        <p class="section-deck">Rollande tolv månader, från april 2025 till mars 2026. Alla siffror är spotelpriset (Nord&nbsp;Pool månadsmedel × verklig timförbrukning) — påslag, energiskatt, nätavgift och moms tillkommer på faktiskt fakturerad summa.</p>
-      </div>
-    </div>
+  <!-- ============== SAMMANFATTNING (NIVÅ 1 · 30 sekunder) ============== -->
+  <section id="sammanfattning" class="summary-section">
+    <div class="summary-card">
+      <div class="summary-eyebrow">Sammanfattning · 30 sekunder</div>
+      <h2 class="summary-title">Vi har en <em>dold elvärmare</em> som körts dygnet runt i fem månader.</h2>
 
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="label">Förbrukning</div>
-        <div class="value mono-num">72&thinsp;811<span class="unit">kWh</span></div>
-        <div class="note">i snitt 200 kWh per dygn</div>
-      </div>
-      <div class="stat">
-        <div class="label">Spotkostnad ex moms</div>
-        <div class="value mono-num">45&thinsp;178<span class="unit">kr</span></div>
-        <div class="note">56&thinsp;472 kr inklusive moms</div>
-      </div>
-      <div class="stat">
-        <div class="label">Volymvägt spotpris</div>
-        <div class="value mono-num">62,1<span class="unit">öre/kWh</span></div>
-        <div class="note">12-månaders snitt SE2</div>
-      </div>
-      <div class="stat">
-        <div class="label">Aktiv säsong</div>
-        <div class="value mono-num">5<span class="unit">månader · maj–sep</span></div>
-        <div class="note">7 månader off-season</div>
+      <ul class="summary-bullets">
+        <li>
+          <span class="b-label">Vad</span>
+          <span class="b-text">Termostat-driven elvärme i en uppvärmd byggnad — sannolikt en bebodd eller hyrd stuga, alternativt ny frostvakt på sanitetsbyggnad. Kördes från 3 oktober 2025 till 12 mars 2026 utan att synas på fakturan som något särskilt.</span>
+        </li>
+        <li>
+          <span class="b-label">Omfattning</span>
+          <span class="b-text">~27 000 extra kWh på 161 dygn. Vid de extrema vinterpriserna jan–feb 2026 motsvarar detta ungefär <strong>16–20 000 kr inklusive moms</strong> — mer än hela on-säsongens elnota.</span>
+        </li>
+        <li>
+          <span class="b-label">Åtgärd</span>
+          <span class="b-text">Avstängningstest byggnad för byggnad (30 min, huvudmätaren visar var de 6–7 kW finns). Om bebodd stuga: säkerställ att hyran täcker elen. Om frostvakt: överväg behovsstyrning. <a href="#atgarder">Hela åtgärdslistan ↓</a></span>
+        </li>
+      </ul>
+
+      <div class="summary-cta">
+        <a href="#strukturbrott" class="cta-primary">Se beviset →</a>
+        <a href="#hela-analysen" class="cta-secondary">Hela analysen ↓</a>
       </div>
     </div>
   </section>
@@ -592,7 +812,7 @@ footer {
   <!-- ============== STRUCTURAL BREAK (NEW) ============== -->
   <section id="strukturbrott">
     <div class="section-head">
-      <div class="section-num serif">02</div>
+      <div class="section-num serif">01</div>
       <div>
         <div class="section-eyebrow">Det viktigaste fyndet · strukturbrottet</div>
         <h2 class="section-title">En dold last <em>som aldrig vilade</em>.</h2>
@@ -636,59 +856,14 @@ footer {
     </div>
 
     <div style="max-width: 60ch; margin: 0 auto 32px; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
-      <p>Vad slogs på? Datan kan inte säga vad utrustningen var, bara att den fanns. Men i <a href="#diagnos" style="color: var(--ocean); border-bottom: 1px solid var(--ocean);">avsnitt 05</a> går vi djupare: timme för timme, mot SMHI:s temperatur, för att avgöra om det är termostat-driven värme, en konstant alltid-på-last, eller schemastyrd verksamhet — och vilken typ av byggnad som passar profilen.</p>
-      <p style="margin-top: 14px;">Det vi <em>kan</em> säga redan här: kostnaden för exakt denna last under jan–feb 2026, vid den månadens extrema spotpriser, var ungefär 16&thinsp;000 kr inklusive moms. Det är mer än hela on-säsongens elnota.</p>
-    </div>
-  </section>
-
-  <!-- ============== SEASONAL SPLIT ============== -->
-  <section id="sasong">
-    <div class="section-head">
-      <div class="section-num serif">03</div>
-      <div>
-        <div class="section-eyebrow">Säsongsfördelning</div>
-        <h2 class="section-title">När campingen är <em>tom</em>, jobbar elmätaren hårdast.</h2>
-        <p class="section-deck">On-säsongen (maj–september) är fem månader långa och stod för 38&nbsp;% av kilowattimmarna men bara 19&nbsp;% av kostnaden. Off-säsongen (oktober–april) — sju månader — bar resten. En del av off-säsongens tyngd kommer från strukturbrottet ovan.</p>
-      </div>
-    </div>
-
-    <div class="season-split">
-      <div class="split-row">
-        <div class="split-label">
-          <div class="name">Förbrukning <em>kWh</em></div>
-          <div class="meta">72&thinsp;811 kWh totalt</div>
-        </div>
-        <div class="split-bar" id="split-kwh">
-          <div class="on" style="flex: 38.3">38,3 % · 27&thinsp;851 kWh</div>
-          <div class="off" style="flex: 61.7">44&thinsp;960 kWh · 61,7 %</div>
-        </div>
-      </div>
-      <div class="split-row">
-        <div class="split-label">
-          <div class="name">Spotkostnad <em>kr ex moms</em></div>
-          <div class="meta">45&thinsp;178 kr totalt</div>
-        </div>
-        <div class="split-bar" id="split-cost">
-          <div class="on" style="flex: 18.9">18,9 % · 8&thinsp;527 kr</div>
-          <div class="off" style="flex: 81.1">36&thinsp;651 kr · 81,1 %</div>
-        </div>
-      </div>
-
-      <div class="chart-legend" style="margin-top: 32px;">
-        <span><span class="swatch" style="background: var(--sage)"></span>On-season · maj–september · 5 månader</span>
-        <span><span class="swatch" style="background: var(--ocean)"></span>Off-season · oktober–april · 7 månader</span>
-      </div>
-    </div>
-
-    <div class="pull-quote">
-      Kilowattimmen kostar <span class="accent">2,7×</span> mer när ingen är där.
+      <p>Kostnaden för exakt denna last jan–feb 2026 var ungefär 16&thinsp;000 kr inklusive moms — mer än hela on-säsongens elnota. <a href="#diagnos" style="color: var(--ocean); border-bottom: 1px solid var(--ocean);">Diagnosen</a> nedan tar reda på vad det är.</p>
     </div>
   </section>
 
   <!-- ============== WEATHER (NEW) ============== -->
   <section id="vader">
     <div class="section-head">
-      <div class="section-num serif">04</div>
+      <div class="section-num serif">02</div>
       <div>
         <div class="section-eyebrow">Vädret bidrog · men inte ensamt</div>
         <h2 class="section-title">Februari 2026 var den <em>tredje kallaste</em> på trettio år.</h2>
@@ -720,16 +895,15 @@ footer {
     </div>
 
     <div style="max-width: 64ch; margin: 40px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
-      <p><strong>Vad vädret <em>inte</em> förklarade.</strong> Räknar man om jan–feb 2026 till samma kWh-per-gradtimme som året innan, hade förbrukningen blivit ~6&thinsp;700 kWh — inte 18&thinsp;700. Mellanskillnaden, ~12&thinsp;000 kWh, kan inte tillskrivas kylan. Det är samma 9 kW-strömlast som syns i strukturbrott-diagrammet ovan, mätt på ett annat sätt.</p>
-      <p style="margin-top: 14px;"><strong>Vad vädret förklarade.</strong> Att det fanns en tröskel runt +3 °C där värmesystemet "tänder", och att varje grad kallare under den tröskeln drar ~8,4 kWh extra per dygn. Sommarens förbrukning korrelerar i princip inte med temperaturen alls (R² = 0,02) — där styr gästbeläggningen.</p>
-      <p style="margin-top: 14px;"><strong>Vad väder absolut inte förklarade.</strong> Vind: r = 0,00. Sommarens regn: r = 0,07. Hypotesen att regn driver gäster inomhus och upp elen — håller inte. Och årets enskilt högsta timme, 23,86 kWh den 24 juni 2025 kl 18, inföll i 13 °C, vindstilla, utan nederbörd. Det var tisdagen efter midsommar — klassisk camping-fyllning.</p>
+      <p><strong>Vad vädret förklarade:</strong> en tröskel runt +3 °C där värmesystemet tänder; varje grad kallare ger ~8,4 kWh extra per dygn. Sommaren styrs istället av gästbeläggningen (R² = 0,02 mot temperatur).</p>
+      <p style="margin-top: 14px;"><strong>Vad vädret <em>inte</em> förklarade:</strong> räknar man om jan–feb 2026 till samma kWh-per-gradtimme som året innan blir det ~6&thinsp;700 kWh, inte 18&thinsp;700. Mellanskillnaden — ~12&thinsp;000 kWh — kan inte tillskrivas kylan.</p>
     </div>
   </section>
 
   <!-- ============== DIAGNOSIS — hourly kWh × temperature ============== -->
   <section id="diagnos">
     <div class="section-head">
-      <div class="section-num serif">05</div>
+      <div class="section-num serif">03</div>
       <div>
         <div class="section-eyebrow">Diagnos · timme för timme</div>
         <h2 class="section-title">Vad är den dolda lasten? En <em>uppvärmd byggnad</em>.</h2>
@@ -834,20 +1008,146 @@ footer {
     </div>
 
     <div style="max-width: 64ch; margin: 40px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
-      <p><strong>Vad bilden ser ut som.</strong> Profilen — brant T-respons, platt över dygnet, ingen vindkänslighet — matchar en isolerad utrymme med direktverkande el. Inte en frostvakt på ett enkelt kallt utrymme (skulle vara mer vindpåverkad). Inte en heat-tracing-kabel (för stor effekt och för regelbunden). Inte en värmepump som havererat (skulle visa knäckpunkt vid sin lägsta arbetstemp).</p>
-      <p style="margin-top: 14px;"><strong>Mest sannolika kandidater</strong>, i prioriterad ordning: (1) en bebodd eller hyrd stuga med direktverkande el — 6–7 kWh/h vid kall temperatur är typiskt för 30–50 m² bostadsutrymme; den konstanta ~2 kWh/h-komponenten matchar kyl, varmvatten, och övrig vardagsförbrukning. (2) En servicebyggnad med ny eller aktiverad invändig värme för vintern 2025/2026, som inte fanns där föregående vinter. (3) En kombination — t.ex. en stuga + frostvakt på sanitetsbyggnaden.</p>
-      <p style="margin-top: 14px;"><strong>Konkreta nästa steg för föreningen.</strong> Stäng strömmen helt till en byggnad i taget under 30 minuter och avläs huvudmätaren — då vet ni var de 6–7 kW finns. Om någon stuga är bebodd eller hyrd vintertid: räkna ut elkostnaden (15–20&thinsp;000 kr på 161 dygn vid genomsnittspris) och se till att hyran täcker den. Om det är en frostvakt: överväg termostatinställning och behovsstyrning — många frostvakter går onödigt varma.</p>
+      <p><strong>Vad bilden ser ut som.</strong> Profilen — brant T-respons, platt över dygnet, ingen vindkänslighet — matchar ett isolerat utrymme med direktverkande el. Inte frostvakt på enkelt kallt utrymme (skulle vara mer vindpåverkad), inte heat-tracing-kabel (för stor effekt), inte havererad värmepump (skulle visa knäckpunkt).</p>
+      <p style="margin-top: 14px;"><strong>Mest sannolika kandidater:</strong> (1) en bebodd eller hyrd stuga — 6–7 kWh/h vid kall temperatur är typiskt för 30–50 m² bostadsutrymme; den konstanta ~2 kWh/h matchar kyl, varmvatten och övrig vardagsförbrukning. (2) En servicebyggnad med ny eller aktiverad invändig värme för vintern 2025/2026. (3) En kombination — t.ex. stuga plus frostvakt på sanitet.</p>
     </div>
   </section>
 
-  <!-- ============== MONTHLY ============== -->
+  <!-- ============== ÅTGÄRDER ============== -->
+  <section id="atgarder">
+    <div class="section-head">
+      <div class="section-num serif alert-num">04</div>
+      <div>
+        <div class="section-eyebrow alert-eyebrow">Åtgärder · vad styrelsen kan göra</div>
+        <h2 class="section-title">Tre konkreta steg, i <em>prioriterad ordning</em>.</h2>
+        <p class="section-deck">Varje åtgärd är låg insats och kan göras under en eftermiddag. Tillsammans avgör de om kostnaden är 0 kr eller 20 000 kr per vintersäsong framåt.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <article class="action">
+        <div class="action-num serif">1</div>
+        <div class="action-body">
+          <h3>Avstängningstest byggnad för byggnad.</h3>
+          <p><strong>30 minuter, ingen kostnad.</strong> Stäng huvudströmmen till en byggnad åt gången och läs av huvudmätaren. Den byggnad där mätaren faller med ~6–7 kW är källan. Gör testet vid kall temperatur (under 0 °C) så lasten är aktiv.</p>
+        </div>
+        <div class="action-stat">
+          <div class="label">Tidsåtgång</div>
+          <div class="big">30 min</div>
+          <div class="detail">Hittar källan på en eftermiddag</div>
+        </div>
+      </article>
+
+      <article class="action">
+        <div class="action-num serif">2</div>
+        <div class="action-body">
+          <h3>Om bebodd stuga: säkerställ att hyran täcker elen.</h3>
+          <p><strong>Räkna ut kostnaden, justera avtalet.</strong> Om någon hyr eller bor i en stuga vintertid drar elen 15–20 000 kr per säsong vid normalpris (mer vid extrema priser som 2026). Hyresavtalet bör antingen inkludera el-tillägg motsvarande detta, eller ha separat el-mätning.</p>
+        </div>
+        <div class="action-stat">
+          <div class="label">Påverkan</div>
+          <div class="big">15–20 tkr</div>
+          <div class="detail">Per vintersäsong, beroende på spotpris</div>
+        </div>
+      </article>
+
+      <article class="action">
+        <div class="action-num serif">3</div>
+        <div class="action-body">
+          <h3>Om frostvakt eller invändig värme: behovsstyr.</h3>
+          <p><strong>Termostatinställning, timer eller smart styrning.</strong> Många frostvakter går onödigt varma — sänkning från +10 °C till +5 °C halverar driftcykeln. Värme i utrymmen som inte används året runt bör styras av närvarosensorer eller schema, inte stå konstant på.</p>
+        </div>
+        <div class="action-stat">
+          <div class="label">Potentiell besparing</div>
+          <div class="big">~50 %</div>
+          <div class="detail">Av frostvaktslast vid sänkt börvärde</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============== HELA ANALYSEN · DIVIDER ============== -->
+  <div id="hela-analysen" class="level-divider">
+    <div class="divider-rule"></div>
+    <div class="divider-text">
+      <span class="divider-eyebrow">Nivå 3 · för den nyfikne</span>
+      <h2 class="divider-title">Hela <em>analysen</em>.</h2>
+      <p class="divider-deck">Ovan är slutsatsen och åtgärderna. Nedan är siffrorna och bevisen som ledde dit — översikt, månader, värmekarta, fynd, metod.</p>
+    </div>
+    <div class="divider-rule"></div>
+  </div>
+
+  <!-- ============== ÖVERSIKT (moved) ============== -->
+  <section id="overblick">
+    <div class="section-head">
+      <div class="section-num serif">05</div>
+      <div>
+        <div class="section-eyebrow">Översikt</div>
+        <h2 class="section-title">Året i <em>stora drag</em>.</h2>
+        <p class="section-deck">Rollande tolv månader, april 2025 till mars 2026. Spotkostnad — påslag, energiskatt, nät och moms tillkommer på faktiskt fakturerad summa.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="label">Förbrukning</div>
+        <div class="value mono-num">72&thinsp;811<span class="unit">kWh</span></div>
+        <div class="note">i snitt 200 kWh per dygn</div>
+      </div>
+      <div class="stat">
+        <div class="label">Spotkostnad ex moms</div>
+        <div class="value mono-num">45&thinsp;178<span class="unit">kr</span></div>
+        <div class="note">56&thinsp;472 kr inklusive moms</div>
+      </div>
+      <div class="stat">
+        <div class="label">Volymvägt spotpris</div>
+        <div class="value mono-num">62,1<span class="unit">öre/kWh</span></div>
+        <div class="note">12-månaders snitt SE2</div>
+      </div>
+      <div class="stat">
+        <div class="label">On-säsong</div>
+        <div class="value mono-num">5<span class="unit">mån · maj–sep</span></div>
+        <div class="note">7 månader off-season</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SÄSONG + MÅNAD (merged) ============== -->
   <section id="manad">
     <div class="section-head">
       <div class="section-num serif">06</div>
       <div>
-        <div class="section-eyebrow">Månad för månad</div>
-        <h2 class="section-title">Förbrukning och kostnad <em>per månad</em>.</h2>
-        <p class="section-deck">Hela datasetet om femton månader. Sage-färg markerar on-säsong (maj–sep). Bärnsten markerar de extrema vintermånaderna jan–feb 2026. Häll musen över en stapel för exakta tal.</p>
+        <div class="section-eyebrow">Säsong &amp; månader</div>
+        <h2 class="section-title">När campingen är <em>tom</em>, jobbar mätaren hårdast.</h2>
+        <p class="section-deck">On-säsongen (maj–september, 5 månader) tog 38&nbsp;% av kilowattimmarna men bara 19&nbsp;% av kostnaden. Off-säsongen (oktober–april, 7 månader) bar resten — varav en del kommer från strukturbrottet.</p>
+      </div>
+    </div>
+
+    <div class="season-split" style="margin-bottom: 56px;">
+      <div class="split-row">
+        <div class="split-label">
+          <div class="name">Förbrukning <em>kWh</em></div>
+          <div class="meta">72&thinsp;811 kWh totalt</div>
+        </div>
+        <div class="split-bar" id="split-kwh">
+          <div class="on" style="flex: 38.3">38,3 % · 27&thinsp;851 kWh</div>
+          <div class="off" style="flex: 61.7">44&thinsp;960 kWh · 61,7 %</div>
+        </div>
+      </div>
+      <div class="split-row">
+        <div class="split-label">
+          <div class="name">Spotkostnad <em>kr ex moms</em></div>
+          <div class="meta">45&thinsp;178 kr totalt</div>
+        </div>
+        <div class="split-bar" id="split-cost">
+          <div class="on" style="flex: 18.9">18,9 % · 8&thinsp;527 kr</div>
+          <div class="off" style="flex: 81.1">36&thinsp;651 kr · 81,1 %</div>
+        </div>
+      </div>
+
+      <div class="chart-legend" style="margin-top: 24px;">
+        <span><span class="swatch" style="background: var(--sage)"></span>On-season · maj–september · 5 månader</span>
+        <span><span class="swatch" style="background: var(--ocean)"></span>Off-season · oktober–april · 7 månader</span>
       </div>
     </div>
 
@@ -860,6 +1160,10 @@ footer {
     <div class="chart-card">
       <svg id="monthly-chart" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Stapeldiagram över månadsförbrukning"></svg>
     </div>
+
+    <div class="pull-quote">
+      Kilowattimmen kostar <span class="accent">2,7×</span> mer när ingen är där.
+    </div>
   </section>
 
   <!-- ============== HEATMAP ============== -->
@@ -869,7 +1173,7 @@ footer {
       <div>
         <div class="section-eyebrow">Daglig värmekarta</div>
         <h2 class="section-title">Varje dygn under <em>femton månader</em>.</h2>
-        <p class="section-deck">En cell per dygn. Mörkare ton = högre förbrukning. Det gröna bandet ovanför markerar on-säsongens fem månader. Lägg märke till de mörka stråken jan–feb 2026 — de är inte huvudsakligen kalla dagar, de är strukturbrottet.</p>
+        <p class="section-deck">En cell per dygn — mörkare ton är högre förbrukning. Det gröna bandet markerar on-säsongen. De mörka stråken jan–feb 2026 är strukturbrottet, inte vädret.</p>
       </div>
     </div>
 
@@ -886,42 +1190,14 @@ footer {
     <div id="heatmap-tooltip" class="heatmap-tooltip"></div>
   </section>
 
-  <!-- ============== HOURLY ============== -->
-  <section id="dygnsprofil">
-    <div class="section-head">
-      <div class="section-num serif">08</div>
-      <div>
-        <div class="section-eyebrow">Dygnsprofil · korrigering</div>
-        <h2 class="section-title">Den platta kurvan är en <em>illusion</em>.</h2>
-        <p class="section-deck">En genomsnittlig dygnskurva ser nästan platt ut — men det är delvis en aggregerings-artefakt. Sommar och vinter har sina toppar vid <em>olika</em> tider på dygnet (sommaren toppar nattetid, vintern morgon-kväll), så när man medelvärdesberäknar 12 månader jämnas mönstret ut. Ser man på en typisk sommarmånad och en typisk vintermånad var för sig kommer formen tillbaka — men kurvorna är inte motsatta utan förskjutna; båda har samma eftermiddagsdipp kring kl 15.</p>
-      </div>
-    </div>
-
-    <div class="chart-legend">
-      <span><span class="swatch" style="background: var(--sage)"></span>Juli 2025 · representativ sommar</span>
-      <span><span class="swatch" style="background: var(--ocean)"></span>Februari 2026 · representativ vinter</span>
-      <span><span class="swatch" style="background: var(--ink); opacity: 0.3"></span>15-månadersmedel (skenbart "platt")</span>
-    </div>
-
-    <div class="chart-card">
-      <svg id="hourly-chart" class="chart-svg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet" aria-label="Linjediagram över timprofil"></svg>
-    </div>
-
-    <div style="max-width: 64ch; margin: 32px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
-      <p><strong>Sommaren (juli)</strong> toppar nattetid kring kl 03 (varmvattenberedning + termostat-cykler) och dippar mitt på dagen kring kl 15 — solen sänker värmebehovet i servicebyggnaden.</p>
-      <p style="margin-top: 14px;"><strong>Vintern (februari)</strong> toppar morgon-kväll kring kl 07 och 19 (klassisk uppvärmning som följer kallaste timmarna) och dippar kl 14–15.</p>
-      <p style="margin-top: 14px;"><strong>Lördagskvällarna</strong> (kl 18–22 i juni–augusti) ligger i snitt 22&nbsp;% över söndagskvällar — den enda riktigt mänskliga signalen i datan, som syns även genom medelvärdet. Det är ankomstfönstret: gäster som checkar in, lagar mat, duschar, fyller på elbilar.</p>
-    </div>
-  </section>
-
   <!-- ============== FINDINGS ============== -->
   <section id="fynd">
     <div class="section-head">
-      <div class="section-num serif">09</div>
+      <div class="section-num serif">08</div>
       <div>
         <div class="section-eyebrow">Anmärkningsvärda fynd</div>
-        <h2 class="section-title">Åtta upptäckter som <em>förändrar bilden</em>.</h2>
-        <p class="section-deck">Två oberoende analyser — en mot SMHI:s 30-åriga väderarkiv, en forensisk genomlysning av timseriestrukturen — landade i åtta fynd som inte syns på fakturan. I prioriterad ordning, från störst handlingsbar besparing till intressantast detalj om campingens vardag.</p>
+        <h2 class="section-title">Tre upptäckter som <em>förändrar bilden</em>.</h2>
+        <p class="section-deck">Tre fynd som inte syns på fakturan. I prioriterad ordning från störst handlingsbar besparing till mest beslutspåverkande insikt.</p>
       </div>
     </div>
 
@@ -956,21 +1232,7 @@ footer {
       </article>
 
       <article class="finding">
-        <div class="finding-num serif">iii</div>
-        <div class="finding-body">
-          <h3>Räkningen är ett <em>platå</em>, inte en serie spikar.</h3>
-          <p>Energi-besparingsråd brukar säga "klipp topparna". I Ånges fall hjälper det inte: de dyraste 1&nbsp;% av alla 10&thinsp;920 timmar är bara 5,5&nbsp;% av kostnaden. De dyraste 10&nbsp;% utgör 44&nbsp;%. Det betyder att räkningen byggs av en bred, jämn last — inte enskilda toppar.</p>
-          <p>Att sänka golvet (grundlasten) är därför mycket mer värt än att kapa toppar. 96 av topp-1 %-timmarna ligger i februari 2026 — månaden där grundlasten var 9 kW snarare än 2.</p>
-        </div>
-        <div class="finding-stat">
-          <div class="label">Topp 1&nbsp;% av timmarna</div>
-          <div class="big">5,5 %</div>
-          <div class="detail">av totala spotkostnaden<br>96 av 109 i feb 2026</div>
-        </div>
-      </article>
-
-      <article class="finding">
-        <div class="finding-num alt serif">iv</div>
+        <div class="finding-num alt serif">iii</div>
         <div class="finding-body">
           <h3>Värmen tänder vid <em>+3 °C</em>.</h3>
           <p>Statistisk modellering mot SMHI:s timdata ger en knäpunkt: under +3&nbsp;°C drar varje grad kallare i snitt 8,4&nbsp;kWh extra per dygn. Ovanför är förbrukningen i praktiken temperaturoberoende. På sommaren förklarar temperaturen i princip ingenting (R² = 0,02) — där styr gästbeläggningen.</p>
@@ -983,69 +1245,13 @@ footer {
         </div>
       </article>
 
-      <article class="finding">
-        <div class="finding-num serif">v</div>
-        <div class="finding-body">
-          <h3>Påsken visar campingens <em>verkliga nollnivå</em>.</h3>
-          <p>De två lägsta dygnen i hela 15-månadersperioden är skärtorsdag och långfredag 2025: 33,1 och 34,2 kWh — en kontinuerlig last på cirka <strong>1,4 kW</strong>. Detta är det fysiska minimum byggnaden drar när absolut ingenting händer: stand-by, kylar, frys, någon liten värme för att inte frysa rören.</p>
-          <p>Det säger två saker: (1) en månadsmedel-grundlast på 2,3 kW är en överskattning av "absolut nollnivå" — den är 1,4 kW. (2) Allt utöver dessa 1,4 kW är reduceringsbart utan att påverka byggnadens existens.</p>
-        </div>
-        <div class="finding-stat">
-          <div class="label">Lägsta dygn 455</div>
-          <div class="big">33 <span style="font-size: 0.4em; color: var(--ink-mute);">kWh</span></div>
-          <div class="detail">Skärtorsdagen 2025-04-17<br>= 1,4 kW kontinuerlig last</div>
-        </div>
-      </article>
-
-      <article class="finding">
-        <div class="finding-num alt serif">vi</div>
-        <div class="finding-body">
-          <h3>Lördagskvällar avslöjar <em>gästerna</em>.</h3>
-          <p>Genom medeltal på alla 24 timmar går mänsklig aktivitet förlorad. Men en specifik signal håller: lördagar i juni–augusti drar i snitt 9,2 kWh/h mellan kl 18–22, mot söndagars 7,5 kWh/h — en <strong>22&nbsp;%-höjning</strong> över fem timmar, fem helger i rad. Det är ankomstfönstret: gäster checkar in lördag eftermiddag, lagar middag, duschar, fyller på elbilar/husbilar.</p>
-          <p>Något motsvarande mönster finns inte på vintern. Förbrukningen är då veckodag-blind — en ren "byggnaden står"-signal.</p>
-        </div>
-        <div class="finding-stat alt">
-          <div class="label">Lör vs sön kväll · sommar</div>
-          <div class="big">+22 %</div>
-          <div class="detail">9,2 vs 7,5 kWh/h kl 18–22<br>Den enda mänskliga signalen som överlever medelvärdet</div>
-        </div>
-      </article>
-
-      <article class="finding">
-        <div class="finding-num serif">vii</div>
-        <div class="finding-body">
-          <h3>Februari 2026 var <em>3:e kallaste</em> på trettio år.</h3>
-          <p>Vid Torpshammar A (32 km från Ånge) var februari 2026 i medel −12,1 °C — 5,9 °C kallare än 30-årssnittet (1996–2024), 1,8 standardavvikelser från normalen. Endast februari 2009 (−12,3 °C) och 2010 (−12,2 °C) var kallare på 30 år. Den lägsta enskilda timmen var <strong>−29,8&nbsp;°C</strong>, 14 februari kl 04.</p>
-          <p>Det förklarar varför priserna sköt i höjden — hela Norrland värmde samtidigt — men förklarar inte att Ånges egen förbrukning fyrdubblades. Dålig kombination av yttre köld och inre strukturbrott.</p>
-        </div>
-        <div class="finding-stat">
-          <div class="label">Köldanomali feb 2026</div>
-          <div class="big">−5,9 <span style="font-size: 0.4em; color: var(--ink-mute);">°C</span></div>
-          <div class="detail">vs 30-årsnormalen · z = −1,84<br>Lägsta tim-temp: −29,8 °C den 14 feb</div>
-        </div>
-      </article>
-
-      <article class="finding">
-        <div class="finding-num alt serif">viii</div>
-        <div class="finding-body">
-          <h3>Sommartoppen var inte väder. Det var <em>midsommar-tisdag</em>.</h3>
-          <p>Årets enskilt högsta timme — 23,86 kWh tisdagen 24 juni 2025 kl 18 — inföll vid 13,1 °C, vindstilla, utan nederbörd. Ingen värmebölja, ingen storm, inget åskväder. Toppen kom dagarna efter midsommarafton (fredag 20 juni) och har den klassiska signaturen för full camping: stadig kvällsbelastning kl 15–23 från bastu, duschar, kök och husvagnsuppkopplingar.</p>
-          <p>Vind och regn var noll-faktorer i hela datasetet (r ≈ 0). Hypotesen att regn driver gäster inomhus och upp elen håller inte; värmebölja → AC syns inte heller. Campingen är väderoberoende — det är gästerna som bestämmer.</p>
-        </div>
-        <div class="finding-stat alt">
-          <div class="label">Topptimme · 24 juni 2025 kl 18</div>
-          <div class="big">23,86 <span style="font-size: 0.4em; color: var(--ink-mute);">kWh</span></div>
-          <div class="detail">13,1 °C · vindstilla · torrt<br>Tisdagen efter midsommarafton</div>
-        </div>
-      </article>
-
     </div>
   </section>
 
   <!-- ============== METHODOLOGY ============== -->
   <section id="metod">
     <div class="section-head">
-      <div class="section-num serif">10</div>
+      <div class="section-num serif">09</div>
       <div>
         <div class="section-eyebrow">Metod &amp; reservationer</div>
         <h2 class="section-title">Hur siffrorna är <em>räknade</em>.</h2>
@@ -2050,7 +2256,6 @@ fetch('data.json').then(r => r.json()).then(data => {
   drawMonthly('kwh');
   drawBaseload();
   drawHeatmap();
-  drawHourly();
   drawHourlyScatter();
   drawHodDiag();
   drawColdSnap();
