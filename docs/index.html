@@ -613,6 +613,11 @@ h2.section-title em {
   margin-right: 8px;
   border-radius: 2px;
 }
+.chart-legend .swatch.swatch-dashed {
+  width: 18px; height: 14px;
+  background: linear-gradient(to right, var(--sage) 0 5px, transparent 5px 9px, var(--sage) 9px 14px, transparent 14px 18px) center/100% 2px no-repeat !important;
+  border-radius: 0;
+}
 .chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
 .axis text { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-mute); }
 .axis line, .axis path { stroke: var(--rule); stroke-width: 1; fill: none; }
@@ -890,7 +895,7 @@ footer {
     <div>
       <div class="kicker">Årsanalys · Elförbrukning · 2025–2026</div>
       <h1 class="headline">Något slogs på <em>3 oktober</em>. Något slogs av <em>12 mars</em>.</h1>
-      <p class="lede">Något drog cirka <strong>9 kilowatt ström dygnet runt i 161 dagar</strong>, från oktober till mars. Det var inte vädret. Det var inte elpriset. Det var något fysiskt — en värmare, ett element, en stuga — som ingen tycks ha vetat om.</p>
+      <p class="lede">Något drog cirka <strong>7 kilowatt extra, dygnet runt i 161 dagar</strong>, från oktober till mars — ovanpå den vanliga grundlasten (kyl, frys, ventilation). Det var inte vädret. Det var inte elpriset. Det var något fysiskt — en värmare, ett element, en stuga — som ingen tycks ha vetat om.</p>
     </div>
     <div class="hero-stat reveal in">
       <div class="label">Vad det kostade · ink moms</div>
@@ -934,25 +939,25 @@ footer {
       <div>
         <div class="section-eyebrow">Det viktigaste fyndet</div>
         <h2 class="section-title">En dold el-förbrukare <em>som aldrig vilade</em>.</h2>
-        <p class="section-deck">Hela vintern 2025/26 sjönk strömmen aldrig under 9 kWh per timme — inte en enda gång på 60 dagar i januari och februari. Vintern innan var samma "tysta nattnivå" 1,8 kWh per timme. Något var påslaget hela tiden. Det var inte vädret som var skillnaden.</p>
+        <p class="section-deck">Hela vintern 2025/26 låg campingens lugnaste timmar runt 9 kW — där samma "tysta nattnivå" året innan var 1,8 kW. Inte en enda timme i januari och februari 2026 var lika lugn som en helt vanlig natt vintern innan. Det innebär ungefär <strong>7 kW extra dygnet runt</strong>, ovanpå det som alltid är på. Det var inte vädret som var skillnaden.</p>
       </div>
     </div>
 
     <div class="stat-grid">
       <div class="stat">
         <div class="label">Lägsta nivå feb 2025</div>
-        <div class="value mono-num">1,8<span class="unit">kWh/timme</span></div>
+        <div class="value mono-num">1,8<span class="unit">kW</span></div>
         <div class="note">Mätarens lugnaste timme varje natt — campingen sov</div>
       </div>
       <div class="stat">
         <div class="label">Lägsta nivå feb 2026</div>
-        <div class="value mono-num">9,4<span class="unit">kWh/timme</span></div>
+        <div class="value mono-num">9,4<span class="unit">kW</span></div>
         <div class="note">Samma siffra ett år senare — fem gånger så hög, varje natt</div>
       </div>
       <div class="stat">
         <div class="label">Lugna timmar jan–feb 2026</div>
         <div class="value mono-num">0<span class="unit">av 1416</span></div>
-        <div class="note">Inte en enda timme under 5 kWh. Året innan: varje natt under fem.</div>
+        <div class="note">Inte en enda timme under 5 kW. Året innan: varje natt under fem.</div>
       </div>
       <div class="stat">
         <div class="label">Hur länge det pågick</div>
@@ -970,7 +975,7 @@ footer {
     </div>
 
     <div class="pull-quote">
-      <span class="accent">9 kilowatt.</span> Dygnet runt. <em>I 161 dygn.</em>
+      <span class="accent">~7 kilowatt extra.</span> Dygnet runt. <em>I 161 dygn.</em>
     </div>
 
     <div style="max-width: 60ch; margin: 0 auto 32px; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
@@ -1042,8 +1047,8 @@ footer {
       </div>
       <div class="stat">
         <div class="label">El extra per kallnad grad</div>
-        <div class="value mono-num">0,32<span class="unit">kWh/timme</span></div>
-        <div class="note">För varje grad kallare drog byggnaden 0,32 kWh extra per timme — nästan fyra gånger mer än vintern innan</div>
+        <div class="value mono-num">0,32<span class="unit">kW per grad</span></div>
+        <div class="note">För varje grad kallare drog byggnaden 0,32 kW extra — nästan fyra gånger mer än vintern innan</div>
       </div>
       <div class="stat">
         <div class="label">Spelar vinden roll?</div>
@@ -1067,7 +1072,7 @@ footer {
         <div class="finding-num alert serif">A</div>
         <div class="finding-body">
           <h3>En el-värmare med termostat — <em>det stämmer</em>.</h3>
-          <p>Om en värmare med termostat går i en uppvärmd byggnad ska elen följa kylan: kallare ute = mer ström. Det är precis vad vi ser. Under brottet drog byggnaden 0,32 kWh extra per timme för varje grad kallare — nästan fyra gånger mer än vintern innan. Och sambandet mellan temperatur och el blev mycket tydligare. Det är vad som händer när någon kopplar in en värmare som lyssnar på temperaturen.</p>
+          <p>Om en värmare med termostat går i en uppvärmd byggnad ska elen följa kylan: kallare ute = mer ström. Det är precis vad vi ser. Under brottet drog byggnaden 0,32 kW extra för varje grad kallare — nästan fyra gånger mer än vintern innan. Och sambandet mellan temperatur och el blev mycket tydligare. Det är vad som händer när någon kopplar in en värmare som lyssnar på temperaturen.</p>
         </div>
         <div class="finding-stat alert">
           <div class="label">Hur mycket starkare</div>
@@ -1080,11 +1085,11 @@ footer {
         <div class="finding-num alt serif">B</div>
         <div class="finding-body">
           <h3>Något står på dygnet runt — <em>delvis</em>.</h3>
-          <p>Om något bara stod på dygnet runt — oavsett temperatur — skulle vi se en jämn extra-förbrukning oavsett kyla. Det stämmer delvis: även när det är 0 °C ute drog campingen 6 kWh per timme mer under brottet än vintern innan. Cirka 2 av dessa kWh är "alltid på" oavsett väder. Men det är bara en tredjedel av extra-elen. Resten kommer på när det blir kallt.</p>
+          <p>Om något bara stod på dygnet runt — oavsett temperatur — skulle vi se en jämn extra-förbrukning oavsett kyla. Det stämmer delvis: även när det är 0 °C ute drog campingen 6 kW mer under brottet än vintern innan. Cirka 2 kW av dessa är "alltid på" oavsett väder. Men det är bara en tredjedel av extra-elen. Resten kommer på när det blir kallt.</p>
         </div>
         <div class="finding-stat alt">
           <div class="label">Alltid-på-andelen</div>
-          <div class="big">~2 kWh/timme</div>
+          <div class="big">~2 kW</div>
           <div class="detail">Cirka 30 % av extra-elen<br>Resten beror på temperaturen</div>
         </div>
       </article>
@@ -1093,7 +1098,7 @@ footer {
         <div class="finding-num serif">C</div>
         <div class="finding-body">
           <h3>Någon som arbetar enligt schema — <em>nej</em>.</h3>
-          <p>Om någon jobbade på platsen dagtid skulle vi se en topp på dagen och dipp på natten. Den finns inte. Under matchade kalla dygn drog campingen mellan 9,2 och 10,7 kWh varje timme — i princip lika mycket klockan tre på natten som klockan tre på dagen. Bara ±10 % skillnad över hela dygnet. Det är ingen mänsklig rytm. Lasten gick dygnet runt utan paus.</p>
+          <p>Om någon jobbade på platsen dagtid skulle vi se en topp på dagen och dipp på natten. Den finns inte. Under matchade kalla dygn drog campingen mellan 9,2 och 10,7 kW dygnet runt — i princip lika mycket klockan tre på natten som klockan tre på dagen. Bara ±10 % skillnad över hela dygnet. Det är ingen mänsklig rytm. Lasten gick dygnet runt utan paus.</p>
         </div>
         <div class="finding-stat">
           <div class="label">Skillnad över dygnet</div>
@@ -1109,7 +1114,7 @@ footer {
         <span><span class="swatch" style="background: var(--sage)"></span>Vintern innan · 57 kalla dygn</span>
       </div>
       <svg id="hod-diag-chart" class="chart-svg" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid meet" aria-label="Timme av dygn-jämförelse mellan vinter 1 och brott"></svg>
-      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Bägge kurvorna är helt platta — det är ingen som arbetar enligt schema vare sig vintern innan eller under brottet. Men nivåerna skiljer sig kraftigt: vintern innan låg på cirka 3 kWh/timme, under brottet på cirka 10 kWh/timme. <em>Samma form, helt olika höjd.</em> Det är så det ser ut när en termostat styr en värmare.</p>
+      <p style="margin: 16px 0 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55;">Bägge kurvorna är helt platta — det är ingen som arbetar enligt schema vare sig vintern innan eller under brottet. Men nivåerna skiljer sig kraftigt: vintern innan låg på cirka 3 kW, under brottet på cirka 10 kW. <em>Samma form, helt olika höjd.</em> Det är så det ser ut när en termostat styr en värmare.</p>
     </div>
 
     <div class="chart-card" style="margin-top: 56px;">
@@ -1127,7 +1132,7 @@ footer {
 
     <div style="max-width: 64ch; margin: 40px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6;">
       <p><strong>Vad det ser ut som:</strong> En byggnad som är ordentligt isolerad och som värms med vanlig el. Inte ett enkelt frostskydd på en kall byggnad (då skulle vinden synas i siffrorna), inte värmekabel utomhus (för mycket effekt), inte en trasig värmepump (då skulle elen rusa när det blir riktigt kallt — det gör den inte).</p>
-      <p style="margin-top: 14px;"><strong>De mest troliga förklaringarna:</strong> (1) Någon bor eller hyr en stuga vintertid — 6–7 kWh per timme är vanligt för en uppvärmd liten bostad på 30–50 kvadratmeter, och de extra 2 kWh som alltid går passar för kyl, varmvatten och annat vardagsbruk. (2) En servicebyggnad har fått ny eller utökad invändig värme inför vintern 2025/26. (3) En kombination — till exempel en stuga plus frostskydd i sanitetsbyggnaden.</p>
+      <p style="margin-top: 14px;"><strong>De mest troliga förklaringarna:</strong> (1) Någon bor eller hyr en stuga vintertid — 6–7 kW är vanligt för en uppvärmd liten bostad på 30–50 kvadratmeter, och de extra 2 kW som alltid går passar för kyl, varmvatten och annat vardagsbruk. (2) En servicebyggnad har fått ny eller utökad invändig värme inför vintern 2025/26. (3) En kombination — till exempel en stuga plus frostskydd i sanitetsbyggnaden.</p>
     </div>
   </section>
 
@@ -1276,7 +1281,13 @@ footer {
     </div>
 
     <div class="chart-card">
-      <svg id="monthly-chart" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Stapeldiagram över månadsförbrukning"></svg>
+      <div class="chart-legend" style="margin-bottom: 12px;">
+        <span><span class="swatch" style="background: var(--sage)"></span>Öppen säsong (maj–sep)</span>
+        <span><span class="swatch" style="background: var(--ocean)"></span>Stängd säsong (okt–apr)</span>
+        <span><span class="swatch" style="background: var(--amber)"></span>Extrempris jan–feb 2026</span>
+        <span><span class="swatch" style="width: 18px; height: 14px; background: linear-gradient(to right, var(--alert) 0 5px, transparent 5px 9px, var(--alert) 9px 14px, transparent 14px 18px) center/100% 2px no-repeat"></span>Månadens medeltemperatur · °C</span>
+      </div>
+      <svg id="monthly-chart" class="chart-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet" aria-label="Stapeldiagram över månadsförbrukning med medeltemperatur"></svg>
     </div>
 
     <div class="pull-quote">
@@ -1346,6 +1357,11 @@ footer {
           <span class="swatch" style="background: var(--alert)"></span>
           <span>Utomhustemperatur · °C (Netatmo Ånge)</span>
         </label>
+        <label class="toggle-line" data-series="predicted" title="Vad förbrukningen borde varit vid samma temperatur, om byggnaden betett sig som vintern jan–apr 2025">
+          <input type="checkbox" id="toggle-predicted" checked>
+          <span class="swatch swatch-dashed"></span>
+          <span>Förväntat enligt 2025 års mönster</span>
+        </label>
         <span id="zoom-info" style="margin-left: auto; font-size: 11px; color: var(--ink-mute);"></span>
       </div>
       <svg id="zoom-chart" class="chart-svg" viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid meet" aria-label="Zoombar timgraf med kWh och temperatur"></svg>
@@ -1353,6 +1369,7 @@ footer {
     </div>
 
     <p style="max-width: 64ch; margin: 24px 0 0; font-size: 14px; color: var(--ink-mute); line-height: 1.55;">Vid längre intervall visas <strong>dygnssnitt</strong> som linje och <strong>dygnets min–max-spann</strong> som ljusare band — så syns kalla nätter och varma eftermiddagar tydligt även när hela året klämts in i grafen. Vid kortare intervall (under en vecka) visas varje enskild timme rakt av. Hovra över grafen för att se exakta värden.</p>
+    <p style="max-width: 64ch; margin: 12px 0 0; font-size: 14px; color: var(--ink-mute); line-height: 1.55;">Den <strong style="color: var(--sage)">streckade gröna linjen</strong> visar vad förbrukningen <em>borde</em> varit vid den temperatur som faktiskt rådde, om byggnaden betett sig som vintern jan–apr 2025. När den blå linjen ligger högt över den gröna har vi alltså dragit mer ström än vad samma kyla orsakade året innan — det är extraförbrukningen, vid samma temperatur. Linjen visas bara på dygnsnivå och under den kalla halvan av året (då uppvärmning dominerar).</p>
   </section>
 
   <!-- ============== FINDINGS ============== -->
@@ -1371,14 +1388,14 @@ footer {
       <article class="finding">
         <div class="finding-num alert serif">1</div>
         <div class="finding-body">
-          <h3>Den dolda lasten på <em>9 kW</em> i 161 dygn.</h3>
-          <p>Mellan 3 oktober 2025 och 12 mars 2026 gick strömmen aldrig under 9 kWh per timme — året innan låg samma "lugnaste timme" på 1,8 kWh. Förändringen är tydlig: först en uppgång veckan 3–11 oktober, sen ett litet tillbakaslag, och från 14 november ända till 12 mars låg den uppe — och föll sedan tillbaka till normalt.</p>
+          <h3>Den dolda extralasten på <em>~7 kW</em> i 161 dygn.</h3>
+          <p>Mellan 3 oktober 2025 och 12 mars 2026 låg campingens lugnaste timmar runt 9 kW — året innan var samma "lugnaste timme" 1,8 kW. Det är ungefär 7 kW extra som gick dygnet runt, <em>ovanpå</em> det som alltid är på (kyl, frys, ventilation, modem). Förändringen är tydlig: först en uppgång veckan 3–11 oktober, sen ett litet tillbakaslag, och från 14 november ända till 12 mars låg den uppe — och föll sedan tillbaka till normalt.</p>
           <p>Det här är inte vädret (som ändras långsamt) och inte elpriset (som inte påverkar förbrukning). Något fysiskt drog ström — sannolikt en specifik värmare, en termostat eller en apparat. Att hitta och stänga av den sparar runt 16 000 kr inklusive moms vid extrempriser som vintern 2026, mer i normala år eftersom utrustningen ändå gick dygnet runt i 161 dygn.</p>
         </div>
         <div class="finding-stat alert">
           <div class="label">Lägsta nivån fem gånger högre</div>
           <div class="big">5,3 ×</div>
-          <div class="detail">Feb 2025: 1,8 kWh/timme · feb 2026: 9,4 kWh/timme<br>Värt att utreda: ~16 000 kr inkl moms</div>
+          <div class="detail">Feb 2025: 1,8 kW · feb 2026: 9,4 kW<br>Värt att utreda: ~16 000 kr inkl moms</div>
         </div>
       </article>
 
@@ -1454,11 +1471,32 @@ const monthName = m => ['jan','feb','mar','apr','maj','jun','jul','aug','sep','o
 const onSeason = m => m >= 5 && m <= 9;
 
 // =================== MONTHLY CHART ===================
+function meanTempForMonths(months) {
+  // Computes mean outdoor temperature per month from the hourly_series.
+  // Returns array aligned with `months` of {mean: °C} or null if no data.
+  if (!DATA.hourly_series) return null;
+  const t = DATA.hourly_series.t;
+  const n = DATA.hourly_series.n;
+  const startMs = new Date(DATA.hourly_series.start_date + 'T00:00:00').getTime();
+  const sums = {}, counts = {};
+  for (let i = 0; i < n; i++) {
+    if (t[i] == null) continue;
+    const d = new Date(startMs + i * 3600_000);
+    const key = d.getFullYear() * 12 + d.getMonth();
+    sums[key] = (sums[key] || 0) + t[i];
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return months.map(m => {
+    const key = m.year * 12 + (m.month - 1);
+    return counts[key] ? sums[key] / counts[key] : null;
+  });
+}
+
 function drawMonthly(mode='kwh') {
   const svg = document.getElementById('monthly-chart');
   svg.innerHTML = '';
   const W = 1200, H = 480;
-  const M = { top: 30, right: 30, bottom: 70, left: 70 };
+  const M = { top: 30, right: 70, bottom: 70, left: 70 };
   const iw = W - M.left - M.right;
   const ih = H - M.top - M.bottom;
 
@@ -1558,6 +1596,89 @@ function drawMonthly(mode='kwh') {
     }
   });
   svg.appendChild(barsG);
+
+  // ===== Monthly mean temperature overlay (right axis · °C) =====
+  const monthlyT = meanTempForMonths(months);
+  if (monthlyT && monthlyT.some(v => v != null)) {
+    const css = getComputedStyle(document.documentElement);
+    const COLOR_T = css.getPropertyValue('--alert').trim() || '#B67342';
+    const valid = monthlyT.filter(v => v != null);
+    const tMinN = Math.floor(Math.min(...valid, -5) / 5) * 5;
+    const tMaxN = Math.ceil(Math.max(...valid, 20) / 5) * 5;
+    const yT = v => M.top + ih - ((v - tMinN) / (tMaxN - tMinN)) * ih;
+
+    // Right Y-axis: °C labels
+    const tStep = Math.max(5, Math.ceil((tMaxN - tMinN) / 6 / 5) * 5);
+    for (let v = tMinN; v <= tMaxN; v += tStep) {
+      const txt = document.createElementNS(ns, 'text');
+      txt.setAttribute('x', W - M.right + 10);
+      txt.setAttribute('y', yT(v) + 4);
+      txt.setAttribute('text-anchor', 'start');
+      txt.style.font = '10px JetBrains Mono, monospace';
+      txt.style.fill = COLOR_T;
+      txt.textContent = (v > 0 ? '+' : '') + v + '°';
+      svg.appendChild(txt);
+    }
+    // Right axis title
+    const tHead = document.createElementNS(ns, 'text');
+    tHead.setAttribute('x', W - M.right + 10);
+    tHead.setAttribute('y', M.top - 12);
+    tHead.style.font = '600 10px Manrope, sans-serif';
+    tHead.style.letterSpacing = '0.18em';
+    tHead.style.textTransform = 'uppercase';
+    tHead.style.fill = COLOR_T;
+    tHead.textContent = '°C medel';
+    svg.appendChild(tHead);
+
+    // Zero-line for T (subtle dotted, only if 0 is in range)
+    if (tMinN < 0 && tMaxN > 0) {
+      const y0 = yT(0);
+      const ln = document.createElementNS(ns, 'line');
+      ln.setAttribute('x1', M.left); ln.setAttribute('x2', W - M.right);
+      ln.setAttribute('y1', y0); ln.setAttribute('y2', y0);
+      ln.setAttribute('stroke', COLOR_T);
+      ln.setAttribute('stroke-width', 1);
+      ln.setAttribute('stroke-dasharray', '2 4');
+      ln.setAttribute('opacity', 0.3);
+      svg.appendChild(ln);
+    }
+
+    // Connecting line (dashed) through monthly means
+    const tPath = document.createElementNS(ns, 'path');
+    let d = '', started = false;
+    monthlyT.forEach((v, i) => {
+      if (v == null) { started = false; return; }
+      const x = M.left + i * bw + bw / 2;
+      const y = yT(v);
+      d += (started ? 'L' : 'M') + x + ',' + y + ' ';
+      started = true;
+    });
+    if (d) {
+      tPath.setAttribute('d', d);
+      tPath.setAttribute('fill', 'none');
+      tPath.setAttribute('stroke', COLOR_T);
+      tPath.setAttribute('stroke-width', 2);
+      tPath.setAttribute('stroke-linejoin', 'round');
+      tPath.setAttribute('stroke-linecap', 'round');
+      tPath.setAttribute('stroke-dasharray', '6 4');
+      svg.appendChild(tPath);
+    }
+    // Dot + small label at each month
+    monthlyT.forEach((v, i) => {
+      if (v == null) return;
+      const x = M.left + i * bw + bw / 2;
+      const y = yT(v);
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 3.5);
+      c.setAttribute('fill', COLOR_T);
+      c.setAttribute('stroke', 'var(--paper)');
+      c.setAttribute('stroke-width', 1.5);
+      const ttl = document.createElementNS(ns, 'title');
+      ttl.textContent = `${months[i].label}: ${v >= 0 ? '+' : ''}${v.toFixed(1)}°C medel`;
+      c.appendChild(ttl);
+      svg.appendChild(c);
+    });
+  }
 
   // Y axis title
   const yt = document.createElementNS(ns, 'text');
@@ -2032,7 +2153,7 @@ function drawHourlyScatter() {
   slopeLbl.setAttribute('y', yFor(breakFit.intercept_kwh_per_h + breakFit.slope_kwh_per_C * -25) - 12);
   slopeLbl.style.font = 'italic 12px Fraunces, serif';
   slopeLbl.style.fill = 'var(--ocean)';
-  slopeLbl.textContent = `under brottet · ${breakFit.slope_kwh_per_C} kWh per timme och grad`;
+  slopeLbl.textContent = `under brottet · +${Math.abs(breakFit.slope_kwh_per_C).toFixed(2).replace('.', ',')} kW per grad kallare`;
   svg.appendChild(slopeLbl);
 
   const slopeLbl2 = document.createElementNS(ns, 'text');
@@ -2040,7 +2161,7 @@ function drawHourlyScatter() {
   slopeLbl2.setAttribute('y', yFor(winter1Fit.intercept_kwh_per_h + winter1Fit.slope_kwh_per_C * -25) - 12);
   slopeLbl2.style.font = 'italic 12px Fraunces, serif';
   slopeLbl2.style.fill = 'var(--sage)';
-  slopeLbl2.textContent = `vintern innan · ${winter1Fit.slope_kwh_per_C} kWh per timme och grad`;
+  slopeLbl2.textContent = `vintern innan · +${Math.abs(winter1Fit.slope_kwh_per_C).toFixed(2).replace('.', ',')} kW per grad kallare`;
   svg.appendChild(slopeLbl2);
 
   // Caption pointer for actual hours
@@ -2293,6 +2414,7 @@ function drawZoomChart(startDate, endDate) {
   // Read toggle state
   const showKwh = document.getElementById('toggle-kwh')?.checked !== false;
   const showTemp = document.getElementById('toggle-temp')?.checked !== false;
+  const showPredicted = document.getElementById('toggle-predicted')?.checked !== false;
 
   // Resolve actual colors so SVG stroke is reliable across browsers
   const css = getComputedStyle(document.documentElement);
@@ -2300,6 +2422,12 @@ function drawZoomChart(startDate, endDate) {
   const COLOR_T = css.getPropertyValue('--alert').trim() || '#B67342';
   const COLOR_RULE = css.getPropertyValue('--rule').trim() || '#D9D2BF';
   const COLOR_INK_MUTE = css.getPropertyValue('--ink-mute').trim() || '#8A8474';
+  const COLOR_PRED = css.getPropertyValue('--sage').trim() || '#6B8758';
+
+  // Vinter1-modellen: dagligt kWh = intercept + slope · max(0, 17 − T_avg)
+  const W1 = DATA.diagnosis?.heating_curves?.winter1 || {};
+  const W1_INT = W1.intercept ?? 31.1;
+  const W1_SLOPE = W1.slope ?? 2.69;
 
   const startIdx = Math.max(0, dateToIndex(startDate));
   const endIdx = Math.min(DATA.hourly_series.n - 1, dateToIndex(endDate) + 23);
@@ -2310,9 +2438,9 @@ function drawZoomChart(startDate, endDate) {
   // Aggregation: hourly if <= 168 hours (7 days), else daily.
   // For daily mode we also keep min/max so cold/hot snaps don't get smoothed away.
   const useDaily = n > 168;
-  let plotKwh, plotT, plotKwhMin, plotKwhMax, plotTMin, plotTMax, plotLabels;
+  let plotKwh, plotT, plotKwhMin, plotKwhMax, plotTMin, plotTMax, plotLabels, plotPred;
   if (useDaily) {
-    plotKwh = []; plotT = []; plotLabels = [];
+    plotKwh = []; plotT = []; plotLabels = []; plotPred = [];
     plotKwhMin = []; plotKwhMax = []; plotTMin = []; plotTMax = [];
     for (let i = 0; i < n; i += 24) {
       const dayKwh = [], dayT = [];
@@ -2320,18 +2448,28 @@ function drawZoomChart(startDate, endDate) {
         if (kwhArr[j] != null) dayKwh.push(kwhArr[j]);
         if (tArr[j] != null) dayT.push(tArr[j]);
       }
+      const meanT = dayT.length ? dayT.reduce((a,b)=>a+b,0) / dayT.length : null;
       plotKwh.push(dayKwh.length ? dayKwh.reduce((a,b)=>a+b,0) / dayKwh.length : null);
       plotKwhMin.push(dayKwh.length ? Math.min(...dayKwh) : null);
       plotKwhMax.push(dayKwh.length ? Math.max(...dayKwh) : null);
-      plotT.push(dayT.length ? dayT.reduce((a,b)=>a+b,0) / dayT.length : null);
+      plotT.push(meanT);
       plotTMin.push(dayT.length ? Math.min(...dayT) : null);
       plotTMax.push(dayT.length ? Math.max(...dayT) : null);
       plotLabels.push(indexToDate(startIdx + i));
+      // Prediktion enligt vinter1-modellen — bara där uppvärmning dominerar (T < 12°C)
+      // så att modellen inte extrapoleras in i sommardrift där andra laster styr.
+      if (meanT != null && meanT < 12) {
+        const hdd = Math.max(0, 17 - meanT);
+        plotPred.push((W1_INT + W1_SLOPE * hdd) / 24);
+      } else {
+        plotPred.push(null);
+      }
     }
   } else {
     plotKwh = kwhArr;
     plotT = tArr;
     plotKwhMin = plotKwhMax = plotTMin = plotTMax = null;
+    plotPred = null;  // model is daily-level; not meaningful at hourly resolution
     plotLabels = Array.from({length: n}, (_, i) => indexToDate(startIdx + i));
   }
 
@@ -2339,7 +2477,11 @@ function drawZoomChart(startDate, endDate) {
   const kVals = useDaily ? plotKwhMax.filter(v => v != null) : plotKwh.filter(v => v != null);
   const tValsLow = useDaily ? plotTMin.filter(v => v != null) : plotT.filter(v => v != null);
   const tValsHigh = useDaily ? plotTMax.filter(v => v != null) : plotT.filter(v => v != null);
-  const kMax = kVals.length ? Math.max(...kVals) : 10;
+  let kMax = kVals.length ? Math.max(...kVals) : 10;
+  if (showPredicted && plotPred) {
+    const pVals = plotPred.filter(v => v != null);
+    if (pVals.length) kMax = Math.max(kMax, Math.max(...pVals));
+  }
   const niceKMax = Math.ceil(kMax / 2) * 2 + 2;
   const tMin = tValsLow.length ? Math.min(-5, Math.min(...tValsLow)) : -5;
   const tMax = tValsHigh.length ? Math.max(15, Math.max(...tValsHigh)) : 15;
@@ -2458,7 +2600,7 @@ function drawZoomChart(startDate, endDate) {
   }
 
   // Draw lines
-  function drawSeries(arr, yScale, color, width) {
+  function drawSeries(arr, yScale, color, width, dash) {
     const path = document.createElementNS(ns, 'path');
     let d = '';
     let started = false;
@@ -2476,6 +2618,7 @@ function drawZoomChart(startDate, endDate) {
     path.setAttribute('stroke-width', width);
     path.setAttribute('stroke-linejoin', 'round');
     path.setAttribute('stroke-linecap', 'round');
+    if (dash) path.setAttribute('stroke-dasharray', dash);
     svg.appendChild(path);
   }
 
@@ -2503,18 +2646,81 @@ function drawZoomChart(startDate, endDate) {
     svg.appendChild(path);
   }
 
-  // Draw order: temp band, kWh band, temp line, kWh line. Bands behind lines.
+  // Daily-mode gap fill: the dramatic visualization — area between actual and predicted kWh
+  // when actual sits above predicted (excess). Drawn first so lines on top stand out.
+  function drawGap(actualArr, predArr, yScale, color, opacity) {
+    const top = [], bottom = [];
+    actualArr.forEach((a, i) => {
+      const p = predArr[i];
+      if (a == null || p == null) {
+        if (top.length) {
+          const path = document.createElementNS(ns, 'path');
+          let d = '';
+          top.forEach((q, j) => { d += (j === 0 ? 'M' : 'L') + q[0] + ',' + q[1] + ' '; });
+          bottom.slice().reverse().forEach(q => { d += 'L' + q[0] + ',' + q[1] + ' '; });
+          d += 'Z';
+          path.setAttribute('d', d);
+          path.setAttribute('fill', color);
+          path.setAttribute('opacity', opacity);
+          path.setAttribute('stroke', 'none');
+          svg.appendChild(path);
+          top.length = 0; bottom.length = 0;
+        }
+        return;
+      }
+      // Only fill where actual > predicted (excess consumption above 2025 baseline)
+      if (a > p) {
+        top.push([xFor(i), yScale(a)]);
+        bottom.push([xFor(i), yScale(p)]);
+      } else if (top.length) {
+        // close current segment
+        const path = document.createElementNS(ns, 'path');
+        let d = '';
+        top.forEach((q, j) => { d += (j === 0 ? 'M' : 'L') + q[0] + ',' + q[1] + ' '; });
+        bottom.slice().reverse().forEach(q => { d += 'L' + q[0] + ',' + q[1] + ' '; });
+        d += 'Z';
+        path.setAttribute('d', d);
+        path.setAttribute('fill', color);
+        path.setAttribute('opacity', opacity);
+        path.setAttribute('stroke', 'none');
+        svg.appendChild(path);
+        top.length = 0; bottom.length = 0;
+      }
+    });
+    if (top.length) {
+      const path = document.createElementNS(ns, 'path');
+      let d = '';
+      top.forEach((q, j) => { d += (j === 0 ? 'M' : 'L') + q[0] + ',' + q[1] + ' '; });
+      bottom.slice().reverse().forEach(q => { d += 'L' + q[0] + ',' + q[1] + ' '; });
+      d += 'Z';
+      path.setAttribute('d', d);
+      path.setAttribute('fill', color);
+      path.setAttribute('opacity', opacity);
+      path.setAttribute('stroke', 'none');
+      svg.appendChild(path);
+    }
+  }
+
+  // Draw order: temp band → kWh band → gap fill → predicted line → temp line → actual kWh line.
   if (useDaily && showTemp) {
     drawBand(plotTMin, plotTMax, yT, COLOR_T, 0.18);
   }
   if (useDaily && showKwh) {
-    drawBand(plotKwhMin, plotKwhMax, yKwh, COLOR_KWH, 0.15);
+    // Lower opacity when prediction is also shown, so the gap stands out
+    drawBand(plotKwhMin, plotKwhMax, yKwh, COLOR_KWH, (showPredicted && plotPred) ? 0.08 : 0.15);
+  }
+  // Gap fill only when both actual and predicted are visible (the gap IS the story)
+  if (useDaily && showKwh && showPredicted && plotPred) {
+    drawGap(plotKwh, plotPred, yKwh, COLOR_PRED, 0.32);
+  }
+  if (useDaily && showPredicted && plotPred) {
+    drawSeries(plotPred, yKwh, COLOR_PRED, 2.8, '8 5');
   }
   if (showTemp) drawSeries(plotT, yT, COLOR_T, useDaily ? 1.8 : 2.5);
   if (showKwh) drawSeries(plotKwh, yKwh, COLOR_KWH, plotKwh.length > 200 ? 1.5 : 2.5);
 
   // If neither: show message
-  if (!showKwh && !showTemp) {
+  if (!showKwh && !showTemp && !(showPredicted && useDaily)) {
     const msg = document.createElementNS(ns, 'text');
     msg.setAttribute('x', W / 2); msg.setAttribute('y', H / 2);
     msg.setAttribute('text-anchor', 'middle');
@@ -2577,7 +2783,19 @@ function drawZoomChart(startDate, endDate) {
         tRow = `<div style="color:#E5B58A">Temp: ${t != null ? SE(t, 1) + '°C' : '—'}</div>`;
       }
     }
-    tip.innerHTML = `<div>${label}</div>${kwhRow}${tRow}`;
+    let predRow = '';
+    if (showPredicted && useDaily && plotPred) {
+      const p = plotPred[idx];
+      if (p != null) {
+        predRow = `<div style="color:#A8BD92">Förväntat 2025: ${SE(p, 2)} /h</div>`;
+        if (k != null) {
+          const gap = (k - p) * 24;  // daily kWh gap
+          const sign = gap >= 0 ? '+' : '';
+          predRow += `<div style="color:${gap >= 0 ? '#E5B58A' : '#A8BD92'}; font-size: 11px;">Avvikelse: ${sign}${SE(gap, 0)} kWh över dygnet</div>`;
+        }
+      }
+    }
+    tip.innerHTML = `<div>${label}</div>${kwhRow}${tRow}${predRow}`;
     tip.classList.add('show');
     tip.style.left = (e.clientX + 14) + 'px';
     tip.style.top = (e.clientY + 14) + 'px';
@@ -2623,7 +2841,7 @@ function wireZoomControls() {
       redrawZoom();
     });
   });
-  ['toggle-kwh', 'toggle-temp'].forEach(id => {
+  ['toggle-kwh', 'toggle-temp', 'toggle-predicted'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('change', redrawZoom);
   });
